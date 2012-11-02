@@ -1,0 +1,50 @@
+Tables
+account
+    id
+    login
+    password
+character
+    id
+    name
+    gender
+    class
+    level
+    money
+item
+    id
+    name
+charstat
+    id
+    speed
+    damage
+    defense
+    absorption
+quest
+    id
+    name
+    reward
+    description
+    clues
+npc
+    id foriegn key to character.id
+    hostility
+pc 
+    id foreign key to character.id
+
+Association Tables
+
+accounts_character
+    accountid foreign key to account.id
+    characterid foreign key character.id
+    
+pc_charstat
+    characterid foreign key pc.id
+    charstatid foreign key charstat.id
+npc_charstat
+    characterid foreign key npc.id
+    charstatid foreign key charstat.id
+quest_character
+    characterid foreign key character.id
+    questid foreign key quest.id
+    
+I don't really know where Items comes into play here. I presume someone else's table schema will cover it.
