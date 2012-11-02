@@ -1,0 +1,35 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:jee="http://www.springframework.org/schema/jee"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                http://www.springframework.org/schema/jee
+                http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+    <bean id="dataSource"
+            class="org.apache.commons.dbcp.BasicDataSource"
+            destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost/diobolical"/>
+        <property name="username" value="rbrous"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <bean id="hibernateProperties"
+            class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.query.substitutions">true 'T', false 'F', 1 true, 0 false</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">validate</prop>
+            </props>
+        </property>
+    </bean>
+
+    <import resource="classpath:commonContext.xml"/>
+</beans>
