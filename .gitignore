@@ -1,0 +1,7 @@
+.project
+.settings
+.classpath
+target
+build.properties
+*.class
+.DS_Store
