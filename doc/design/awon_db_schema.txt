@@ -1,0 +1,205 @@
+      Table "public.account"
+   Column    |  Type   | Modifiers 
+-------------+---------+-----------
+ id          | bigint  | not null
+ active      | boolean | 
+ challenge   | text    | 
+ login       | text    | 
+ charlist_id | bigint  | 
+Indexes:
+    "account_pkey" PRIMARY KEY, btree (id)
+    "account_login_key" UNIQUE CONSTRAINT, btree (login)
+Foreign-key constraints:
+    FOREIGN KEY (charlist_id) REFERENCES charlist(id)
+Referenced by:
+    TABLE "charlist" CONSTRAINT FOREIGN KEY (login) REFERENCES charlist(login)
+
+          Table "public.charlist"
+      Column      |      Type      | Modifiers 
+------------------+----------------+-----------
+ id               | bigint         | not null
+ character        | bigint         | not null
+ character_order  | integer        |
+ login            | text           | 
+Indexes:
+    "charlist_pkey" PRIMARY KEY, btree (id, character_order)
+Foreign-key constraints:
+    FOREIGN KEY (login) REFERENCES account(login)
+    FOREIGN KEY (character_order) REFERENCES character(id)
+
+                       Table "public.character"
+          Column           |            Type             | Modifiers 
+---------------------------+-----------------------------+-----------
+ id                        | bigint                      | not null
+ name                      | character varying(255)      | 
+ gender                    | integer                     | 
+ class                     | character varying(255)      | 
+ level                     | integer                     | 
+ money                     | bigint                      | 
+ alignment                 | text                        | 
+Indexes:
+    "character_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "npc_character" CONSTRAINT FOREIGN KEY (character_id) REFERENCES character(id)
+    TABLE "pc_character" CONSTRAINT FOREIGN KEY (character_id) REFERENCES character(id)
+    TABLE "character_charstat" CONSTRAINT FOREIGN KEY (character_id) REFERENCES student(id)
+    TABLE "character_item" CONSTRAINT FOREIGN KEY (character_id) REFERENCES character(id)
+    TABLE "character_skill" CONSTRAINT FOREIGN KEY (character_id) REFERENCES character(id)
+    TABLE "account" CONSTRAINT FOREIGN KEY (character_id) REFERENCES character(id)
+
+                   Table "public.charstat"
+       Column        |            Type           | Modifiers 
+---------------------+---------------------------+-----------
+ id                  | bigint                    | not null
+ speed               | integer                   | 
+ damage              | double precision          | 
+ defense             | double precision          | 
+ absorption          | double precision          | 
+Indexes:
+    "charstat_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "character_charstat" CONSTRAINT FOREIGN KEY (student_id) REFERENCES charstat(id)
+
+                      Table "public.pc"
+          Column       |          Type           | Modifiers 
+-----------------------+-------------------------+-----------
+ id                    | bigint                  | not null
+Indexes:
+    "pc_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "pc_character" CONSTRAINT FOREIGN KEY (pc_id) REFERENCES pc(id)
+    TABLE "pc_quest" CONSTRAINT FOREIGN KEY (pc_id) REFERENCES pc(id)
+
+                     Table "public.npc"
+          Column       |          Type           | Modifiers 
+-----------------------+-------------------------+-----------
+ id                    | bigint                  | not null
+ hostility             | integer                 | 
+Indexes:
+    "npc_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "npc_character" CONSTRAINT FOREIGN KEY (npc_id) REFERENCES npc(id)
+    TABLE "npc_quest" CONSTRAINT FOREIGN KEY (npc_id) REFERENCES npc(id)
+
+      Table "public.pc_character"
+     Column       |  Type   | Modifiers 
+------------------+---------+-----------
+ pc_id            | bigint  | not null
+ character_id     | bigint  | not null
+Indexes:
+    "pc_character_pkey" PRIMARY KEY, btree (pc_id)
+Foreign-key constraints:
+    FOREIGN KEY (pc_id) REFERENCES pc(id)
+    FOREIGN KEY (character_id) REFERENCES character(id)
+
+     Table "public.npc_character"
+     Column       |  Type   | Modifiers 
+------------------+---------+-----------
+ npc_id           | bigint  | not null
+ character_id     | bigint  | not null
+Indexes:
+    "npc_character_pkey" PRIMARY KEY, btree (npc_id)
+Foreign-key constraints:
+    FOREIGN KEY (npc_id) REFERENCES npc(id)
+    FOREIGN KEY (character_id) REFERENCES character(id)
+
+      Table "public.pc_quest"
+     Column      |  Type   | Modifiers 
+-----------------+---------+-----------
+ pc_id           | bigint  | not null
+ quest_id        | bigint  | not null
+ pcquest_order   | integer | not null
+Indexes:
+    "pc_quest_pkey" PRIMARY KEY, btree (pc_id, pcquest_order)
+Foreign-key constraints:
+    FOREIGN KEY (pc_id) REFERENCES pc(id)
+    FOREIGN KEY (quest_id) REFERENCES quest(id)
+
+     Table "public.npc_quest"
+     Column      |  Type   | Modifiers 
+-----------------+---------+-----------
+ npc_id          | bigint  | not null
+ quest_id        | bigint  | not null
+ npcquest_order  | integer | not null
+Indexes:
+    "npc_quest_pkey" PRIMARY KEY, btree (npc_id, npcquest_order)
+Foreign-key constraints:
+    FOREIGN KEY (npc_id) REFERENCES npc(id)
+    FOREIGN KEY (quest_id) REFERENCES quest(id)
+
+  Table "public.character_charstat"
+   Column      |  Type  | Modifiers 
+---------------+--------+-----------
+ character_id  | bigint | not null
+ charstat_id   | bigint | not null
+Indexes:
+    "character_charstat_id_key" UNIQUE CONSTRAINT, btree (charstat_id)
+Foreign-key constraints:
+    FOREIGN KEY (charstat_id) REFERENCES charstat(id)
+    FOREIGN KEY (character_id) REFERENCES character(id)
+
+     Table "public.character_item"
+     Column      |  Type   | Modifiers 
+-----------------+---------+-----------
+ character_id    | bigint  | not null
+ item_id         | bigint  | not null
+ charitem_order  | integer | not null
+Indexes:
+    "character_item_pkey" PRIMARY KEY, btree (character_id, charitem_order)
+Foreign-key constraints:
+    FOREIGN KEY (character_id) REFERENCES character(id)
+    FOREIGN KEY (item_id) REFERENCES item(id)
+
+    Table "public.character_skill"
+     Column      |  Type   | Modifiers 
+-----------------+---------+-----------
+ character_id    | bigint  | not null
+ skill_id        | bigint  | not null
+ charskill_order | integer | not null
+Indexes:
+    "character_skill_pkey" PRIMARY KEY, btree (character_id, charskill_order)
+Foreign-key constraints:
+    FOREIGN KEY (character_id) REFERENCES character(id)
+    FOREIGN KEY (skill_id) REFERENCES skill(id)
+
+                        Table "public.quest"
+          Column           |            Type             | Modifiers 
+---------------------------+-----------------------------+-----------
+ id                        | bigint                      | not null
+ name                      | character varying(255)      | 
+ reward                    | character varying(255)      | 
+ description               | text                        | 
+ clues                     | text                        | 
+Indexes:
+    "quest_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "pc_quest" CONSTRAINT FOREIGN KEY (quest_id) REFERENCES quest(id)
+    TABLE "npc_quest" CONSTRAINT FOREIGN KEY (quest_id) REFERENCES quest(id)
+
+                        Table "public.item"
+          Column           |            Type             | Modifiers 
+---------------------------+-----------------------------+-----------
+ id                        | bigint                      | not null
+ slot                      | character varying(255)      | 
+ mindamage                 | double precision            | 
+ maxdamage                 | double precision            | 
+ critchance                | double precision            | 
+ atkspeed                  | integer                     | 
+ defense                   | double precision            | 
+ absorption                | double precision            | 
+ blockchance               | double precision            | 
+Indexes:
+    "item_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "character_item" CONSTRAINT "fk" FOREIGN KEY (itemstats_id) REFERENCES itemstats(id)
+
+
+                         Table "public.skill"
+          Column           |            Type             | Modifiers 
+---------------------------+-----------------------------+-----------
+ id                        | bigint                      | not null
+ description               | text                        | 
+Indexes:
+    "skills_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "character_skill" CONSTRAINT FOREIGN KEY (skills_id) REFERENCES skills(id)
