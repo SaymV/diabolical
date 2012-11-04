@@ -1,4 +1,4 @@
-package edu.lmu.cs.diobolical.ws.resource;
+package edu.lmu.cs.diabolical.ws.resource;
 
 import java.security.Principal;
 
