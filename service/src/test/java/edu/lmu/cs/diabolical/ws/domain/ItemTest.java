@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
+import edu.lmu.cs.diabolical.ws.domain.Item;
 
 public class ItemTest {
     @Test
@@ -73,9 +74,10 @@ public class ItemTest {
 
     @Test
     public void equalsUsesIdOnly() {
-        assertThat(new Item(5L, "Bracer", 1600.0, 1450.0, 0.90, 2, 99.9, 99.8, 99.7), equalTo(new Item(5L, "Not", 100.0, 140.0, 0.20, 1, 9.9, 9.8, 9.7)));
-        assertThat(new Item(5L, "Bracer", 1600.0, 1450.0, 0.90, 2, 99.9, 99.8, 99.7),
-                not(equalTo(new Item(7L, "Bracer", 1600.0, 1450.0, 0.90, 2, 99.9, 99.8, 99.7))));
+        assertThat(new Item(5L, "Bracer", 1600.0, 1450.0, 0.90, 2, 99.9, 99.8, 99.7), equalTo(new Item(5L, "Not",
+                100.0, 140.0, 0.20, 1, 9.9, 9.8, 9.7)));
+        assertThat(new Item(5L, "Bracer", 1600.0, 1450.0, 0.90, 2, 99.9, 99.8, 99.7), not(equalTo(new Item(7L,
+                "Bracer", 1600.0, 1450.0, 0.90, 2, 99.9, 99.8, 99.7))));
 
         assertFalse(new Item(5L, "Bracer", 1600.0, 1450.0, 0.90, 2, 99.9, 99.8, 99.7).equals("some string"));
         assertFalse(new Item(5L, "Bracer", 1600.0, 1450.0, 0.90, 2, 99.9, 99.8, 99.7).equals(new Object()));
