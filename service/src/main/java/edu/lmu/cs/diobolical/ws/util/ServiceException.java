@@ -7,6 +7,7 @@ import javax.ws.rs.core.Response;
  * A simplified exception class useful in JAX-RS applications.  Allows responses to be
  * build with an HTTP response code, the content type text/plain and a single message.
  */
+@SuppressWarnings("serial")
 public class ServiceException extends WebApplicationException {
 
     public ServiceException(int status, String message) {
