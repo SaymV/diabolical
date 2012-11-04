@@ -1,4 +1,4 @@
-package edu.lmu.cs.diobolical.ws.resource;
+package edu.lmu.cs.diabolical.ws.resource;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
-import edu.lmu.cs.diobolical.ws.util.ServiceException;
+import edu.lmu.cs.diabolical.ws.util.ServiceException;
 
 /**
  * A base class for the resources, supplying error keys, a logger, a validation method, and fields

@@ -11,7 +11,7 @@ import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
 
-import edu.lmu.cs.diobolical.ws.resource.StringListMessageBodyProvider;
+import edu.lmu.cs.diabolical.ws.resource.StringListMessageBodyProvider;
 
 /**
  * Base class for all other resource test classes to extend. It defines a shared

@@ -1,4 +1,4 @@
-package edu.lmu.cs.diobolical.ws.util;
+package edu.lmu.cs.diabolical.ws.util;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

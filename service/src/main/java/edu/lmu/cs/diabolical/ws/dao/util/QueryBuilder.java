@@ -1,4 +1,4 @@
-package edu.lmu.cs.diobolical.ws.dao.util;
+package edu.lmu.cs.diabolical.ws.dao.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
