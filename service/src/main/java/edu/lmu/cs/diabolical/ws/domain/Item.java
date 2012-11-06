@@ -16,13 +16,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Item {
 
     private Long id;
+    private String name;
     private String slot;
     private Double mindamage;
     private Double maxdamage;
     private Double critchance;
     private Integer atkspeed;
-    private Integer minLevel;
-    private Integer maxLevel;
+    private Integer level;
     private Double defense;
     private Double absorption;
     private Double blockchance;
@@ -31,9 +31,10 @@ public class Item {
         // No-arg constructor
     }
 
-    public Item(Long id, String slot, Double mindamage, Double maxdamage, Double critchance, Integer atkspeed,
-            Double defense, Double absorption, Double blockchance, Integer minLevel, Integer maxLevel) {
+    public Item(Long id, String name, String slot, Double mindamage, Double maxdamage, Double critchance,
+            Integer atkspeed, Double defense, Double absorption, Double blockchance, Integer level) {
         this.id = id;
+        this.name = name;
         this.slot = slot;
         this.mindamage = mindamage;
         this.maxdamage = maxdamage;
@@ -42,8 +43,7 @@ public class Item {
         this.defense = defense;
         this.absorption = absorption;
         this.blockchance = blockchance;
-        this.minLevel = minLevel;
-        this.maxLevel = maxLevel;
+        this.level = level;
     }
 
     @Id
@@ -122,28 +122,27 @@ public class Item {
         this.blockchance = blockchance;
     }
 
-    public Integer getMinLevel() {
-        return minLevel;
+    public Integer getLevel() {
+        return level;
     }
 
-    public void setMinLevel(Integer minLevel) {
-        this.minLevel = minLevel;
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
-    public Integer getMaxLevel() {
-        return maxLevel;
+    public String getName() {
+        return name;
     }
 
-    public void setMaxLevel(Integer maxLevel) {
-        this.maxLevel = maxLevel;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Item{id: " + id + ", slot: " + slot + ", mindamage: " + mindamage + ", maxdamage: " + maxdamage
-                + ", critchance: " + critchance + ", atkspeed: " + atkspeed + ", defense: " + defense
-                + ", absorption: " + absorption + ", blockchance: " + blockchance + ", minlevel: " + minLevel
-                + ", maxlevel: " + maxLevel + "}";
+        return "Item{id: " + id + ", name: " + name + ", slot: " + slot + ", mindamage: " + mindamage + ", maxdamage: "
+                + maxdamage + ", critchance: " + critchance + ", atkspeed: " + atkspeed + ", defense: " + defense
+                + ", absorption: " + absorption + ", blockchance: " + blockchance + ", level: " + level + "}";
     }
 
     @Override
