@@ -2,26 +2,28 @@ package edu.lmu.cs.diabolical.ws.dao;
 
 import java.util.List;
 
-public class CharacterDaoHibernateImpl {
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+public class CharacterDaoHibernateImpl extends HibernateDaoSupport {
 
     public List<Character> getCharactersByQuery(String query) {
         return null;
     }
     
     public Character getCharacterById(Integer id) {
-        // Call getCharactersByQuery with just an id in the query
-        return null;
+        return getHibernateTemplate().get(Character.class, id);
     }
     
-    public void deleteCharacter(Integer id) {
-        return;
+    public void deleteCharacter(Character c) {
+        getHibernateTemplate().delete(c);
     }
     
-    public void updateCharacter(Character c) {
-        return;
+    public void createOrUpdateCharacter(Character c) {
+        getHibernateTemplate().saveOrUpdate(c);
     }
     
-    public void createCharacter(Character c) {
-        return;
+    public Character createCharacter(Character c) {
+        getHibernateTemplate().save(c);
+        return c;
     }
 }
