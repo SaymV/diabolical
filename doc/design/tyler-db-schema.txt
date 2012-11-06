@@ -1,0 +1,66 @@
+Tables
+======
+Account
+	primary key: Integer id
+	String login
+	String password
+
+Account_Character
+	foreign key: Integer accountId
+	foreign key: Integer characterId
+
+Character
+	primary key: Integer id
+	String name
+	Integer gender
+	String class
+	Integer level
+	BigInt money
+	
+character_charstats
+	foreign key: Integer characterId
+	foreign key: Integer charstatsId
+
+
+NPC
+	primary key: Integer id
+	foreign key: Integer character
+	Boolean hostility
+
+PC
+	primary key: Integer id
+	foreign key: Integer character
+
+CharStats
+	primary key: Integer id
+	Integer speed
+	Double damage
+	Double defense
+	Float absorption
+
+Quest
+	foreign key: Integer npc
+	foreign key: Integer pc
+
+Skill
+    primary key: Integer id
+    Text description
+    
+character_skill
+    foreign key: Integer charId
+    foreign key: Integer skillId
+
+Item
+	primary key: Integer id
+	foreign key: Integer stats
+
+ItemStats
+	primary key: Integer id
+	String slot
+	Double minDamage
+	Double maxDamage
+	Float critChance
+	Integer atkSpeed
+	Double defense
+	Float absorption
+	Float blockChance
