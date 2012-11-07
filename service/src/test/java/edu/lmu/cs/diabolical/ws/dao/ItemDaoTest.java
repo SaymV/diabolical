@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import edu.lmu.cs.diabolical.ws.domain.Item;
 import edu.lmu.cs.diabolical.ws.util.ApplicationContextTest;
+import edu.lmu.cs.diabolical.ws.util.DomainObjectUtils;
 
 public class ItemDaoTest extends ApplicationContextTest {
 
@@ -64,5 +65,33 @@ public class ItemDaoTest extends ApplicationContextTest {
     public void testGetItemsByInvalidQuery() {
         List<Item> items = itemDao.getItems("blarg", null, null, 0, 5);
         Assert.assertEquals(0, items.size());
+    }
+
+    @Test
+    public void testCreateItem() {
+        // Create an id-less grant.
+        Item itemToCreate = DomainObjectUtils.createItemObject("Super Soaker", "mainhand", 2.0, 4.0,
+                5.0, 1, 5, 80.0, null, null);
+
+        itemDao.createItem(itemToCreate);
+
+        // The created grant should now have an ID of 1 because there is
+        // nothing else in the text fixture.
+        Assert.assertEquals(Long.valueOf(1L), itemToCreate.getId());
+
+        // Reload the grant that was just created.
+        Item createdItem = itemDao.getItemById(1L);
+        assertSimpleEquality(itemToCreate, createdItem);
+    }
+
+    /**
+     * Helper function for asserting the equality of two grants.
+     */
+    private void assertSimpleEquality(Item item1, Item item2) {
+        Assert.assertEquals(item1.getId(), item2.getId());
+        Assert.assertEquals(item1.getName(), item2.getName());
+        Assert.assertEquals(item1.getSlot(), item2.getSlot());
+        Assert.assertEquals(item1.getDefense(), item2.getDefense());
+        Assert.assertEquals(item1.getLevel(), item2.getLevel());
     }
 }
