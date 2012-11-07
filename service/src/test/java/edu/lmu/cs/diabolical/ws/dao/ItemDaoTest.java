@@ -70,8 +70,8 @@ public class ItemDaoTest extends ApplicationContextTest {
     @Test
     public void testCreateItem() {
         // Create an id-less grant.
-        Item itemToCreate = DomainObjectUtils.createItemObject("Super Soaker", "mainhand", 2.0, 4.0,
-                5.0, 1, 5, 80.0, null, null);
+        Item itemToCreate = DomainObjectUtils.createItemObject("Super Soaker", "mainhand", 2.0, 4.0, 5.0, 1, 5, 80.0,
+                null, null);
 
         itemDao.createItem(itemToCreate);
 
@@ -84,8 +84,33 @@ public class ItemDaoTest extends ApplicationContextTest {
         assertSimpleEquality(itemToCreate, createdItem);
     }
 
+    @Test
+    public void testCreateAndUpdateItem() {
+        // Create an id-less item.
+        Item itemToCreate = DomainObjectUtils.createItemObject("Super Soaker", "mainhand", 2.0, 4.0, 5.0, 1, 5, 80.0,
+                null, null);
+        Item itemToReplaceWith = DomainObjectUtils.createItemObject("Super Soaker", "mainhand", null, null, null, 1, 5,
+                80.0, 25.0, 76.25);
+
+        itemDao.createItem(itemToCreate);
+
+        // Keep the ID of the created item to make sure it does not change when updated.
+        Long createdItemId = itemToCreate.getId();
+        itemToReplaceWith.setId(createdItemId);
+
+        // Reload the item that was just created with a new item with the same ID.
+        itemDao.createOrUpdateItem(itemToReplaceWith);
+        Item createdItem = itemDao.getItemById(createdItemId);
+
+        assertSimpleEquality(itemToReplaceWith, createdItem);
+        Assert.assertNotSame(createdItem.getName(), itemToCreate.getName());
+        Assert.assertNotSame(createdItem.getSlot(), itemToCreate.getSlot());
+        Assert.assertNotSame(createdItem.getMindamage(), itemToCreate.getMindamage());
+        Assert.assertNotSame(createdItem.getMaxdamage(), itemToCreate.getMaxdamage());
+    }
+
     /**
-     * Helper function for asserting the equality of two grants.
+     * Helper function for asserting the equality of two items.
      */
     private void assertSimpleEquality(Item item1, Item item2) {
         Assert.assertEquals(item1.getId(), item2.getId());
