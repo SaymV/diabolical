@@ -2,15 +2,15 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>edu.lmu.cs.diobolical</groupId>
-  <artifactId>diobolical-web-service</artifactId>
+  <groupId>edu.lmu.cs.diabolical</groupId>
+  <artifactId>diabolical-web-service</artifactId>
   <version>0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>Diobolical Web Service</name>
-  <url>https://github.com/saymv/diobolical</url>
+  <name>Diabolical Web Service</name>
+  <url>https://github.com/saymv/diabolical</url>
   <description>
-    The single war file for all Diobolical SOA services.
+    The single war file for all Diabolical SOA services.
   </description>
 
   <dependencies>
@@ -238,9 +238,9 @@
         </configuration>
       </plugin>
       <plugin>
-      	<groupId>org.apache.maven.plugins</groupId>
-      	<artifactId>maven-javadoc-plugin</artifactId>
-      	<version>2.7</version>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.7</version>
       </plugin>
       <!-- FIXME Ditto Tomcat. -->
       <plugin>
@@ -319,9 +319,9 @@
   <reporting>
     <plugins>
       <plugin>
-      	<groupId>org.apache.maven.plugins</groupId>
-      	<artifactId>maven-javadoc-plugin</artifactId>
-      	<version>2.7</version>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.7</version>
       </plugin>
     </plugins>
   </reporting>
