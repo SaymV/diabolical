@@ -136,6 +136,25 @@ public class AbstractResource {
     }
 
     /**
+     * Preprocesses a query for a URI by trimming, urldecoding, and validating that the skip and
+     * max parameters make sense. Allows for a null query value.
+     *
+     * @return the processed query.
+     * @throws a ServiceException resulting in an HTTP 500 if the JVM for any reason doesn't understand
+     *     the encoding scheme used to decoding the URL.
+     */
+    protected String preprocessNullableQuery(String q, int skip, int max, int minimumSkip, int maximumSkip) {
+        try {
+            // We trim before checking validity.
+            String query = StringUtils.trimToNull(q != null ? URLDecoder.decode(q, "UTF-8") : null);
+            validatePagination(skip, max, minimumSkip, maximumSkip);
+            return query;
+        } catch (UnsupportedEncodingException e) {
+            throw new ServiceException(Response.Status.INTERNAL_SERVER_ERROR, UNSUPPORTED_ENCODING);
+        }
+    }
+
+    /**
      * Returns a datetime object for a string in a null-safe way.
      *
      * @return null if the input is null, or else the datetime object for the string produced
