@@ -14,6 +14,23 @@ public class Character {
     private List<Skill> skills;
     private List<Quest> accomplishedQuests;
 
+    public Character() {
+
+    }
+
+    public Character(Integer id, String name, Integer gender, String classType, Integer level, Long money,
+            List<Item> items, List<Skill> skills, List<Quest> accomplishedQuests) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.classType = classType;
+        this.level = level;
+        this.money = money;
+        this.items =  items;
+        this.skills = skills;
+        this.accomplishedQuests = accomplishedQuests;
+    }
+
     public void addAccomplishedQuest(Quest q) {
         this.accomplishedQuests.add(q);
     }
