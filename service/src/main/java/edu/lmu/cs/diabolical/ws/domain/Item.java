@@ -130,6 +130,7 @@ public class Item {
         this.level = level;
     }
 
+    @Lob
     public String getName() {
         return name;
     }

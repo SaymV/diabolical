@@ -34,26 +34,26 @@
     </bean>
 
     <!-- Sample beans -->
-    <bean id="studentResource"
-        class="edu.lmu.cs.diobolical.ws.resource.StudentResourceImpl">
-        <constructor-arg ref="userDao"/>
-        <constructor-arg ref="studentDao"/>
+    <!--
+    <bean id="itemResource"
+        class="edu.lmu.cs.diabolical.ws.resource.ItemResourceImpl">
     </bean>
+    -->
 
-    <bean id="userDaoImpl"
-        class="edu.lmu.cs.diobolical.ws.dao.UserDaoHibernateImpl"
+    <bean id="itemDaoImpl"
+        class="edu.lmu.cs.diabolical.ws.dao.ItemDaoHibernateImpl"
         autowire="byName"
     />
 
-    <bean id="userDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <bean id="itemDao" class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="proxyInterfaces">
-            <value>edu.lmu.cs.diobolical.ws.dao.UserDao</value>
+            <value>edu.lmu.cs.diabolical.ws.dao.ItemDao</value>
         </property>
 
         <property name="interceptorNames">
             <list>
                 <value>hibernateInterceptor</value>
-                <value>userDaoImpl</value>
+                <value>itemDaoImpl</value>
             </list>
         </property>
     </bean>
