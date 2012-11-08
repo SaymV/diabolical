@@ -8,6 +8,21 @@ public class User {
     private String username;
     private Gender gender;
     private List<Account> accounts;
+    
+    public User() {
+        // No arg constructor for annotations???
+    }
+    
+    public User(Integer id, String username, Gender gender, List<Account> accounts) {
+        this.id = id;
+        this.username = username;
+        this.gender = gender;
+        this.accounts = accounts;
+    }
+    
+    public User(Integer id, String username, Gender gender) {
+        this(id, username, gender, null);
+    }
 
     public Integer getId() {
         return id;
