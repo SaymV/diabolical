@@ -20,7 +20,7 @@ public class QuestTest {
     @Test
     public void testQuestSetters() {
 			  Quest quest = new Quest();
-				quest.setID(2L);
+				quest.setId(2L);
 				quest.setName("Two");
 				quest.setDescription("Second quest added");
 				quest.setClues("No clues yet!");
