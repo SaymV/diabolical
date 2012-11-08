@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-public class CharacterDaoHibernateImpl extends HibernateDaoSupport {
+public class CharacterDaoHibernateImpl extends HibernateDaoSupport implements CharacterDao {
 
     public List<Character> getCharactersByQuery(String query) {
         return null;
