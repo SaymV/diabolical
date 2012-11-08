@@ -16,7 +16,12 @@
         <property name="hibernateProperties" ref="hibernateProperties" />
         <property name="annotatedClasses">
             <list>
+                <value>edu.lmu.cs.diabolical.ws.domain.Account</value>
+                <value>edu.lmu.cs.diabolical.ws.domain.User</value>
                 <value>edu.lmu.cs.diabolical.ws.domain.Item</value>
+                <value>edu.lmu.cs.diabolical.ws.domain.Skill</value>
+                <value>edu.lmu.cs.diabolical.ws.domain.Quest</value>
+                <value>edu.lmu.cs.diabolical.ws.domain.Character</value>
             </list>
         </property>
     </bean>

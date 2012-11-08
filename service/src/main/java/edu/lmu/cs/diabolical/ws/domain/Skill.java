@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Skill {
 
     private Long id;
+    private String name;
     private String description;
 
 		public Skill(){
@@ -36,6 +37,15 @@ public class Skill {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Lob
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Lob

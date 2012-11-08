@@ -2,6 +2,17 @@ package edu.lmu.cs.diabolical.ws.domain;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@Entity
+@XmlRootElement
 public class Character {
 
     private Integer id;
@@ -13,10 +24,6 @@ public class Character {
     private List<Item> items;
     private List<Skill> skills;
     private List<Quest> accomplishedQuests;
-
-    public Character() {
-
-    }
 
     public Character(Integer id, String name, Integer gender, String classType, Integer level, Long money,
             List<Item> items, List<Skill> skills, List<Quest> accomplishedQuests) {
@@ -43,6 +50,9 @@ public class Character {
         this.skills.add(s);
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @XmlAttribute
     public Integer getId() {
         return id;
     }
@@ -91,6 +101,7 @@ public class Character {
         this.money = money;
     }
 
+    @ManyToOne
     public List<Item> getItems() {
         return items;
     }
@@ -99,6 +110,7 @@ public class Character {
         this.items = items;
     }
 
+    @ManyToOne
     public List<Skill> getSkills() {
         return skills;
     }
@@ -107,6 +119,7 @@ public class Character {
         this.skills = skills;
     }
 
+    @ManyToOne
     public List<Quest> getAccomplishedQuests() {
         return accomplishedQuests;
     }
