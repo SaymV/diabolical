@@ -21,7 +21,7 @@ public class ItemDaoTest extends ApplicationContextTest {
     }
 
     @Test
-    public void testGetGrantById() {
+    public void testGetItemById() {
         // Grab the known event in the fixture.
         Item item = itemDao.getItemById(5000000L);
 
@@ -48,14 +48,14 @@ public class ItemDaoTest extends ApplicationContextTest {
     }
 
     @Test
-    public void testGetGrantsByMinLevel() {
+    public void testGetItemsByMinLevel() {
         List<Item> items = itemDao.getItems(null, 40, null, 0, 10);
         Assert.assertEquals(1, items.size());
         Assert.assertEquals(Long.valueOf(5000001L), items.get(0).getId());
     }
 
     @Test
-    public void testGetGrantsByMaxLevel() {
+    public void testGetItemsByMaxLevel() {
         List<Item> items = itemDao.getItems(null, null, 40, 0, 10);
         Assert.assertEquals(1, items.size());
         Assert.assertEquals(Long.valueOf(5000000L), items.get(0).getId());
