@@ -1,17 +1,17 @@
 package edu.lmu.cs.diabolical.ws.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
 public class UserTest {
-    
-    List<Account> sampleAccounts= new ArrayList<Account>();
-    
+
+    List<Account> sampleAccounts = new ArrayList<Account>();
+
     @Test
     public void testUserConstructors() {
         User u = new User(20, "upswimsdn", Gender.MALE, sampleAccounts);
@@ -20,7 +20,7 @@ public class UserTest {
         assertThat(u.getGender(), is(Gender.MALE));
         assertThat(u.getAccounts(), is(sampleAccounts));
     }
-    
+
     @Test
     public void testUserSetters() {
         User u = new User(20, "upswimsdn", Gender.MALE, sampleAccounts);
