@@ -57,4 +57,14 @@ public class Skill {
         this.description = description;
     }
 
+    @Lob
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
 }
