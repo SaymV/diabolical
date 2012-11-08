@@ -8,6 +8,21 @@ public class Account {
     private String login;
     private String password;
     private List<Character> characters;
+    
+    public Account() {
+        
+    }
+    
+    public Account(Integer id, String login, String password, List<Character> characters) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.characters = characters;
+    }
+    
+    public Account(Integer id, String login, String password) {
+        this(id, login, password, null);
+    }
 
     public Integer getId() {
         return id;
