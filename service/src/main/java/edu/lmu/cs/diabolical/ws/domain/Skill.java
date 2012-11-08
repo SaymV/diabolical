@@ -18,9 +18,9 @@ public class Skill {
     private Long id;
     private String description;
 
-    public Skill() {
-        // No-arg constructor
-    }
+		public Skill(){
+		
+		}
 
     public Skill(Long id, String description) {
         this.id = id;

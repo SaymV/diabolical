@@ -20,12 +20,10 @@ public class Quest {
 	private String description;
 	private String clues;
 	private String reward;
-	// TODO NPCs 
-
-
+	//TODO private List<NPCs> npcs; 
 
     public Quest() {
-        // No-arg constructor
+
     }
 
     public Quest(Long id, String name, String description, String clues, String reward) {
@@ -82,5 +80,17 @@ public class Quest {
     public void setReward(String reward) {
         this.reward = reward;
     }
+/* TODO
+		public List<NPC> getNpcs() {
+      return npcs;
+    }
 
+    public void setNpcs(List<Npcs> npcs) {
+			this.npcs = npcs;
+    }
+
+		public void addNpcs(Npcs npcs){
+			this.npcs.add(npcs);
+		}
+*/
 }
