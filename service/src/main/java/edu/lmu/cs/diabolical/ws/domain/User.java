@@ -2,6 +2,17 @@ package edu.lmu.cs.diabolical.ws.domain;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@Entity
+@XmlRootElement
 public class User {
 
     private Integer id;
@@ -24,6 +35,9 @@ public class User {
         this(id, username, gender, null);
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @XmlAttribute
     public Integer getId() {
         return id;
     }
@@ -48,6 +62,7 @@ public class User {
         this.gender = gender;
     }
 
+    @ManyToOne
     public List<Account> getAccounts() {
         return accounts;
     }
