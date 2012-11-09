@@ -38,18 +38,21 @@
     </bean>
 
     <!-- Sample beans -->
-    <!--
+    <bean id="itemService"
+        class="edu.lmu.cs.diabolical.ws.service.ItemServiceImpl">
+        <constructor-arg ref="itemDao"/>
+    </bean>
+
     <bean id="itemResource"
         class="edu.lmu.cs.diabolical.ws.resource.ItemResourceImpl">
         <constructor-arg ref="itemService"/>
     </bean>
-    -->
 
     <bean id="itemDaoImpl"
         class="edu.lmu.cs.diabolical.ws.dao.ItemDaoHibernateImpl"
         autowire="byName"
     />
-    
+
     <bean id="characterDaoImpl"
         class="edu.lmu.cs.diabolical.ws.dao.CharacterDaoHibernateImpl"
         autowire="byName"
@@ -67,7 +70,7 @@
             </list>
         </property>
     </bean>
-    
+
     <bean id="characterDao" class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="proxyInterfaces">
             <value>edu.lmu.cs.diabolical.ws.dao.CharacterDao</value>

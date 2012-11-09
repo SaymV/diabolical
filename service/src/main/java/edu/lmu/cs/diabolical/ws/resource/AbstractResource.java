@@ -60,7 +60,7 @@ public class AbstractResource {
      * Checks that a condition is true and throws a <code>ServiceException</code> with the given
      * integer HTTP response code if it is not.  Example:
      * <pre>
-     *     validate(student != null, 404, NO_STUDENT);
+     *     validate(student != null, 404, NO_USER);
      * </pre>
      */
     protected void validate(boolean condition, int httpStatus, String errorKey) {
