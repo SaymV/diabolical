@@ -2,14 +2,17 @@ package edu.lmu.cs.diabolical.ws.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @XmlRootElement
@@ -101,7 +104,8 @@ public class Character {
         this.money = money;
     }
 
-    @ManyToOne
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Item> getItems() {
         return items;
     }
@@ -110,7 +114,8 @@ public class Character {
         this.items = items;
     }
 
-    @ManyToOne
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Skill> getSkills() {
         return skills;
     }
@@ -119,7 +124,8 @@ public class Character {
         this.skills = skills;
     }
 
-    @ManyToOne
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Quest> getAccomplishedQuests() {
         return accomplishedQuests;
     }

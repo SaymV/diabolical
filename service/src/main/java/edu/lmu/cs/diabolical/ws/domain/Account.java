@@ -1,15 +1,14 @@
 package edu.lmu.cs.diabolical.ws.domain;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import java.util.List;
 
 @Entity
 @XmlRootElement
@@ -62,7 +61,7 @@ public class Account {
         this.password = password;
     }
 
-    @ManyToOne
+    @OneToMany
     public List<Character> getCharacters() {
         return characters;
     }

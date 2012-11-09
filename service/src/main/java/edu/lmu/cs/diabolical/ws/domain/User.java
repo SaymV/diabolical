@@ -2,14 +2,17 @@ package edu.lmu.cs.diabolical.ws.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @XmlRootElement
@@ -62,7 +65,8 @@ public class User {
         this.gender = gender;
     }
 
-    @ManyToOne
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Account> getAccounts() {
         return accounts;
     }

@@ -1,5 +1,7 @@
 package edu.lmu.cs.diabolical.ws.domain;
 
+import edu.lmu.cs.diabolical.ws.domain.Gender;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
