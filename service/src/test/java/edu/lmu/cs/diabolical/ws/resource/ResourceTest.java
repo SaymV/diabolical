@@ -44,12 +44,6 @@ public abstract class ResourceTest extends JerseyTest {
                 "com.sun.jersey.config.property.packages",
                 "edu.lmu.cs.diabolical.ws.resource"
             )
-            // TODO: User validation one more time
-            /*
-            .initParam(
-                "com.sun.jersey.spi.container.ContainerRequestFilters",
-                "edu.lmu.cs.diabolical.ws.resource.SecurityContextContainerRequestFilter"
-            )*/
             .contextPath("diabolical-test").build();
     }
 

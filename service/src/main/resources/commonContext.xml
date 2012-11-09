@@ -37,7 +37,6 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!-- Sample beans -->
     <bean id="itemService"
         class="edu.lmu.cs.diabolical.ws.service.ItemServiceImpl">
         <constructor-arg ref="itemDao"/>
