@@ -20,7 +20,7 @@ public class Character {
 
     private Integer id;
     private String name;
-    private Integer gender;
+    private Gender gender;
     private String classType;
     private Integer level;
     private Long money;
@@ -32,7 +32,7 @@ public class Character {
         // Empty arg constructor for annotations?
     }
 
-    public Character(Integer id, String name, Integer gender, String classType, Integer level, Long money,
+    public Character(Integer id, String name, Gender gender, String classType, Integer level, Long money,
             List<Item> items, List<Skill> skills, List<Quest> accomplishedQuests) {
         this.id = id;
         this.name = name;
@@ -76,11 +76,11 @@ public class Character {
         this.name = name;
     }
 
-    public Integer getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(Integer gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

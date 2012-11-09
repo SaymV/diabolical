@@ -70,4 +70,8 @@ public class Account {
         this.characters = characters;
     }
 
+    public void addCharacter(Character character) {
+        this.characters.add(character);
+    }
+
 }
