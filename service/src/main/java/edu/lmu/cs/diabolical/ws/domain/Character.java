@@ -27,6 +27,10 @@ public class Character {
     private List<Item> items;
     private List<Skill> skills;
     private List<Quest> accomplishedQuests;
+    
+    public Character() {
+        // Empty arg constructor for annotations?
+    }
 
     public Character(Integer id, String name, Integer gender, String classType, Integer level, Long money,
             List<Item> items, List<Skill> skills, List<Quest> accomplishedQuests) {
