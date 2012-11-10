@@ -35,7 +35,7 @@ public class ItemDaoHibernateImpl extends HibernateDaoSupport implements ItemDao
     }
 
     /**
-     * Returns a base HQL query object (no pagination) for the given parameters for grants.
+     * Returns a base HQL query object (no pagination) for the given parameters for items.
      */
     private QueryBuilder createItemQuery(String slot, Integer minLevel, Integer maxLevel) {
         // The desired return order is id.

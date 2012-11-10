@@ -18,6 +18,7 @@
             <list>
                 <value>edu.lmu.cs.diabolical.ws.domain.Account</value>
                 <value>edu.lmu.cs.diabolical.ws.domain.Item</value>
+                <value>edu.lmu.cs.diabolical.ws.domain.ItemTemplate</value>
                 <value>edu.lmu.cs.diabolical.ws.domain.Skill</value>
                 <value>edu.lmu.cs.diabolical.ws.domain.Quest</value>
                 <value>edu.lmu.cs.diabolical.ws.domain.Character</value>
@@ -52,6 +53,11 @@
         autowire="byName"
     />
 
+    <bean id="itemTemplateDaoImpl"
+        class="edu.lmu.cs.diabolical.ws.dao.ItemTemplateDaoHibernateImpl"
+        autowire="byName"
+    />
+
     <bean id="characterDaoImpl"
         class="edu.lmu.cs.diabolical.ws.dao.CharacterDaoHibernateImpl"
         autowire="byName"
@@ -66,6 +72,19 @@
             <list>
                 <value>hibernateInterceptor</value>
                 <value>itemDaoImpl</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="itemTemplateDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>edu.lmu.cs.diabolical.ws.dao.ItemTemplateDao</value>
+        </property>
+
+        <property name="interceptorNames">
+            <list>
+                <value>hibernateInterceptor</value>
+                <value>itemTemplateDaoImpl</value>
             </list>
         </property>
     </bean>
