@@ -19,9 +19,9 @@ public class Skill {
     private String name;
     private String description;
 
-		public Skill(){
-		
-		}
+    public Skill() {
+
+    }
 
     public Skill(Long id, String description) {
         this.id = id;
@@ -56,6 +56,5 @@ public class Skill {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
 }
