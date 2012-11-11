@@ -30,7 +30,7 @@ public abstract class ResourceTest extends JerseyTest {
     protected AppDescriptor configure() {
         // The test web app descriptor nearly replicates web.xml except for the
         // Spring context and a container request filter.
-        return new WebAppDescriptor.Builder("edu.lmu.cs.headmaster.ws.resource")
+        return new WebAppDescriptor.Builder("edu.lmu.cs.diabolical.ws.resource")
             .clientConfig(createClientConfig())
             .contextParam("contextConfigLocation", "classpath:testContext.xml")
             .contextListenerClass(ContextLoaderListener.class)
@@ -42,13 +42,9 @@ public abstract class ResourceTest extends JerseyTest {
             )
             .initParam(
                 "com.sun.jersey.config.property.packages",
-                "edu.lmu.cs.headmaster.ws.resource"
+                "edu.lmu.cs.diabolical.ws.resource"
             )
-            .initParam(
-                "com.sun.jersey.spi.container.ContainerRequestFilters",
-                "edu.lmu.cs.headmaster.ws.resource.SecurityContextContainerRequestFilter"
-            )
-            .contextPath("headmaster-test").build();
+            .contextPath("diabolical-test").build();
     }
 
     /**

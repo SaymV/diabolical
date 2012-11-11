@@ -2,14 +2,17 @@ package edu.lmu.cs.diabolical.ws.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @XmlRootElement
@@ -17,15 +20,19 @@ public class Character {
 
     private Integer id;
     private String name;
-    private Integer gender;
+    private Gender gender;
     private String classType;
     private Integer level;
     private Long money;
     private List<Item> items;
     private List<Skill> skills;
     private List<Quest> accomplishedQuests;
+    
+    public Character() {
+        // Empty arg constructor for annotations?
+    }
 
-    public Character(Integer id, String name, Integer gender, String classType, Integer level, Long money,
+    public Character(Integer id, String name, Gender gender, String classType, Integer level, Long money,
             List<Item> items, List<Skill> skills, List<Quest> accomplishedQuests) {
         this.id = id;
         this.name = name;
@@ -69,11 +76,11 @@ public class Character {
         this.name = name;
     }
 
-    public Integer getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(Integer gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -101,7 +108,8 @@ public class Character {
         this.money = money;
     }
 
-    @ManyToOne
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Item> getItems() {
         return items;
     }
@@ -110,7 +118,8 @@ public class Character {
         this.items = items;
     }
 
-    @ManyToOne
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Skill> getSkills() {
         return skills;
     }
@@ -119,7 +128,8 @@ public class Character {
         this.skills = skills;
     }
 
-    @ManyToOne
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Quest> getAccomplishedQuests() {
         return accomplishedQuests;
     }

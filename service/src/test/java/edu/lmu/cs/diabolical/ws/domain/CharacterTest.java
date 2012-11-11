@@ -10,11 +10,11 @@ import org.junit.Test;
 public class CharacterTest {
     @Test
     public void testCharacterConstructor() {
-        Character c = new Character(1, "Uncle Bob", 1, "Coder", 99, 1000000000L, new ArrayList<Item>(),
+        Character c = new Character(1, "Uncle Bob", Gender.MALE, "Coder", 99, 1000000000L, new ArrayList<Item>(),
                 new ArrayList<Skill>(), new ArrayList<Quest>());
         assertThat(c.getId(), is(1));
         assertThat(c.getName(), is("Uncle Bob"));
-        assertThat(c.getGender(), is(1));
+        assertThat(c.getGender(), is(Gender.MALE));
         assertThat(c.getClassType(), is("Coder"));
         assertThat(c.getLevel(), is(99));
         assertThat(c.getMoney(), is(1000000000L));
@@ -25,7 +25,7 @@ public class CharacterTest {
 
     @Test
     public void testCharacterSetters() {
-        Character c = new Character(1, "Uncle Bob", 1, "Coder", 99, 1000000000L, new ArrayList<Item>(),
+        Character c = new Character(1, "Uncle Bob", Gender.MALE, "Coder", 99, 1000000000L, new ArrayList<Item>(),
                 new ArrayList<Skill>(), new ArrayList<Quest>());
         assertThat(c.getId(), is(1));
         c.setId(2);
@@ -35,9 +35,9 @@ public class CharacterTest {
         c.setName("Homie D. Clown");
         assertThat(c.getName(), is("Homie D. Clown"));
 
-        assertThat(c.getGender(), is(1));
-        c.setGender(0);
-        assertThat(c.getGender(), is(0));
+        assertThat(c.getGender(), is(Gender.MALE));
+        c.setGender(Gender.FEMALE);
+        assertThat(c.getGender(), is(Gender.FEMALE));
 
         assertThat(c.getClassType(), is("Coder"));
         c.setClassType("Clown");
@@ -66,7 +66,7 @@ public class CharacterTest {
 
     @Test
     public void testQuestItemSkillSetter() {
-        Character c = new Character(1, "Uncle Bob", 1, "Coder", 99, 1000000000L, new ArrayList<Item>(),
+        Character c = new Character(1, "Uncle Bob", Gender.MALE, "Coder", 99, 1000000000L, new ArrayList<Item>(),
                 new ArrayList<Skill>(), new ArrayList<Quest>());
 
         assertThat(c.getAccomplishedQuests().size(), is(0));

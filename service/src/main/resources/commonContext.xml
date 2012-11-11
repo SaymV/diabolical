@@ -17,8 +17,8 @@
         <property name="annotatedClasses">
             <list>
                 <value>edu.lmu.cs.diabolical.ws.domain.Account</value>
-                <value>edu.lmu.cs.diabolical.ws.domain.User</value>
                 <value>edu.lmu.cs.diabolical.ws.domain.Item</value>
+                <value>edu.lmu.cs.diabolical.ws.domain.ItemTemplate</value>
                 <value>edu.lmu.cs.diabolical.ws.domain.Skill</value>
                 <value>edu.lmu.cs.diabolical.ws.domain.Quest</value>
                 <value>edu.lmu.cs.diabolical.ws.domain.Character</value>
@@ -38,19 +38,26 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!-- Sample beans -->
-    <!--
+    <bean id="itemService"
+        class="edu.lmu.cs.diabolical.ws.service.ItemServiceImpl">
+        <constructor-arg ref="itemDao"/>
+    </bean>
+
     <bean id="itemResource"
         class="edu.lmu.cs.diabolical.ws.resource.ItemResourceImpl">
         <constructor-arg ref="itemService"/>
     </bean>
-    -->
 
     <bean id="itemDaoImpl"
         class="edu.lmu.cs.diabolical.ws.dao.ItemDaoHibernateImpl"
         autowire="byName"
     />
-    
+
+    <bean id="itemTemplateDaoImpl"
+        class="edu.lmu.cs.diabolical.ws.dao.ItemTemplateDaoHibernateImpl"
+        autowire="byName"
+    />
+
     <bean id="characterDaoImpl"
         class="edu.lmu.cs.diabolical.ws.dao.CharacterDaoHibernateImpl"
         autowire="byName"
@@ -68,7 +75,20 @@
             </list>
         </property>
     </bean>
-    
+
+    <bean id="itemTemplateDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>edu.lmu.cs.diabolical.ws.dao.ItemTemplateDao</value>
+        </property>
+
+        <property name="interceptorNames">
+            <list>
+                <value>hibernateInterceptor</value>
+                <value>itemTemplateDaoImpl</value>
+            </list>
+        </property>
+    </bean>
+
     <bean id="characterDao" class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="proxyInterfaces">
             <value>edu.lmu.cs.diabolical.ws.dao.CharacterDao</value>
