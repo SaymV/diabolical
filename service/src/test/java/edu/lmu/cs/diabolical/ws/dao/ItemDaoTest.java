@@ -22,7 +22,6 @@ public class ItemDaoTest extends ApplicationContextTest {
 
     @Test
     public void testGetItemById() {
-        // Grab the known event in the fixture.
         Item item = itemDao.getItemById(5000000L);
 
         Assert.assertEquals(Long.valueOf(5000000L), item.getId());
@@ -42,7 +41,6 @@ public class ItemDaoTest extends ApplicationContextTest {
     public void testGetItemsBySlot() {
         List<Item> items = itemDao.getItems("Brace", null, null, 0, 5);
 
-        // There should only be one grant there. We'll check just the ID.
         Assert.assertEquals(1, items.size());
         Assert.assertEquals(Long.valueOf(5000000L), items.get(0).getId());
     }
@@ -69,24 +67,19 @@ public class ItemDaoTest extends ApplicationContextTest {
 
     @Test
     public void testCreateItem() {
-        // Create an id-less grant.
         Item itemToCreate = DomainObjectUtils.createItemObject("Super Soaker", "mainhand", 2.0, 4.0, 5.0, 1, 5, 80.0,
                 null, null);
 
         itemDao.createItem(itemToCreate);
 
-        // The created grant should now have an ID of 1 because there is
-        // nothing else in the text fixture.
         Assert.assertEquals(Long.valueOf(1L), itemToCreate.getId());
 
-        // Reload the grant that was just created.
         Item createdItem = itemDao.getItemById(1L);
         assertSimpleEquality(itemToCreate, createdItem);
     }
 
     @Test
     public void testCreateAndUpdateItem() {
-        // Create an id-less item.
         Item itemToCreate = DomainObjectUtils.createItemObject("Super Soaker", "mainhand", 2.0, 4.0, 5.0, 1, 5, 80.0,
                 null, null);
         Item itemToReplaceWith = DomainObjectUtils.createItemObject("Super Soaker", "mainhand", null, null, null, 1, 5,
@@ -94,11 +87,9 @@ public class ItemDaoTest extends ApplicationContextTest {
 
         itemDao.createItem(itemToCreate);
 
-        // Keep the ID of the created item to make sure it does not change when updated.
         Long createdItemId = itemToCreate.getId();
         itemToReplaceWith.setId(createdItemId);
 
-        // Reload the item that was just created with a new item with the same ID.
         itemDao.createOrUpdateItem(itemToReplaceWith);
         Item createdItem = itemDao.getItemById(createdItemId);
 
