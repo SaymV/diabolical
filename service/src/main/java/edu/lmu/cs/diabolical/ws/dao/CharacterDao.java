@@ -12,5 +12,4 @@ public interface CharacterDao {
     public void createOrUpdateCharacter(Character c);
     
     public Character createCharacter(Character c);
-
 }
