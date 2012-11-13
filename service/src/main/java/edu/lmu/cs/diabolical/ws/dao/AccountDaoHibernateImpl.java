@@ -2,14 +2,15 @@ package edu.lmu.cs.diabolical.ws.dao;
 
 import java.util.List;
 
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
 import edu.lmu.cs.diabolical.ws.domain.Account;
 
-public class AccountDaoHibernateImpl extends HibernatedaoSupport implements AccountDao{
+public class AccountDaoHibernateImpl extends HibernateDaoSupport implements AccountDao{
 
     @Override
     public Account findUserById(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        return getHibernateTemplate().get(Account.class, id);
     }
 
     @Override
@@ -20,19 +21,19 @@ public class AccountDaoHibernateImpl extends HibernatedaoSupport implements Acco
 
     @Override
     public void deleteAccount(Account a) {
-        // TODO Auto-generated method stub
+        getHibernateTemplate().delete(a);
         
     }
 
     @Override
     public void createOrUpdateAccount(Account a) {
-        // TODO Auto-generated method stub
+        getHibernateTemplate().saveOrUpdate(a);
         
     }
 
     @Override
     public void createAccount(Account a) {
-        // TODO Auto-generated method stub
+        getHibernateTemplate().save(a);
         
     }
 
