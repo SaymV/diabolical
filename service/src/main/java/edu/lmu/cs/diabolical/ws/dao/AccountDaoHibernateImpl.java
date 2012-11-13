@@ -9,7 +9,7 @@ import edu.lmu.cs.diabolical.ws.domain.Account;
 public class AccountDaoHibernateImpl extends HibernateDaoSupport implements AccountDao{
 
     @Override
-    public Account findUserById(Integer id) {
+    public Account findAccountById(Integer id) {
         return getHibernateTemplate().get(Account.class, id);
     }
 

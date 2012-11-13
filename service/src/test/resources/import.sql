@@ -4,3 +4,7 @@ insert into item(id, name, slot, critchance, atkspeed, absorption, level) values
 
 insert into itemtemplate(id, name, slot, minMindamage, maxMindamage, minMaxdamage, maxMaxdamage, minCritchance, maxCritchance, minAtkspeed, maxAtkspeed, minLevel, maxLevel) values(5000000, 'MyBracer', 'Bracer', 1400.0, 1450.0, 1700.0, 1750.0, 0.9, 0.99, 2, 5, 20, 30);
 insert into itemtemplate(id, name, slot, minLevel, maxLevel) values(5000001, 'SOJ', 'Finger', 34, 42);
+
+insert into account(id, firstName, lastName, login, password) values(1, 'Jose', 'Jose', 'upswimsdn', 'aaaaaa');
+insert into account(id, firstName, lastName, login, password) values(2, 'Ignatius', 'Lion', 'lmulion', 'iggy');
+insert into account(id, firstName, lastName, login, password) values(3, 'Bart', 'Simpson', 'bs', 'hello');

@@ -5,7 +5,7 @@ import java.util.List;
 import edu.lmu.cs.diabolical.ws.domain.Account;
 
 public interface AccountDao {
-    public Account findUserById(Integer id);
+    public Account findAccountById(Integer id);
     
     public List<Account> getAccountsByQuery(String query);
     

@@ -62,6 +62,24 @@
         class="edu.lmu.cs.diabolical.ws.dao.CharacterDaoHibernateImpl"
         autowire="byName"
     />
+    
+    <bean id="accountDaoImpl"
+        class="edu.lmu.cs.diabolical.ws.dao.AccountDaoHibernateImpl"
+        autowire="byName"
+    />
+    
+    <bean id="accountDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>edu.lmu.cs.diabolical.ws.dao.AccountDao</value>
+        </property>
+
+        <property name="interceptorNames">
+            <list>
+                <value>hibernateInterceptor</value>
+                <value>accountDaoImpl</value>
+            </list>
+        </property>
+    </bean>
 
     <bean id="itemDao" class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="proxyInterfaces">
@@ -101,4 +119,5 @@
             </list>
         </property>
     </bean>
+    
 </beans>
