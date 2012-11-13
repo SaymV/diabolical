@@ -15,47 +15,46 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Skill {
 
-    private Long id;
-    private String name;
-    private String description;
+ private Long id;
+ private String name;
+ private String description;
 
-		public Skill(){
-		
-		}
+ public Skill(){
+ 
+ }
 
-    public Skill(Long id, String description) {
-        this.id = id;
-        this.description = description;
-    }
+ public Skill(Long id, String description) {
+  this.id = id;
+  this.description = description;
+ }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @XmlAttribute
-    public Long getId() {
-        return id;
-    }
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ @XmlAttribute
+ public Long getId() {
+  return id;
+ }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+ public void setId(Long id) {
+  this.id = id;
+ }
 
-    @Lob
-    public String getName() {
-        return name;
-    }
+ @Lob
+ public String getName() {
+  return name;
+ }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+ public void setName(String name) {
+  this.name = name;
+ }
 
-    @Lob
-    public String getDescription() {
-        return description;
-    }
+ @Lob
+ public String getDescription() {
+  return description;
+ }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+ public void setDescription(String description) {
+  this.description = description;
+ }
 
 }
