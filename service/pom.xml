@@ -251,7 +251,7 @@
           <!-- http port -->
           <port>9595</port>
           <!-- application path always starts with /-->
-          <path>/diobolical</path>
+          <path>/diabolical</path>
           <!-- custom server.xml -->
           <serverXml>target/classes/server.xml</serverXml>
           <!-- if you want to use test dependencies rather than only runtime -->
