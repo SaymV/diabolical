@@ -3,9 +3,12 @@ package edu.lmu.cs.diabolical.ws.resource;
 import java.util.List;
 
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import edu.lmu.cs.diabolical.ws.domain.Item;
+import edu.lmu.cs.diabolical.ws.domain.ItemTemplate;
 import edu.lmu.cs.diabolical.ws.service.ItemService;
 
 @Path("/items")
@@ -30,6 +33,16 @@ public class ItemResourceImpl extends AbstractResource implements ItemResource {
     }
 
     @Override
+    public Item getItemById(Long id) {
+        logServiceCall();
+
+        Item item = itemService.getItemById(id);
+        validate(item != null, Response.Status.NOT_FOUND, ITEM_NOT_FOUND);
+
+        return item;
+    }
+
+    @Override
     public Response createItem(Item item) {
         logServiceCall();
 
@@ -50,13 +63,43 @@ public class ItemResourceImpl extends AbstractResource implements ItemResource {
     }
 
     @Override
-    public Item getItemById(Long id) {
+    public Item getSpawnedItem(@QueryParam("level") Integer level, @QueryParam("slot") String slot) {
         logServiceCall();
 
-        Item item = itemService.getItemById(id);
-        validate(item != null, Response.Status.NOT_FOUND, ITEM_NOT_FOUND);
+        validate((level != null || slot != null), Response.Status.BAD_REQUEST,
+                SPAWNER_PARAMETERS_MISSING);
 
-        return item;
+        return itemService.getSpawnedItem(level, slot);
+    }
+
+    @Override
+    public ItemTemplate getItemTemplateById(@PathParam("id") Long id) {
+        logServiceCall();
+
+        ItemTemplate itemTemplate = itemService.getItemTemplateById(id);
+        validate(itemTemplate != null, Response.Status.NOT_FOUND, ITEM_TEMPLATE_NOT_FOUND);
+
+        return itemTemplate;
+    }
+
+    @Override
+    public Response createItemTemplate(ItemTemplate itemTemplate) {
+        logServiceCall();
+
+        validate(itemTemplate.getId() == null, Response.Status.BAD_REQUEST, ITEM_TEMPLATE_OVERSPECIFIED);
+        itemTemplate = itemService.createItemTemplate(itemTemplate);
+
+        return Response.created(java.net.URI.create(Long.toString(itemTemplate.getId()))).build();
+    }
+
+    @Override
+    public Response createOrUpdateItemTemplate(@PathParam("id") Long id, ItemTemplate itemTemplate) {
+        logServiceCall();
+
+        validate(id.equals(itemTemplate.getId()), Response.Status.BAD_REQUEST, ITEM_TEMPLATE_INCONSISTENT);
+        itemService.createOrUpdateItemTemplate(itemTemplate);
+
+        return Response.noContent().build();
     }
 
 }

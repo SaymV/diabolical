@@ -16,8 +16,8 @@ public class ItemTemplateDaoHibernateImpl extends HibernateDaoSupport implements
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ItemTemplate> getItemTemplates(String slot, Integer level, int skip, int max) {
-        return createItemTemplateQuery(slot, level).build(getSession()).setFirstResult(skip).setMaxResults(max).list();
+    public List<ItemTemplate> getItemTemplates(Integer level, String slot) {
+        return createItemTemplateQuery(slot, level).build(getSession()).list();
     }
 
     @Override
