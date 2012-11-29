@@ -48,6 +48,16 @@
         <constructor-arg ref="itemService"/>
     </bean>
 
+    <bean id="accountService"
+        class="edu.lmu.cs.diabolical.ws.service.AccountServiceImpl">
+        <constructor-arg ref="accountDao"/>
+    </bean>
+
+    <bean id="accountResource"
+        class="edu.lmu.cs.diabolical.ws.resource.AccountResourceImpl">
+        <constructor-arg ref="accountService"/>
+    </bean>
+
     <bean id="itemDaoImpl"
         class="edu.lmu.cs.diabolical.ws.dao.ItemDaoHibernateImpl"
         autowire="byName"

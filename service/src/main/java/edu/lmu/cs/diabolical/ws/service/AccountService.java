@@ -1,17 +1,17 @@
-package edu.lmu.cs.diabolical.ws.dao;
+package edu.lmu.cs.diabolical.ws.service;
 
 import java.util.List;
 
 import edu.lmu.cs.diabolical.ws.domain.Account;
 
-public interface AccountDao {
+public interface AccountService {
     public Account findAccountById(Long id);
     
-    public List<Account> getAccountsByQuery(String query);
+    public List<Account> getAccounts(String query);
     
     public void deleteAccount(Account a);
     
-    public void createOrUpdateAccount(Account a);
-    
     public void createAccount(Account a);
+    
+    public void createOrUpdateAccount(Account a);
 }

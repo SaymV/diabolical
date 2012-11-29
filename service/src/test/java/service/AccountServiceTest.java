@@ -1,24 +1,25 @@
-package edu.lmu.cs.diabolical.ws.dao;
+package service;
+
+import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.Assert;
-
 import edu.lmu.cs.diabolical.ws.domain.Account;
+import edu.lmu.cs.diabolical.ws.service.AccountService;
 import edu.lmu.cs.diabolical.ws.util.ApplicationContextTest;
 
-public class AccountDaoTest extends ApplicationContextTest{
+public class AccountServiceTest extends ApplicationContextTest {
+    private AccountService accountService;
 
-    private AccountDao accountDao;
-    
     @Before
     public void setUp() {
-        accountDao = (AccountDao) applicationContext.getBean("accountDao");
+        accountService = (AccountService) applicationContext.getBean("accountService");
     }
+
     @Test
     public void testFindAccountById() {
-        Account a = accountDao.findAccountById(Long.valueOf(1));
+        Account a = accountService.findAccountById(Long.valueOf(1));
         Assert.assertEquals(a.getId(), Long.valueOf(1));
         Assert.assertEquals(a.getFirstName(), "Jose");
         Assert.assertEquals(a.getLastName(), "Jose");

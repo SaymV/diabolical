@@ -6,7 +6,7 @@
     http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     version="2.5">
 
-    <display-name>Headmaster Web Resource</display-name>
+    <display-name>Diabolical Web Resource</display-name>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -36,7 +36,7 @@
         </init-param>  
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>edu.lmu.cs.headmaster.ws.resource</param-value>
+            <param-value>edu.lmu.cs.diabolical.ws.resource</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>

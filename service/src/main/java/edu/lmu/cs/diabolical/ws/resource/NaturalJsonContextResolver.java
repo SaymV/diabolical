@@ -10,6 +10,7 @@ import javax.xml.bind.JAXBContext;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
 
+import edu.lmu.cs.diabolical.ws.domain.Account;
 import edu.lmu.cs.diabolical.ws.domain.Item;
 import edu.lmu.cs.diabolical.ws.domain.Quest;
 import edu.lmu.cs.diabolical.ws.domain.Skill;
@@ -26,6 +27,7 @@ public class NaturalJsonContextResolver implements ContextResolver<JAXBContext> 
     private final Class<?>[] types = {
 
         // Domain classes requiring JSON serialization.
+        Account.class,
         Character.class,
         Item.class,
         Quest.class,

@@ -1,5 +1,8 @@
 package edu.lmu.cs.diabolical.ws.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,42 +11,43 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import java.util.List;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @XmlRootElement
 public class Account {
 
-    private Integer id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String login;
     private String password;
-    private List<Character> characters;
-    
+    private List<Character> characters = new ArrayList<Character>();
+
     public Account() {
-        
+
     }
-    
-    public Account(Integer id, String login, String password, List<Character> characters) {
+
+    public Account(Long id, String login, String password, List<Character> characters) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.characters = characters;
     }
-    
-    public Account(Integer id, String login, String password) {
+
+    public Account(Long id, String login, String password) {
         this(id, login, password, null);
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlAttribute
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -80,6 +84,7 @@ public class Account {
     }
 
     @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Character> getCharacters() {
         return characters;
     }

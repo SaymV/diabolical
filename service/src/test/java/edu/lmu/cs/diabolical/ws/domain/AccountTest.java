@@ -18,13 +18,13 @@ public class AccountTest {
     @Before
     public void setUp() {
         sampleCharacterRoster = new ArrayList<Character>();
-        sampleAccount = new Account(1, "Oli Oli Oxen Free", "YUP", sampleCharacterRoster);
+        sampleAccount = new Account(1L, "Oli Oli Oxen Free", "YUP", sampleCharacterRoster);
     }
 
     @Test
     public void testAccountConstructor() {
-        Account a = new Account(23, "myname", "ABCDEFG123", new ArrayList<Character>());
-        assertThat(a.getId(), is(23));
+        Account a = new Account(23L, "myname", "ABCDEFG123", new ArrayList<Character>());
+        assertThat(a.getId(), is(23L));
         assertThat(a.getLogin(), is("myname"));
         assertThat(a.getPassword(), is("ABCDEFG123"));
         assertThat(a.getCharacters().size(), is(0));
@@ -32,12 +32,12 @@ public class AccountTest {
 
     @Test
     public void testAccountSetterMethods() {
-        Account a = new Account(23, "myname", "ABCDEFG123", new ArrayList<Character>());
+        Account a = new Account(23L, "myname", "ABCDEFG123", new ArrayList<Character>());
         List<Character> characters = new ArrayList<Character>();
         characters.add(new Character());
-        assertThat(a.getId(), is(23));
-        a.setId(55);
-        assertThat(a.getId(), is(55));
+        assertThat(a.getId(), is(23L));
+        a.setId(55L);
+        assertThat(a.getId(), is(55L));
         assertThat(a.getLogin(), is("myname"));
         a.setLogin("Badonk");
         assertThat(a.getLogin(), is("Badonk"));
