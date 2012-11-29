@@ -41,6 +41,7 @@
     <bean id="itemService"
         class="edu.lmu.cs.diabolical.ws.service.ItemServiceImpl">
         <constructor-arg ref="itemDao"/>
+        <constructor-arg ref="itemTemplateDao"/>
     </bean>
 
     <bean id="itemResource"
@@ -72,12 +73,12 @@
         class="edu.lmu.cs.diabolical.ws.dao.CharacterDaoHibernateImpl"
         autowire="byName"
     />
-    
+
     <bean id="accountDaoImpl"
         class="edu.lmu.cs.diabolical.ws.dao.AccountDaoHibernateImpl"
         autowire="byName"
     />
-    
+
     <bean id="accountDao" class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="proxyInterfaces">
             <value>edu.lmu.cs.diabolical.ws.dao.AccountDao</value>
@@ -129,5 +130,5 @@
             </list>
         </property>
     </bean>
-    
+
 </beans>

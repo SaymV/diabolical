@@ -14,10 +14,9 @@ public interface ItemTemplateDao {
     ItemTemplate getItemTemplateById(Long id);
 
     /**
-     * Returns a paginated set of item templates that match the required query term, skipping the first
-     * <code>skip</code> results and returning at most <code>max</code> results.
+     * Returns a set of item templates that match the specified query terms.
      */
-    List<ItemTemplate> getItemTemplates(String slot, Integer level, int skip, int max);
+    List<ItemTemplate> getItemTemplates(Integer level, String slot);
 
     /**
      * Saves the given item template, which should have a null id.

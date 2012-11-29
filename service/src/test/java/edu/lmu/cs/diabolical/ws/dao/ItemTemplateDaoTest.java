@@ -41,7 +41,7 @@ public class ItemTemplateDaoTest extends ApplicationContextTest {
 
     @Test
     public void testGetItemTemplatesBySlot() {
-        List<ItemTemplate> itemTemplates = itemTemplateDao.getItemTemplates("Brace", null, 0, 5);
+        List<ItemTemplate> itemTemplates = itemTemplateDao.getItemTemplates(null, "Brace");
 
         Assert.assertEquals(1, itemTemplates.size());
         Assert.assertEquals(Long.valueOf(5000000L), itemTemplates.get(0).getId());
@@ -49,14 +49,14 @@ public class ItemTemplateDaoTest extends ApplicationContextTest {
 
     @Test
     public void testGetItemTemplatesByLevel() {
-        List<ItemTemplate> itemTemplates = itemTemplateDao.getItemTemplates(null, 40, 0, 10);
+        List<ItemTemplate> itemTemplates = itemTemplateDao.getItemTemplates(40, null);
         Assert.assertEquals(1, itemTemplates.size());
         Assert.assertEquals(Long.valueOf(5000001L), itemTemplates.get(0).getId());
     }
 
     @Test
     public void testGetItemTemplatesByInvalidQuery() {
-        List<ItemTemplate> itemTemplates = itemTemplateDao.getItemTemplates("blarg", null, 0, 5);
+        List<ItemTemplate> itemTemplates = itemTemplateDao.getItemTemplates(null, "blarg");
         Assert.assertEquals(0, itemTemplates.size());
     }
 
