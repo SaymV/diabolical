@@ -2,10 +2,16 @@ package edu.lmu.cs.diabolical.ws.resource;
 
 import java.util.List;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import edu.lmu.cs.diabolical.ws.domain.Item;
+import edu.lmu.cs.diabolical.ws.domain.ItemTemplate;
 import edu.lmu.cs.diabolical.ws.service.ItemService;
 
 @Path("/items")
@@ -57,6 +63,30 @@ public class ItemResourceImpl extends AbstractResource implements ItemResource {
         validate(item != null, Response.Status.NOT_FOUND, ITEM_NOT_FOUND);
 
         return item;
+    }
+
+    @Override
+    public Item getSpawnedItem(@QueryParam("level") Integer level, @QueryParam("slot") String slot) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ItemTemplate getItemTemplateById(@PathParam("id") Long id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Response createItemTemplate(ItemTemplate itemTemplate) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Response createOrUpdateItemTemplate(@PathParam("id") Long id, ItemTemplate itemTemplate) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
