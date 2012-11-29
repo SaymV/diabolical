@@ -34,6 +34,7 @@ public interface ItemResource {
     String ITEM_NOT_FOUND = "item.not.found";
     String ITEM_TEMPLATE_NOT_FOUND = "item.template.not.found";
     String ITEM_QUERY_PARAMETERS_MISSING = "item.query.parameters.missing";
+    String SPAWNER_PARAMETERS_MISSING = "spawner.parameters.missing";
 
     /**
      * Returns items according to the search parameters

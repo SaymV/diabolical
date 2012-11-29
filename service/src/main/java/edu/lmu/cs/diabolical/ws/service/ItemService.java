@@ -3,6 +3,7 @@ package edu.lmu.cs.diabolical.ws.service;
 import java.util.List;
 
 import edu.lmu.cs.diabolical.ws.domain.Item;
+import edu.lmu.cs.diabolical.ws.domain.ItemTemplate;
 
 public interface ItemService {
 
@@ -27,5 +28,26 @@ public interface ItemService {
      * Updates or saves the given item, which should have a non-null id.
      */
     void createOrUpdateItem(Item item);
+
+    /**
+     * Returns a random spawned item that was generated based off of an item
+     * template that matches supplied query terms.
+     */
+    Item getSpawnedItem(Integer level, String slot);
+
+    /**
+     * Returns the item template with the given id, or null if no such item template exists.
+     */
+    ItemTemplate getItemTemplateById(Long id);
+
+    /**
+     * Saves the given item template, which should have a null id.
+     */
+    ItemTemplate createItemTemplate(ItemTemplate itemTemplate);
+
+    /**
+     * Updates or saves the given item template, which should have a non-null id.
+     */
+    void createOrUpdateItemTemplate(ItemTemplate itemTemplate);
 
 }

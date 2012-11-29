@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.lmu.cs.diabolical.ws.dao.ItemDao;
 import edu.lmu.cs.diabolical.ws.domain.Item;
+import edu.lmu.cs.diabolical.ws.domain.ItemTemplate;
 
 public class ItemServiceImpl extends AbstractService implements ItemService {
 
@@ -35,6 +36,34 @@ public class ItemServiceImpl extends AbstractService implements ItemService {
     public Item getItemById(Long id) {
         getLogger().debug("getItemById");
         return itemDao.getItemById(id);
+    }
+
+    @Override
+    public Item getSpawnedItem(Integer level, String slot) {
+        getLogger().debug("getSpawnedItem");
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ItemTemplate getItemTemplateById(Long id) {
+        getLogger().debug("getItemTemplateById");
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ItemTemplate createItemTemplate(ItemTemplate itemTemplate) {
+        getLogger().debug("createItemTemplate");
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void createOrUpdateItemTemplate(ItemTemplate itemTemplate) {
+        getLogger().debug("createOrUpdateItemTemplate");
+        // TODO Auto-generated method stub
+
     }
 
 }
