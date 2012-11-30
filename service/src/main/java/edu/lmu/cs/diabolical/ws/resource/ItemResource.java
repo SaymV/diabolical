@@ -52,6 +52,7 @@ public interface ItemResource {
      * @return the (paginated) set of items matching the query parameters
      */
     @GET
+    @Path("/")
     List<Item> getItems(@QueryParam("q") String query, @QueryParam("minlevel") Integer minlevel,
             @QueryParam("maxlevel") Integer maxlevel, @QueryParam("skip") @DefaultValue("0") int skip,
             @QueryParam("max") @DefaultValue("100") int max);
@@ -65,6 +66,7 @@ public interface ItemResource {
      *         <code>item.overspecified</code> if the item's id is not null.
      */
     @POST
+    @Path("/")
     Response createItem(Item item);
 
     /**
@@ -105,7 +107,7 @@ public interface ItemResource {
      */
     @GET
     @Path("/spawner")
-    Item getSpawnedItem(@QueryParam("level") Integer level, @QueryParam("slot") String slot);
+    Item getSpawnedItem(@QueryParam("level") String level, @QueryParam("slot") String slot);
 
     /**
      * Returns the item template with the given id.

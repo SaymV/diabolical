@@ -3,8 +3,6 @@ package edu.lmu.cs.diabolical.ws.resource;
 import java.util.List;
 
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import edu.lmu.cs.diabolical.ws.domain.Item;
@@ -63,17 +61,28 @@ public class ItemResourceImpl extends AbstractResource implements ItemResource {
     }
 
     @Override
-    public Item getSpawnedItem(@QueryParam("level") Integer level, @QueryParam("slot") String slot) {
+    public Item getSpawnedItem(String levelString, String slot) {
         logServiceCall();
+        Integer level = null;
+
+        if (levelString != null) {
+            try {
+                level = Integer.parseInt(levelString);
+            } catch (Exception e) {
+                level = null;
+            }
+        }
 
         validate((level != null || slot != null), Response.Status.BAD_REQUEST,
                 SPAWNER_PARAMETERS_MISSING);
 
-        return itemService.getSpawnedItem(level, slot);
+        Item spawnedItem = itemService.getSpawnedItem(level, slot);
+        spawnedItem.setLevel(level);
+        return spawnedItem;
     }
 
     @Override
-    public ItemTemplate getItemTemplateById(@PathParam("id") Long id) {
+    public ItemTemplate getItemTemplateById(Long id) {
         logServiceCall();
 
         ItemTemplate itemTemplate = itemService.getItemTemplateById(id);
@@ -93,7 +102,7 @@ public class ItemResourceImpl extends AbstractResource implements ItemResource {
     }
 
     @Override
-    public Response createOrUpdateItemTemplate(@PathParam("id") Long id, ItemTemplate itemTemplate) {
+    public Response createOrUpdateItemTemplate(Long id, ItemTemplate itemTemplate) {
         logServiceCall();
 
         validate(id.equals(itemTemplate.getId()), Response.Status.BAD_REQUEST, ITEM_TEMPLATE_INCONSISTENT);

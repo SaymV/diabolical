@@ -19,8 +19,6 @@ public interface ItemDao {
      */
     List<Item> getItems(String slot, Integer minLevel, Integer maxLevel, int skip, int max);
 
-    // TODO stats queries
-
     /**
      * Saves the given item, which should have a null id.
      */
