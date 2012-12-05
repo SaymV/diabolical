@@ -1,6 +1,7 @@
 package edu.lmu.cs.diabolical.ws.service;
 
 import edu.lmu.cs.diabolical.ws.dao.CharacterDao;
+import edu.lmu.cs.diabolical.ws.domain.Character;
 
 public class CharacterServiceImpl extends AbstractService implements CharacterService {
 
@@ -11,28 +12,23 @@ public class CharacterServiceImpl extends AbstractService implements CharacterSe
     }
 
     @Override
-    public Character getCharacterById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+    public Character getCharacterById(Integer id) {
+        return characterDao.getCharacterById(id);
     }
 
     @Override
     public void createOrUpdateCharacter(Character character) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public Character getCharacterByName(String name) {
-        // TODO Auto-generated method stub
-        return null;
+        characterDao.createOrUpdateCharacter(character);
     }
 
     @Override
     public Character createCharacter(Character character) {
-        // TODO Auto-generated method stub
-        return null;
+        return characterDao.createCharacter(character);
     }
 
+    @Override
+    public void deleteCharacter(Character character) {
+        characterDao.deleteCharacter(character);
+    }
 
 }
