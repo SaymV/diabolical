@@ -44,6 +44,21 @@
         <constructor-arg ref="itemTemplateDao"/>
     </bean>
 
+    <bean id="characterDaoHibernateImpl"
+        class="edu.lmu.cs.diabolical.ws.dao.CharacterDaoHibernateImpl"
+        autowire="byName"
+    />
+
+    <bean id="characterService"
+        class="edu.lmu.cs.diabolical.ws.service.CharacterServiceImpl">
+        <constructor-arg ref="characterDao"/>
+    </bean>
+
+    <bean id="characterResource"
+        class="edu.lmu.cs.diabolical.ws.resource.CharacterResourceImpl">
+        <constructor-arg ref="characterService"/>
+    </bean>
+
     <bean id="itemResource"
         class="edu.lmu.cs.diabolical.ws.resource.ItemResourceImpl">
         <constructor-arg ref="itemService"/>
@@ -66,11 +81,6 @@
 
     <bean id="itemTemplateDaoImpl"
         class="edu.lmu.cs.diabolical.ws.dao.ItemTemplateDaoHibernateImpl"
-        autowire="byName"
-    />
-
-    <bean id="characterDaoImpl"
-        class="edu.lmu.cs.diabolical.ws.dao.CharacterDaoHibernateImpl"
         autowire="byName"
     />
 
@@ -126,7 +136,7 @@
         <property name="interceptorNames">
             <list>
                 <value>hibernateInterceptor</value>
-                <value>characterDaoImpl</value>
+                <value>characterDaoHibernateImpl</value>
             </list>
         </property>
     </bean>

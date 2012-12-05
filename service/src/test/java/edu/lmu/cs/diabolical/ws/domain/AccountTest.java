@@ -12,7 +12,7 @@ import org.junit.Test;
 public class AccountTest {
 
     List<Character> sampleCharacterRoster;
-    Character sampleCharacter = new Character(99, "Hodor", Gender.MALE, null, null, null, null, null, null);
+    Character sampleCharacter = new Character("Hodor", Gender.MALE, null, null, null, null, null, null);
     Account sampleAccount;
 
     @Before
