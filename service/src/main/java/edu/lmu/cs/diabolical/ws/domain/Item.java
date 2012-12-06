@@ -1,17 +1,17 @@
 package edu.lmu.cs.diabolical.ws.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
+//import javax.persistence.Lob;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * An item is equippable by a character and provides changes to charstats.
  */
-@Entity
+//@Entity
 @XmlRootElement
 public class Item {
 
@@ -46,8 +46,8 @@ public class Item {
         this.level = level;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlAttribute
     public Long getId() {
         return id;
@@ -57,7 +57,7 @@ public class Item {
         this.id = id;
     }
 
-    @Lob
+//    @Lob
     public String getSlot() {
         return slot;
     }
@@ -130,7 +130,7 @@ public class Item {
         this.level = level;
     }
 
-    @Lob
+//    @Lob
     public String getName() {
         return name;
     }

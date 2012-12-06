@@ -1,17 +1,17 @@
 package edu.lmu.cs.diabolical.ws.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
+//import javax.persistence.Lob;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * A quest is a specific predetermined mission for a character to accomplish.
  */
-@Entity
+// @Entity
 @XmlRootElement
 public class Quest {
 
@@ -34,8 +34,8 @@ public class Quest {
   this.reward = reward;
  }
 
- @Id
- @GeneratedValue(strategy = GenerationType.AUTO)
+// @Id
+// @GeneratedValue(strategy = GenerationType.AUTO)
  @XmlAttribute
  public Long getId() {
   return id;
@@ -45,7 +45,7 @@ public class Quest {
   this.id = id;
  }
 
- @Lob
+// @Lob
  public String getName() {
   return name;
  }
@@ -54,7 +54,7 @@ public class Quest {
   this.name = name;
  }
 
- @Lob
+// @Lob
  public String getDescription() {
   return description;
  }
@@ -63,7 +63,7 @@ public class Quest {
   this.description = description;
  }
 
- @Lob
+// @Lob
  public String getClues() {
   return clues;
  }
@@ -72,7 +72,7 @@ public class Quest {
   this.clues = clues;
  }
 
- @Lob
+// @Lob
  public String getReward() {
   return reward;
  }

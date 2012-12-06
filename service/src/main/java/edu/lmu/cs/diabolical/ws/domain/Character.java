@@ -2,20 +2,20 @@ package edu.lmu.cs.diabolical.ws.domain;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+//import javax.persistence.CascadeType;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
+//import javax.persistence.ManyToMany;
+//import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+//import org.hibernate.annotations.LazyCollection;
+//import org.hibernate.annotations.LazyCollectionOption;
 
-@Entity
+//@Entity
 @XmlRootElement
 public class Character {
 
@@ -58,8 +58,8 @@ public class Character {
         this.skills.add(s);
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlAttribute
     public Integer getId() {
         return id;
@@ -109,8 +109,8 @@ public class Character {
         this.money = money;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @LazyCollection(LazyCollectionOption.FALSE)
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Item> getItems() {
         return items;
     }
@@ -119,8 +119,8 @@ public class Character {
         this.items = items;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Skill> getSkills() {
         return skills;
     }
@@ -129,8 +129,8 @@ public class Character {
         this.skills = skills;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Quest> getAccomplishedQuests() {
         return accomplishedQuests;
     }

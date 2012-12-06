@@ -6,7 +6,7 @@
     http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     version="2.5">
 
-    <display-name>Headmaster Web Resource</display-name>
+    <display-name>Diabolical Web Resource</display-name>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -36,48 +36,17 @@
         </init-param>  
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>edu.lmu.cs.headmaster.ws.resource</param-value>
+            <param-value>edu.lmu.cs.diabolical.ws.resource</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <!--
-        Let Jersey handle *everything*.
+        Let Jersey handle everything (_ah/admin still works despite this).
     -->
     <servlet-mapping>
         <servlet-name>jersey</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
-    <!--
-        Allow access only to valid users.  We're not restricting access to resources by roles here
-        in the web.xml.  Instead, we will be using authorization annotations within the resource
-        classes.
-    -->
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Whole application access</web-resource-name>
-            <url-pattern>/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>*</role-name>
-        </auth-constraint>
-        <user-data-constraint>
-            <!-- Set to NONE for HTTP, or CONFIDENTIAL for HTTPS -->
-            <transport-guarantee>NONE</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
-
-    <!--
-        Basic Auth is okay here because the web resources are only being called by the various web
-        applications' servers and are not accessible by users (of the webapp).  Of course, this
-        could be changed to DIGEST or CLIENT_CERT later.
-    -->
-    <login-config>
-        <auth-method>BASIC</auth-method>
-    </login-config>
-
-    <security-role>
-        <role-name>*</role-name>
-    </security-role>
 </web-app>

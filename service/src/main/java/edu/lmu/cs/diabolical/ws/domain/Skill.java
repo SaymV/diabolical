@@ -1,17 +1,17 @@
 package edu.lmu.cs.diabolical.ws.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
+//import javax.persistence.Lob;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * A skill is a special ability from a character.
  */
-@Entity
+//@Entity
 @XmlRootElement
 public class Skill {
 
@@ -28,8 +28,8 @@ public class Skill {
   this.description = description;
  }
 
- @Id
- @GeneratedValue(strategy = GenerationType.AUTO)
+// @Id
+// @GeneratedValue(strategy = GenerationType.AUTO)
  @XmlAttribute
  public Long getId() {
   return id;
@@ -39,7 +39,7 @@ public class Skill {
   this.id = id;
  }
 
- @Lob
+// @Lob
  public String getName() {
   return name;
  }
@@ -48,7 +48,7 @@ public class Skill {
   this.name = name;
  }
 
- @Lob
+// @Lob
  public String getDescription() {
   return description;
  }

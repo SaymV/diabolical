@@ -1,16 +1,16 @@
 package edu.lmu.cs.diabolical.ws.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
+//import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import java.util.List;
 
-@Entity
+//@Entity
 @XmlRootElement
 public class Account {
 
@@ -36,8 +36,8 @@ public class Account {
         this(id, login, password, null);
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlAttribute
     public Integer getId() {
         return id;
@@ -79,7 +79,7 @@ public class Account {
         this.password = password;
     }
 
-    @OneToMany
+//    @OneToMany
     public List<Character> getCharacters() {
         return characters;
     }

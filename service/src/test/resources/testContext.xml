@@ -10,26 +10,5 @@
             http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 
-    <bean id="dataSource"
-            class="org.apache.commons.dbcp.BasicDataSource"
-            destroy-method="close">
-        <property name="driverClassName" value="${test.jdbc.driver}"/>
-        <property name="url" value="${test.jdbc.url}"/>
-        <property name="username" value="${test.jdbc.user}"/>
-        <property name="password" value="${test.jdbc.password}"/>
-    </bean>
-
-    <bean id="hibernateProperties"
-            class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="properties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
-                <prop key="hibernate.query.substitutions">true 'T', false 'F', 1 true, 0 false</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
-            </props>
-        </property>
-    </bean>
-
     <import resource="classpath:commonContext.xml"/>
 </beans>
