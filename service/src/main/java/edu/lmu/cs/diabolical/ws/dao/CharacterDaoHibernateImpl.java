@@ -26,8 +26,9 @@ public class CharacterDaoHibernateImpl extends HibernateDaoSupport implements Ch
         getHibernateTemplate().delete(c);
     }
 
-    public void createOrUpdateCharacter(Character c) {
+    public Character createOrUpdateCharacter(Character c) {
         getHibernateTemplate().saveOrUpdate(c);
+        return c;
     }
 
     public Character createCharacter(Character c) {

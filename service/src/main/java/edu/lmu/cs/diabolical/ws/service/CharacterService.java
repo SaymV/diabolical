@@ -8,7 +8,7 @@ public interface CharacterService {
 
     public Character createCharacter(Character character);
 
-    public void createOrUpdateCharacter(Character character);
+    public Character createOrUpdateCharacter(Character character);
 
     public void deleteCharacter(Character character);
 }

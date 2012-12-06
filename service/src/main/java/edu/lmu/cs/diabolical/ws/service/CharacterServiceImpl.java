@@ -17,8 +17,8 @@ public class CharacterServiceImpl extends AbstractService implements CharacterSe
     }
 
     @Override
-    public void createOrUpdateCharacter(Character character) {
-        characterDao.createOrUpdateCharacter(character);
+    public Character createOrUpdateCharacter(Character character) {
+        return characterDao.createOrUpdateCharacter(character);
     }
 
     @Override

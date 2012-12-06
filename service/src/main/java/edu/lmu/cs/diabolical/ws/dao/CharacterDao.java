@@ -10,7 +10,7 @@ public interface CharacterDao {
 
     public void deleteCharacter(Character c);
 
-    public void createOrUpdateCharacter(Character c);
+    public Character createOrUpdateCharacter(Character c);
 
     public Character createCharacter(Character c);
 }

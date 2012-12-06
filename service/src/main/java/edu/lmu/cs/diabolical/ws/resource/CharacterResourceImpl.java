@@ -2,20 +2,17 @@ package edu.lmu.cs.diabolical.ws.resource;
 
 import java.util.List;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import edu.lmu.cs.diabolical.ws.domain.Character;
 import edu.lmu.cs.diabolical.ws.service.CharacterService;
 
 public class CharacterResourceImpl extends AbstractResource implements CharacterResource {
 
+    private static final String INVALID_CHARACTER_ID = "Character ID invalid or missing.";
+    private static final String CHARACTER_QUERY_PARAMS_MISSING = "Character query parameter missing.";
+    private static final String CHARACTER_NOT_PROVIDED = "No character object payload provided.";
+    
     CharacterService characterService;
 
     public CharacterResourceImpl(CharacterService characterService) {
@@ -23,63 +20,67 @@ public class CharacterResourceImpl extends AbstractResource implements Character
     }
 
     @Override
-    @GET
-    @Path("/characters/{id}")
-    public Character getCharacterById(@PathParam("id") String id) {
-        // TODO Auto-generated method stub
+    public Character getCharacterById(Integer id) {
+        logServiceCall();
+
+        validate((id != null && id >= 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+
+        return characterService.getCharacterById(id);
+    }
+
+    // TODO: Finish this.
+    @Override
+    public List<Character> getCharactersByQuery(String q) {
+
+        logServiceCall();
+
+        validate(q != null, Response.Status.BAD_REQUEST, CHARACTER_QUERY_PARAMS_MISSING);
+
+//        return characterService.getCharacters(preprocessNullableQuery(query, skip, max, 0, 100), minlevel, maxlevel,
+//                skip, max);
         return null;
     }
 
     @Override
-    @GET
-    @Path("/characters")
-    public List<Character> getCharactersByQuery(@DefaultValue("") @QueryParam("name") String name,
-            @DefaultValue("") @QueryParam("class") String className,
-            @DefaultValue("") @QueryParam("gender") String gender,
-            @DefaultValue("") @QueryParam("minLevel") String minLevel,
-            @DefaultValue("") @QueryParam("maxLevel") String maxLevel,
-            @DefaultValue("") @QueryParam("skill") String skill) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    @GET
-    @Path("/characters/spawners")
     public Character spawnRandomCharacter() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    @DELETE
-    @Path("/characters/{id}")
-    public Response deleteCharacterById(@PathParam("id") String id) {
+    public Response deleteCharacterById(Integer id) {
+        logServiceCall();
+
+        validate((id != null && id >= 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+
+        characterService.deleteCharacter(characterService.getCharacterById(id));
+
+        return Response.status(Response.Status.NO_CONTENT).build();
+    }
+
+    @Override
+    public Character updateCharacter(Character c) {
+        logServiceCall();
+        
+        validate(c != null, Response.Status.BAD_REQUEST, CHARACTER_NOT_PROVIDED);
+        
+        return characterService.createOrUpdateCharacter(c);
+    }
+
+    @Override
+    public Character updateCharacterByIdWithSpecifiedFields(Character c) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    @PUT
-    @Path("/characters/{id}")
-    public Character updateCharacterById(@PathParam("id") String id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    @PATCH
-    @Path("/characters/{id}")
-    public Character updateCharacterByIdWithSpecifiedFields(@PathParam("id") String id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    @POST
-    @Path("/characters")
     public Response createCharacter(Character c) {
-        // TODO Auto-generated method stub
-        return null;
+        logServiceCall();
+        
+        validate(c != null, Response.Status.BAD_REQUEST, CHARACTER_NOT_PROVIDED);
+
+        characterService.createCharacter(c);
+        
+        return Response.status(Response.Status.CREATED).build();
     }
 }
