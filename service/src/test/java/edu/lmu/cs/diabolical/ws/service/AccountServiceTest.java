@@ -1,4 +1,4 @@
-package service;
+package edu.lmu.cs.diabolical.ws.service;
 
 import junit.framework.Assert;
 
