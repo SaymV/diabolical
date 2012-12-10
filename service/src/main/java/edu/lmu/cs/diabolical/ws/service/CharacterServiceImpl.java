@@ -1,7 +1,10 @@
 package edu.lmu.cs.diabolical.ws.service;
 
+import java.util.List;
+
 import edu.lmu.cs.diabolical.ws.dao.CharacterDao;
 import edu.lmu.cs.diabolical.ws.domain.Character;
+import edu.lmu.cs.diabolical.ws.domain.Gender;
 
 public class CharacterServiceImpl extends AbstractService implements CharacterService {
 
@@ -11,6 +14,11 @@ public class CharacterServiceImpl extends AbstractService implements CharacterSe
         this.characterDao = characterDao;
     }
 
+    @Override
+    public List<Character> getCharacters(String name, String className, Gender gender, Integer minLevel, Integer maxLevel) {
+        return characterDao.getCharacters(name, className, gender, minLevel, maxLevel);
+    }
+    
     @Override
     public Character getCharacterById(Integer id) {
         return characterDao.getCharacterById(id);

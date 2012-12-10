@@ -2,17 +2,18 @@ package edu.lmu.cs.diabolical.ws.resource;
 
 import java.util.List;
 
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import edu.lmu.cs.diabolical.ws.domain.Character;
+import edu.lmu.cs.diabolical.ws.domain.Gender;
 import edu.lmu.cs.diabolical.ws.service.CharacterService;
 
 public class CharacterResourceImpl extends AbstractResource implements CharacterResource {
 
     private static final String INVALID_CHARACTER_ID = "Character ID invalid or missing.";
-    private static final String CHARACTER_QUERY_PARAMS_MISSING = "Character query parameter missing.";
     private static final String CHARACTER_NOT_PROVIDED = "No character object payload provided.";
-    
+
     CharacterService characterService;
 
     public CharacterResourceImpl(CharacterService characterService) {
@@ -30,15 +31,13 @@ public class CharacterResourceImpl extends AbstractResource implements Character
 
     // TODO: Finish this.
     @Override
-    public List<Character> getCharactersByQuery(String q) {
+    public List<Character> getCharactersByQuery(@QueryParam("name") String name,
+            @QueryParam("className") String className, @QueryParam("gender") Gender gender,
+            @QueryParam("minLevel") Integer minLevel, @QueryParam("maxLevel") Integer maxLevel) {
 
         logServiceCall();
 
-        validate(q != null, Response.Status.BAD_REQUEST, CHARACTER_QUERY_PARAMS_MISSING);
-
-//        return characterService.getCharacters(preprocessNullableQuery(query, skip, max, 0, 100), minlevel, maxlevel,
-//                skip, max);
-        return null;
+        return characterService.getCharacters(name, className, gender, minLevel, maxLevel);
     }
 
     @Override
@@ -61,9 +60,9 @@ public class CharacterResourceImpl extends AbstractResource implements Character
     @Override
     public Character updateCharacter(Character c) {
         logServiceCall();
-        
+
         validate(c != null, Response.Status.BAD_REQUEST, CHARACTER_NOT_PROVIDED);
-        
+
         return characterService.createOrUpdateCharacter(c);
     }
 
@@ -76,11 +75,11 @@ public class CharacterResourceImpl extends AbstractResource implements Character
     @Override
     public Response createCharacter(Character c) {
         logServiceCall();
-        
+
         validate(c != null, Response.Status.BAD_REQUEST, CHARACTER_NOT_PROVIDED);
 
         characterService.createCharacter(c);
-        
+
         return Response.status(Response.Status.CREATED).build();
     }
 }

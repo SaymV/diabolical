@@ -54,4 +54,21 @@ public class CharacterServiceTest extends ApplicationContextTest {
         charService.deleteCharacter(c);
         assertEquals(charService.getCharacterById(1), null);
     }
+
+    @Test
+    public void getCharacters() {
+        charService.createCharacter(new Character("HarHar", Gender.MALE, "Project Manager", 99, 1000000000L, new ArrayList<Item>(),
+                new ArrayList<Skill>(), new ArrayList<Quest>()));
+        assertEquals(charService.getCharacters("HarHar", null, null, null, null).size(), 1);
+
+        charService.createCharacter(new Character("Azzi", Gender.FEMALE, "Project Manager", 53, 1000000000L, new ArrayList<Item>(),
+                new ArrayList<Skill>(), new ArrayList<Quest>()));
+        assertEquals(charService.getCharacters(null, "Project Manager", null, null, null).size(), 2);
+
+        assertEquals(charService.getCharacters(null, null, Gender.FEMALE, null, null).size(), 1);
+        assertEquals(charService.getCharacters(null, null, Gender.FEMALE, null, null).get(0).getName(), "Azzi");
+        
+        assertEquals(charService.getCharacters(null, null, null, 50, 60).size(), 1);
+        assertEquals(charService.getCharacters(null, null, null, 50, 60).get(0).getName(), "Azzi");
+    }
 }

@@ -8,3 +8,9 @@ insert into itemtemplate(id, name, slot, minLevel, maxLevel) values(5000001, 'SO
 insert into account(id, firstName, lastName, login, password) values(1, 'Jose', 'Jose', 'upswimsdn', 'aaaaaa');
 insert into account(id, firstName, lastName, login, password) values(2, 'Ignatius', 'Lion', 'lmulion', 'iggy');
 insert into account(id, firstName, lastName, login, password) values(3, 'Bart', 'Simpson', 'bs', 'hello');
+
+insert into character(id, classtype, gender, level, money, name) values(1, "Wizard", "male", 99, 1000, "HarryPotter");
+insert into character(id, classtype, gender, level, money, name) values(2, "Wizard", "female", 99, 1000, "HermioneGranger");
+insert into character(id, classtype, gender, level, money, name) values(3, "Warrior", "male", 99, 1000, "Ogre");
+insert into character(id, classtype, gender, level, money, name) values(4, "Rogue", "male", 57, 1000, "RayToal");
+insert into character(id, classtype, gender, level, money, name) values(4, "Healer", "male", 55, 1000, "Dondi");
