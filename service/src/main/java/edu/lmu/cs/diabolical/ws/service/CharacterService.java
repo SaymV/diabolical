@@ -15,5 +15,7 @@ public interface CharacterService {
 
     public Character createOrUpdateCharacter(Character character);
 
+    public Character updateCharacterWithGivenFields(Character character);
+
     public void deleteCharacter(Character character);
 }

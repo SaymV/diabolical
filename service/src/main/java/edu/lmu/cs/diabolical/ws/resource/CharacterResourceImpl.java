@@ -2,13 +2,14 @@ package edu.lmu.cs.diabolical.ws.resource;
 
 import java.util.List;
 
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 import edu.lmu.cs.diabolical.ws.domain.Character;
 import edu.lmu.cs.diabolical.ws.domain.Gender;
 import edu.lmu.cs.diabolical.ws.service.CharacterService;
 
+@Path("/characters")
 public class CharacterResourceImpl extends AbstractResource implements CharacterResource {
 
     private static final String INVALID_CHARACTER_ID = "Character ID invalid or missing.";
@@ -20,6 +21,7 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         this.characterService = characterService;
     }
 
+    // Tested
     @Override
     public Character getCharacterById(Integer id) {
         logServiceCall();
@@ -29,11 +31,8 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         return characterService.getCharacterById(id);
     }
 
-    // TODO: Finish this.
     @Override
-    public List<Character> getCharactersByQuery(@QueryParam("name") String name,
-            @QueryParam("className") String className, @QueryParam("gender") Gender gender,
-            @QueryParam("minLevel") Integer minLevel, @QueryParam("maxLevel") Integer maxLevel) {
+    public List<Character> getCharactersByQuery(String name, String className, Gender gender, Integer minLevel, Integer maxLevel) {
 
         logServiceCall();
 
@@ -46,6 +45,7 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         return null;
     }
 
+    // Tested
     @Override
     public Response deleteCharacterById(Integer id) {
         logServiceCall();
@@ -57,6 +57,7 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
+    // Tested
     @Override
     public Character updateCharacter(Character c) {
         logServiceCall();
@@ -66,20 +67,25 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         return characterService.createOrUpdateCharacter(c);
     }
 
+    // Tested
     @Override
     public Character updateCharacterByIdWithSpecifiedFields(Character c) {
-        // TODO Auto-generated method stub
-        return null;
+        logServiceCall();
+        
+        validate((c != null && c.getId() != null && c.getId() >= 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+        
+        return characterService.updateCharacterWithGivenFields(c);
     }
 
+    // Tested
     @Override
     public Response createCharacter(Character c) {
         logServiceCall();
 
         validate(c != null, Response.Status.BAD_REQUEST, CHARACTER_NOT_PROVIDED);
 
-        characterService.createCharacter(c);
+        Character character = characterService.createCharacter(c);
 
-        return Response.status(Response.Status.CREATED).build();
+        return Response.created(uriInfo.getAbsolutePathBuilder().path(character.getId() + "").build()).build();
     }
 }

@@ -21,33 +21,33 @@ import edu.lmu.cs.diabolical.ws.domain.Gender;
 @Produces(MediaType.APPLICATION_JSON)
 public interface CharacterResource {
     @GET
-    @Path("/characters/{id}")
+    @Path("/{id}")
     public Character getCharacterById(@PathParam("id") Integer id);
 
     @GET
-    @Path("/characters")
+    @Path("/")
     public List<Character> getCharactersByQuery(@QueryParam("name") String name,
             @QueryParam("className") String className, @QueryParam("gender") Gender gender,
             @QueryParam("minLevel") Integer minLevel, @QueryParam("maxLevel") Integer maxLevel);
 
     @GET
-    @Path("/characters/spawn")
+    @Path("/spawn")
     public Character spawnRandomCharacter();
 
     @DELETE
-    @Path("/characters/{id}")
+    @Path("/{id}")
     public Response deleteCharacterById(@PathParam("id") Integer id);
 
     @PUT
-    @Path("/characters")
+    @Path("/")
     public Character updateCharacter(Character c);
 
-    @PATCH
-    @Path("/characters")
+    @PUT
+    @Path("/update")
     public Character updateCharacterByIdWithSpecifiedFields(Character c);
 
     @POST
-    @Path("/characters")
+    @Path("/")
     public Response createCharacter(Character c);
 
 }
