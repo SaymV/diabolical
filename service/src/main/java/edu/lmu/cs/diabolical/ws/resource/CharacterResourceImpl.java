@@ -31,6 +31,7 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         return characterService.getCharacterById(id);
     }
 
+    // Tested
     @Override
     public List<Character> getCharactersByQuery(String name, String className, Gender gender, Integer minLevel, Integer maxLevel) {
 

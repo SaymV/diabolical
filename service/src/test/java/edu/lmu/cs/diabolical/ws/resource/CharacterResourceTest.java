@@ -55,47 +55,97 @@ public class CharacterResourceTest extends ResourceTest {
     @Ignore
     @Test
     public void runCharactersQuery() {
-        Character c = new Character("WonkyBonkers", Gender.FEMALE, "Rogue", 32, 1000000000L,
-                new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>());
+        Character c = new Character("WonkyBonkers", Gender.FEMALE, "Rogue", 32, 1000000000L, new ArrayList<Item>(),
+                new ArrayList<Skill>(), new ArrayList<Quest>());
 
         ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
         assertEquals(201, clientResponse.getStatus());
 
-        List<Character> characters = wr.path("/characters").queryParam("name", "WonkyBonkers").get(new GenericType<List<Character>>() {
-        });
+        List<Character> characters = wr.path("/characters").queryParam("name", "WonkyBonkers")
+                .get(new GenericType<List<Character>>() {
+                });
         assertEquals(characters.size(), 1);
     }
 
     @Test
     public void updateSpecificCharacterFields() {
-        Character c = new Character("HonkyTonkers", Gender.MALE, "Priest", 15, 1000000000L,
-                new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>());
+        Character c = new Character("HonkyTonkers", Gender.MALE, "Priest", 15, 1000000000L, new ArrayList<Item>(),
+                new ArrayList<Skill>(), new ArrayList<Quest>());
 
         ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
         assertEquals(201, clientResponse.getStatus());
 
         c = wr.path("/characters/1").get(new GenericType<Character>() {
         });
-        
+
         c.setName("FunkyFlow");
         c.setGender(Gender.FEMALE);
         c.setMoney(null);
-        
-        c = wr.path("/characters/update").put(new GenericType<Character>(){}, c);
+
+        c = wr.path("/characters/update").put(new GenericType<Character>() {
+        }, c);
         assertEquals(c.getName(), "FunkyFlow");
         assertEquals(c.getGender(), Gender.FEMALE);
         assertEquals(c.getMoney(), (Long) 1000000000L);
     }
 
     @Test
-    public void queryForCharacters() {
-        Character c = new Character("HonkyTonkers", Gender.MALE, "Priest", 13, 1000000000L,
-                new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>());
+    public void queryForCharactersByLevelRange() {
+        Character c = new Character("HonkyTonkers", Gender.MALE, "Priest", 13, 1000000000L, new ArrayList<Item>(),
+                new ArrayList<Skill>(), new ArrayList<Quest>());
 
         ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
         assertEquals(201, clientResponse.getStatus());
-        
-        List<Character> characters = wr.path("/characters").queryParam("minLevel", "10").queryParam("maxLevel", "14").get(new GenericType<List<Character>>(){});
+
+        List<Character> characters = wr.path("/characters").queryParam("minLevel", "10").queryParam("maxLevel", "14")
+                .get(new GenericType<List<Character>>() {
+                });
         assertEquals(characters.size(), 1);
+        assertEquals(characters.get(0).getName(), "HonkyTonkers");
+    }
+
+    @Test
+    public void queryForCharactersByName() {
+        Character c = new Character("FunkyStuff", Gender.MALE, "Priest", 45, 1000000000L, new ArrayList<Item>(),
+                new ArrayList<Skill>(), new ArrayList<Quest>());
+
+        ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
+        assertEquals(201, clientResponse.getStatus());
+
+        List<Character> characters = wr.path("/characters").queryParam("name", "FunkyStuff")
+                .get(new GenericType<List<Character>>() {
+                });
+        assertEquals(characters.size(), 1);
+        assertEquals(characters.get(0).getName(), "FunkyStuff");
+    }
+
+    @Test
+    public void queryForCharactersByClassName() {
+        Character c = new Character("TreesNShit", Gender.MALE, "Druid", 63, 1000000000L, new ArrayList<Item>(),
+                new ArrayList<Skill>(), new ArrayList<Quest>());
+
+        ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
+        assertEquals(201, clientResponse.getStatus());
+
+        List<Character> characters = wr.path("/characters").queryParam("className", "Druid")
+                .get(new GenericType<List<Character>>() {
+                });
+        assertEquals(characters.size(), 1);
+        assertEquals(characters.get(0).getName(), "TreesNShit");
+    }
+
+    @Test
+    public void queryForCharactersByGender() {
+        Character c = new Character("NewcastleBrownAle", Gender.MALE, "Druid", 71, 1000000000L, new ArrayList<Item>(),
+                new ArrayList<Skill>(), new ArrayList<Quest>());
+
+        ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
+        assertEquals(201, clientResponse.getStatus());
+
+        List<Character> characters = wr.path("/characters").queryParam("gender", "MALE").queryParam("minLevel", "71")
+                .queryParam("maxLevel", "71").get(new GenericType<List<Character>>() {
+                });
+        assertEquals(characters.size(), 1);
+        assertEquals(characters.get(0).getName(), "NewcastleBrownAle");
     }
 }
