@@ -40,10 +40,12 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         return characterService.getCharacters(name, className, gender, minLevel, maxLevel);
     }
 
+    // Tested
     @Override
     public Character spawnRandomCharacter() {
-        // TODO Auto-generated method stub
-        return null;
+        logServiceCall();
+
+        return characterService.spawnRandomCharacter();
     }
 
     // Tested

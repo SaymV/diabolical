@@ -13,6 +13,8 @@ public interface CharacterService {
 
     public Character createCharacter(Character character);
 
+    public Character spawnRandomCharacter();
+
     public Character createOrUpdateCharacter(Character character);
 
     public Character updateCharacterWithGivenFields(Character character);

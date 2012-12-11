@@ -148,4 +148,10 @@ public class CharacterResourceTest extends ResourceTest {
         assertEquals(characters.size(), 1);
         assertEquals(characters.get(0).getName(), "NewcastleBrownAle");
     }
+
+    @Test
+    public void generateRandomCharacter() {
+        ClientResponse clientResponse = wr.path("/characters").get(ClientResponse.class);
+        assertEquals(200, clientResponse.getStatus());
+    }
 }

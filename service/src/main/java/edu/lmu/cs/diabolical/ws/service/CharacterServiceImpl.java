@@ -1,10 +1,15 @@
 package edu.lmu.cs.diabolical.ws.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import edu.lmu.cs.diabolical.ws.dao.CharacterDao;
 import edu.lmu.cs.diabolical.ws.domain.Character;
 import edu.lmu.cs.diabolical.ws.domain.Gender;
+import edu.lmu.cs.diabolical.ws.domain.Item;
+import edu.lmu.cs.diabolical.ws.domain.Quest;
+import edu.lmu.cs.diabolical.ws.domain.Skill;
 
 public class CharacterServiceImpl extends AbstractService implements CharacterService {
 
@@ -25,6 +30,19 @@ public class CharacterServiceImpl extends AbstractService implements CharacterSe
     @Override
     public Character getCharacterById(Integer id) {
         return characterDao.getCharacterById(id);
+    }
+
+    // TODO: Test this
+    @Override
+    public Character spawnRandomCharacter() {
+        Random gen = new Random();
+        return characterDao.createCharacter(new Character(
+                randomString(gen.nextInt(15) + 1),
+                (gen.nextInt() % 2 == 1 ? Gender.MALE : Gender.FEMALE),
+                randomString(gen.nextInt(15) + 1),
+                (Integer) (gen.nextInt(99) + 1),
+                new Long(gen.nextInt(100000000)),
+                new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>()));
     }
 
     // Tested
@@ -85,4 +103,13 @@ public class CharacterServiceImpl extends AbstractService implements CharacterSe
         characterDao.deleteCharacter(character);
     }
 
+    private static String randomString(int length) {
+        Random generator = new Random();
+        String characters = "ABCDEFGHIZKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        char[] text = new char[length];
+        for (int i = 0; i < length; i++) {
+            text[i] = characters.charAt(generator.nextInt(characters.length()));
+        }
+        return new String(text);
+    }
 }
