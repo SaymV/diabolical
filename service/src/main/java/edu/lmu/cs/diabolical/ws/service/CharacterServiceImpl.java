@@ -14,27 +14,31 @@ public class CharacterServiceImpl extends AbstractService implements CharacterSe
         this.characterDao = characterDao;
     }
 
+    // Tested
     @Override
-    public List<Character> getCharacters(String name, String className, Gender gender, Integer minLevel, Integer maxLevel) {
+    public List<Character> getCharacters(String name, String className, Gender gender, Integer minLevel,
+            Integer maxLevel) {
         return characterDao.getCharacters(name, className, gender, minLevel, maxLevel);
     }
-    
+
+    // Tested
     @Override
     public Character getCharacterById(Integer id) {
         return characterDao.getCharacterById(id);
     }
 
+    // Tested
     @Override
     public Character createOrUpdateCharacter(Character character) {
         return characterDao.createOrUpdateCharacter(character);
     }
 
-    // TODO: Test this.
+    // Tested
     @Override
     public Character updateCharacterWithGivenFields(Character character) {
         Character current = characterDao.getCharacterById(character.getId());
 
-        if (character.getAccomplishedQuests() != null ) {
+        if (character.getAccomplishedQuests() != null) {
             current.setAccomplishedQuests(character.getAccomplishedQuests());
         }
 
@@ -69,11 +73,13 @@ public class CharacterServiceImpl extends AbstractService implements CharacterSe
         return characterDao.createOrUpdateCharacter(current);
     }
 
+    // Tested
     @Override
     public Character createCharacter(Character character) {
         return characterDao.createCharacter(character);
     }
 
+    // Tested
     @Override
     public void deleteCharacter(Character character) {
         characterDao.deleteCharacter(character);

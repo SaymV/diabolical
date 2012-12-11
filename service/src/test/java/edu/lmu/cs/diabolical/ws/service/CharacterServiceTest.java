@@ -71,4 +71,21 @@ public class CharacterServiceTest extends ApplicationContextTest {
         assertEquals(charService.getCharacters(null, null, null, 50, 60).size(), 1);
         assertEquals(charService.getCharacters(null, null, null, 50, 60).get(0).getName(), "Azzi");
     }
+
+    @Test
+    public void updateCharacterWithGivenFields() {
+        Character c = new Character("Crazy Uncle Rich", Gender.MALE, "Project Manager", 99, 1000000000L,
+                new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>());
+
+        Character modified = charService.createCharacter(c);
+        assertEquals(modified.getName(), "Crazy Uncle Rich");
+        modified.setName("FuzzyBritches");
+        modified.setLevel(7);
+        modified = charService.updateCharacterWithGivenFields(modified);
+        assertEquals(c.getId(), modified.getId());
+        assertEquals(modified.getName(), "FuzzyBritches");
+        assertEquals(modified.getLevel(), (Integer) 7);
+        assertEquals(modified.getGender(), Gender.MALE);
+        assertEquals(modified.getClassType(), "Project Manager");
+    }
 }

@@ -14,6 +14,7 @@ import edu.lmu.cs.diabolical.ws.domain.Gender;
 
 public class CharacterDaoHibernateImpl extends HibernateDaoSupport implements CharacterDao {
 
+    // Tested
     @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @SuppressWarnings("unchecked")
@@ -21,19 +22,23 @@ public class CharacterDaoHibernateImpl extends HibernateDaoSupport implements Ch
         return createCharacterQuery(name, className, gender, minLevel, maxLevel).build(getSession()).list();
     }
 
+    // Tested
     public Character getCharacterById(Integer id) {
         return getHibernateTemplate().get(Character.class, id);
     }
 
+    // Tested
     public void deleteCharacter(Character c) {
         getHibernateTemplate().delete(c);
     }
 
+    // Tested
     public Character createOrUpdateCharacter(Character c) {
         getHibernateTemplate().saveOrUpdate(c);
         return c;
     }
 
+    // Tested
     public Character createCharacter(Character c) {
         getHibernateTemplate().save(c);
         return c;
