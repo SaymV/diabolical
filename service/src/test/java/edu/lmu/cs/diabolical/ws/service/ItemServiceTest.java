@@ -1,4 +1,4 @@
-package service;
+package edu.lmu.cs.diabolical.ws.service;
 
 import java.util.List;
 

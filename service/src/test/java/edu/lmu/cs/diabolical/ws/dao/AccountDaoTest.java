@@ -63,7 +63,7 @@ public class AccountDaoTest extends ApplicationContextTest {
     @Test
     public void getAccountsByGender() {
         List<Account> femalesOnly = accountDao.getAccountsByQuery(Gender.FEMALE, null, null, null, 0, 10);
-        Assert.assertEquals(femalesOnly.size(), 2);
+        Assert.assertEquals(2, femalesOnly.size());
     }
 
     @Test
