@@ -34,6 +34,24 @@ public class CharacterResourceTest extends ResourceTest {
     }
 
     @Test
+    public void getNonexistentCharacterReturns404() {
+        ClientResponse clientResponse = wr.path("/characters/50123").get(ClientResponse.class);
+        assertEquals(404, clientResponse.getStatus());
+    }
+
+    @Test
+    public void getCharacterByNegativeIdReturns400() {
+        ClientResponse clientResponse = wr.path("/characters/-1").get(ClientResponse.class);
+        assertEquals(400, clientResponse.getStatus());
+    }
+
+    @Test
+    public void getCharacterById0Returns400() {
+        ClientResponse clientResponse = wr.path("/characters/0").get(ClientResponse.class);
+        assertEquals(400, clientResponse.getStatus());
+    }
+
+    @Test
     public void updateAndDeleteCharacter() {
         Character c = new Character("Crazy Uncle Rich", Gender.MALE, "Project Manager", 99, 1000000000L,
                 new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>());

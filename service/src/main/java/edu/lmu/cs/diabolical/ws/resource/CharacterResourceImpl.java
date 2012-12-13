@@ -14,6 +14,7 @@ public class CharacterResourceImpl extends AbstractResource implements Character
 
     private static final String INVALID_CHARACTER_ID = "Character ID invalid or missing.";
     private static final String CHARACTER_NOT_PROVIDED = "No character object payload provided.";
+    private static final String CHARACTER_NOT_FOUND = "Character not found.";
 
     CharacterService characterService;
 
@@ -26,9 +27,11 @@ public class CharacterResourceImpl extends AbstractResource implements Character
     public Character getCharacterById(Integer id) {
         logServiceCall();
 
-        validate((id != null && id >= 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+        validate((id != null && id > 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+        Character c = characterService.getCharacterById(id);
+        validate(c != null, Response.Status.NOT_FOUND, CHARACTER_NOT_FOUND);
 
-        return characterService.getCharacterById(id);
+        return c;
     }
 
     // Tested
