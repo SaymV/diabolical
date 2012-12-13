@@ -105,7 +105,7 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         logServiceCall();
 
         validate(c != null, Response.Status.BAD_REQUEST, CHARACTER_NOT_PROVIDED);
-
+        c.setId(null);
         Character character = characterService.createCharacter(c);
 
         return Response.created(uriInfo.getAbsolutePathBuilder().path(character.getId() + "").build()).build();
