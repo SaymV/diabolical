@@ -5,7 +5,6 @@ import static junit.framework.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sun.jersey.api.client.ClientResponse;
@@ -52,6 +51,12 @@ public class CharacterResourceTest extends ResourceTest {
     }
 
     @Test
+    public void queryCharactersWithoutParametersReturns400() {
+        ClientResponse clientResponse = wr.path("/characters").get(ClientResponse.class);
+        assertEquals(400, clientResponse.getStatus());
+    }
+
+    @Test
     public void updateAndDeleteCharacter() {
         Character c = new Character("Crazy Uncle Rich", Gender.MALE, "Project Manager", 99, 1000000000L,
                 new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>());
@@ -70,19 +75,22 @@ public class CharacterResourceTest extends ResourceTest {
         assertEquals(204, clientResponse.getStatus());
     }
 
-    @Ignore
     @Test
-    public void runCharactersQuery() {
-        Character c = new Character("WonkyBonkers", Gender.FEMALE, "Rogue", 32, 1000000000L, new ArrayList<Item>(),
-                new ArrayList<Skill>(), new ArrayList<Quest>());
+    public void deleteCharacterWithNonexistentId() {
+        ClientResponse clientResponse = wr.path("/characters/9867485").delete(ClientResponse.class);
+        assertEquals(404, clientResponse.getStatus());
+    }
 
-        ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
-        assertEquals(201, clientResponse.getStatus());
+    @Test
+    public void deleteCharacterWithNegativeIdReturns400() {
+        ClientResponse clientResponse = wr.path("/characters/-1").delete(ClientResponse.class);
+        assertEquals(400, clientResponse.getStatus());
+    }
 
-        List<Character> characters = wr.path("/characters").queryParam("name", "WonkyBonkers")
-                .get(new GenericType<List<Character>>() {
-                });
-        assertEquals(characters.size(), 1);
+    @Test
+    public void deleteCharacterWithId0Returns400() {
+        ClientResponse clientResponse = wr.path("/characters/0").delete(ClientResponse.class);
+        assertEquals(400, clientResponse.getStatus());
     }
 
     @Test
@@ -105,6 +113,33 @@ public class CharacterResourceTest extends ResourceTest {
         assertEquals(c.getName(), "FunkyFlow");
         assertEquals(c.getGender(), Gender.FEMALE);
         assertEquals(c.getMoney(), (Long) 1000000000L);
+    }
+
+    @Test
+    public void runCharactersQuery() {
+        Character c = new Character("WonkyBonkers", Gender.FEMALE, "Rogue", 32, 1000000000L, new ArrayList<Item>(),
+                new ArrayList<Skill>(), new ArrayList<Quest>());
+
+        ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
+        assertEquals(201, clientResponse.getStatus());
+
+        List<Character> characters = wr.path("/characters").queryParam("name", "WonkyBonkers")
+                .get(new GenericType<List<Character>>() {
+                });
+        assertEquals(characters.size(), 1);
+    }
+
+    @Test
+    public void runCharacterQueryWithNoCharactersFound() {
+        ClientResponse response = wr.path("/characters").queryParam("name", "stufusdljfnasdifnalsjkndf")
+                .get(ClientResponse.class);
+        assertEquals(response.getStatus(), 404);
+    }
+
+    @Test
+    public void runCharacterQueryParamsReturns400() {
+        ClientResponse response = wr.path("/characters").get(ClientResponse.class);
+        assertEquals(response.getStatus(), 400);
     }
 
     @Test
@@ -169,7 +204,7 @@ public class CharacterResourceTest extends ResourceTest {
 
     @Test
     public void generateRandomCharacter() {
-        ClientResponse clientResponse = wr.path("/characters").get(ClientResponse.class);
+        ClientResponse clientResponse = wr.path("/characters/spawn").get(ClientResponse.class);
         assertEquals(200, clientResponse.getStatus());
     }
 }
