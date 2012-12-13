@@ -137,7 +137,7 @@ public class CharacterResourceTest extends ResourceTest {
     }
 
     @Test
-    public void runCharacterQueryParamsReturns400() {
+    public void runCharacterQueryWithoutParamsReturns400() {
         ClientResponse response = wr.path("/characters").get(ClientResponse.class);
         assertEquals(response.getStatus(), 400);
     }
