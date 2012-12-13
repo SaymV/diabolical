@@ -19,8 +19,8 @@ public class AccountServiceTest extends ApplicationContextTest {
 
     @Test
     public void testFindAccountById() {
-        Account a = accountService.findAccountById(Long.valueOf(1));
-        Assert.assertEquals(a.getId(), Long.valueOf(1));
+        Account a = accountService.findAccountById(Long.valueOf(100001));
+        Assert.assertEquals(a.getId(), Long.valueOf(100001));
         Assert.assertEquals(a.getFirstName(), "Jose");
         Assert.assertEquals(a.getLastName(), "Jose");
         Assert.assertEquals(a.getLogin(), "upswimsdn");
