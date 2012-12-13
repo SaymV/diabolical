@@ -78,18 +78,24 @@ public class CharacterResourceImpl extends AbstractResource implements Character
     public Character updateCharacter(Character c) {
         logServiceCall();
 
-        validate(c != null, Response.Status.BAD_REQUEST, CHARACTER_NOT_PROVIDED);
+        validate((c != null && c.getId() != null && c.getId() > 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+        Character character = characterService.getCharacterById(c.getId());
+        validate(character != null, Response.Status.NOT_FOUND, CHARACTER_NOT_FOUND);
+        character = characterService.createOrUpdateCharacter(c);
 
-        return characterService.createOrUpdateCharacter(c);
+        return character;
     }
 
     // Tested
+    // I use PUT /characters/update because our IT library doesn't support PATCH
     @Override
     public Character updateCharacterByIdWithSpecifiedFields(Character c) {
         logServiceCall();
 
-        validate((c != null && c.getId() != null && c.getId() >= 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
-
+        validate((c != null && c.getId() != null && c.getId() > 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+        Character character = characterService.getCharacterById(c.getId());
+        validate(character != null, Response.Status.NOT_FOUND, CHARACTER_NOT_FOUND);
+        
         return characterService.updateCharacterWithGivenFields(c);
     }
 

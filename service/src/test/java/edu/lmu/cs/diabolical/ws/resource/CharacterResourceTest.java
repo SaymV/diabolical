@@ -4,6 +4,8 @@ import static junit.framework.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
@@ -62,17 +64,79 @@ public class CharacterResourceTest extends ResourceTest {
                 new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>());
 
         ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
+        String location = clientResponse.getHeaders().get("Location").get(0);
         assertEquals(201, clientResponse.getStatus());
 
+        Matcher idFinder = Pattern.compile("(?<=/)[0-9]+$").matcher(location);
+        idFinder.find();
+        c = wr.path("/characters/" + idFinder.group(0)).get(Character.class);
+        
         c.setName("HardyHar");
         clientResponse = wr.path("/characters").put(ClientResponse.class, c);
         assertEquals(200, clientResponse.getStatus());
-        c = wr.path("/characters/2").get(new GenericType<Character>() {
+        c = wr.path("/characters/" + c.getId()).get(new GenericType<Character>() {
         });
         assertEquals("HardyHar", c.getName());
+        assertEquals("Project Manager", c.getClassType());
 
-        clientResponse = wr.path("/characters/2").delete(ClientResponse.class);
+        clientResponse = wr.path("/characters/" + c.getId()).delete(ClientResponse.class);
         assertEquals(204, clientResponse.getStatus());
+    }
+
+    @Test
+    public void putToCharactersWithNullCharacterIdReturns400() {
+        Character c = new Character("Crazy Uncle Rich", Gender.MALE, "Project Manager", 99, 1000000000L,
+                new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>());
+
+        ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
+        assertEquals(201, clientResponse.getStatus());
+
+        c.setName("HardyHar");
+        c.setId(null);
+        clientResponse = wr.path("/characters").put(ClientResponse.class, c);
+        assertEquals(400, clientResponse.getStatus());
+    }
+
+    @Test
+    public void putToCharactersWithNonexistentCharacterIdReturns404() {
+        Character c = new Character("Crazy Uncle Rich", Gender.MALE, "Project Manager", 99, 1000000000L,
+                new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>());
+
+        ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
+        assertEquals(201, clientResponse.getStatus());
+
+        c.setName("HardyHar");
+        c.setId(23717);
+        clientResponse = wr.path("/characters").put(ClientResponse.class, c);
+        assertEquals(404, clientResponse.getStatus());
+    }
+
+    @Test
+    public void putToCharactersWithNegativeCharacterIdReturns400() {
+        Character c = new Character("Crazy Uncle Rich", Gender.MALE, "Project Manager", 99, 1000000000L,
+                new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>());
+
+        ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
+        assertEquals(201, clientResponse.getStatus());
+
+        c.setName("HardyHar");
+        c.setId(-1);
+        clientResponse = wr.path("/characters").put(ClientResponse.class, c);
+        assertEquals(400, clientResponse.getStatus());
+    }
+
+    @Test
+    public void putToCharactersWithCharacterId0Returns400() {
+        Character c = new Character("Crazy Uncle Rich", Gender.MALE, "Project Manager", 99, 1000000000L,
+                new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>());
+
+        ClientResponse clientResponse = wr.path("/characters").post(ClientResponse.class, c);
+        assertEquals(201, clientResponse.getStatus());
+
+        c.setName("HardyHar");
+        c.setId(0);
+        clientResponse = wr.path("/characters").put(ClientResponse.class, c);
+        assertEquals(400, clientResponse.getStatus());
     }
 
     @Test
@@ -113,6 +177,14 @@ public class CharacterResourceTest extends ResourceTest {
         assertEquals(c.getName(), "FunkyFlow");
         assertEquals(c.getGender(), Gender.FEMALE);
         assertEquals(c.getMoney(), (Long) 1000000000L);
+    }
+
+    @Test
+    public void updateSpecificCharacterFieldsWithNullCharacterReturns400() {
+        Character c = new Character();
+
+        ClientResponse clientResponse = wr.path("/characters/update").put(ClientResponse.class, c);
+        assertEquals(400, clientResponse.getStatus());
     }
 
     @Test
