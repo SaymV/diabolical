@@ -18,12 +18,12 @@ public class AccountTest {
     @Before
     public void setUp() {
         sampleCharacterRoster = new ArrayList<Character>();
-        sampleAccount = new Account(1L, "Oli Oli Oxen Free", "YUP", sampleCharacterRoster);
+        sampleAccount = new Account(null, null, null, null, null, sampleCharacterRoster,  Gender.MALE);
     }
 
     @Test
     public void testAccountConstructor() {
-        Account a = new Account(23L, "myname", "ABCDEFG123", new ArrayList<Character>());
+        Account a = new Account(23L, "first", "last", "myname", "ABCDEFG123", new ArrayList<Character>(), Gender.MALE);
         assertThat(a.getId(), is(23L));
         assertThat(a.getLogin(), is("myname"));
         assertThat(a.getPassword(), is("ABCDEFG123"));
@@ -32,7 +32,7 @@ public class AccountTest {
 
     @Test
     public void testAccountSetterMethods() {
-        Account a = new Account(23L, "myname", "ABCDEFG123", new ArrayList<Character>());
+        Account a = new Account(23L,"first", "last", "myname", "ABCDEFG123", new ArrayList<Character>(), Gender.MALE);
         List<Character> characters = new ArrayList<Character>();
         characters.add(new Character());
         assertThat(a.getId(), is(23L));

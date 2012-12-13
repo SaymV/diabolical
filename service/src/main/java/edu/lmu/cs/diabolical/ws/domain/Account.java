@@ -1,6 +1,5 @@
 package edu.lmu.cs.diabolical.ws.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,21 +22,22 @@ public class Account {
     private String lastName;
     private String login;
     private String password;
-    private List<Character> characters = new ArrayList<Character>();
+    private List<Character> characters;
+    private Gender gender;
 
     public Account() {
 
     }
 
-    public Account(Long id, String login, String password, List<Character> characters) {
+    public Account(Long id, String firstName, String lastName, String login, String password,
+            List<Character> characters, Gender gender) {
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.characters = characters;
-    }
-
-    public Account(Long id, String login, String password) {
-        this(id, login, password, null);
+        this.gender = gender;
     }
 
     @Id
@@ -91,6 +91,14 @@ public class Account {
 
     public void setCharacters(List<Character> characters) {
         this.characters = characters;
+    }
+
+    public Gender getGender() {
+        return this.gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public void addCharacter(Character character) {

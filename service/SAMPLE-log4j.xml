@@ -26,15 +26,6 @@
         </layout>
     </appender>
 
-    <appender name="drFirstFile" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${catalina.base}/logs/drFirst.log" />
-        <param name="DatePattern" value=".yyyy-MM-dd" />
-        <param name="Append" value="true" />
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d %-5p [%c][%x] %m%n" />
-        </layout>
-    </appender>
-
     <appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
         <appender-ref ref="console" />
     </appender>

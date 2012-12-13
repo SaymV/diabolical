@@ -17,8 +17,8 @@ public class AccountResourceTest extends ResourceTest{
 
     @Test
     public void testGetAccountById() {
-        Account account = wr.path("accounts/1").get(ClientResponse.class).getEntity(Account.class);
-        Assert.assertEquals(account.getId(), Long.valueOf(1L));
+        Account account = wr.path("accounts/100001").get(ClientResponse.class).getEntity(Account.class);
+        Assert.assertEquals(account.getId(), Long.valueOf(100001L));
         Assert.assertEquals(account.getFirstName(), "Jose");
         Assert.assertEquals(account.getLastName(), "Jose");
         Assert.assertEquals(account.getLogin(), "upswimsdn");
