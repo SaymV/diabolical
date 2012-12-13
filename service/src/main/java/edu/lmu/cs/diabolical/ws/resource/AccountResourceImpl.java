@@ -1,8 +1,8 @@
 package edu.lmu.cs.diabolical.ws.resource;
 
+import java.net.URI;
 import java.util.List;
 
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
@@ -36,21 +36,33 @@ public class AccountResourceImpl extends AbstractResource implements AccountReso
     }
 
     @Override
-    public Response deleteAccount(Account account) {
-        // TODO Auto-generated method stub
-        return null;
+    public Response deleteAccount(Long id) {
+        logServiceCall();
+
+        Account account = accountService.findAccountById(id);
+        validate(account != null, Response.Status.NOT_FOUND, ACCOUNT_NOT_FOUND);
+
+        accountService.deleteAccount(account);
+        return Response.noContent().build();
     }
 
     @Override
-    @POST
     public Response createAccount(Account account) {
-        // TODO Auto-generated method stub
-        return null;
+        logServiceCall();
+
+        validate(account.getId() == null, Response.Status.BAD_REQUEST, ACCOUNT_OVER_SPECIFIED);
+
+        accountService.createAccount(account);
+        return Response.created(URI.create(Long.toString(account.getId()))).build();
     }
 
     @Override
-    public Response updateAccount(Account account) {
-        // TODO Auto-generated method stub
+    public Response createOrUpdateAccount(Long id, Account account) {
+        logServiceCall();
+
+        validate(id.equals(account.getId()), Response.Status.BAD_REQUEST, ARGUMENT_CONFLICT);
+
+        accountService.createOrUpdateAccount(account);
         return null;
     }
 
