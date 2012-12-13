@@ -23,6 +23,7 @@ import edu.lmu.cs.diabolical.ws.domain.Gender;
 public interface AccountResource {
 
     final String ACCOUNT_NOT_FOUND = "account.not.found";
+    final String ACCOUNT_OVER_SPECIFIED = "account.over.specified";
 
     @GET
     @Path("{id}")
@@ -30,17 +31,18 @@ public interface AccountResource {
 
     @GET
     public List<Account> getAccountsByQuery(@QueryParam("gender") Gender gender,
-            @QueryParam("username") String username, @QueryParam("name") String name, @QueryParam("page") @DefaultValue("0") String page,
+            @QueryParam("username") String username, @QueryParam("name") String name,
+            @QueryParam("page") @DefaultValue("0") String page,
             @QueryParam("pageSize") @DefaultValue("10") String pageSize);
 
     @DELETE
     @Path("{id}")
-    public Response deleteAccount(Account account);
+    public Response deleteAccount(@PathParam("id") Long id);
 
     @POST
     public Response createAccount(Account account);
 
     @PUT
     @Path("{id}")
-    public Response updateAccount(Account account);
+    public Response createOrUpdateAccount(@PathParam("id") Long id, Account account);
 }
