@@ -70,7 +70,7 @@ public class CharacterResourceTest extends ResourceTest {
         Matcher idFinder = Pattern.compile("(?<=/)[0-9]+$").matcher(location);
         idFinder.find();
         c = wr.path("/characters/" + idFinder.group(0)).get(Character.class);
-        
+
         c.setName("HardyHar");
         clientResponse = wr.path("/characters").put(ClientResponse.class, c);
         assertEquals(200, clientResponse.getStatus());
@@ -185,6 +185,25 @@ public class CharacterResourceTest extends ResourceTest {
 
         ClientResponse clientResponse = wr.path("/characters/update").put(ClientResponse.class, c);
         assertEquals(400, clientResponse.getStatus());
+    }
+
+    @Test
+    public void updateSpecificCharacterFieldsWithCharacterId0Returns400() {
+        Character c = new Character();
+
+        ClientResponse clientResponse = wr.path("/characters/update").put(ClientResponse.class, c);
+        assertEquals(400, clientResponse.getStatus());
+    }
+
+    @Test
+    public void updateSpecificCharacterFieldsWithNonexistentCharacterId0Returns404() {
+        Character c = new Character("HonkyTonkers", Gender.MALE, "Priest", 15, 1000000000L, new ArrayList<Item>(),
+                new ArrayList<Skill>(), new ArrayList<Quest>());
+
+        c.setId(234234);
+
+        ClientResponse clientResponse = wr.path("/characters/update").put(ClientResponse.class, c);
+        assertEquals(404, clientResponse.getStatus());
     }
 
     @Test

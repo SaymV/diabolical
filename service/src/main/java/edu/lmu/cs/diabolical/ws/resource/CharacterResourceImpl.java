@@ -95,7 +95,7 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         validate((c != null && c.getId() != null && c.getId() > 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
         Character character = characterService.getCharacterById(c.getId());
         validate(character != null, Response.Status.NOT_FOUND, CHARACTER_NOT_FOUND);
-        
+
         return characterService.updateCharacterWithGivenFields(c);
     }
 
