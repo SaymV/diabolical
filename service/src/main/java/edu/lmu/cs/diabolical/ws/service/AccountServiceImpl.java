@@ -20,7 +20,7 @@ public class AccountServiceImpl extends AbstractService implements AccountServic
 
     @Override
     public List<Account> getAccounts(String query) {
-        return accountDao.getAccountsByQuery(query);
+        return null;
     }
 
     @Override
