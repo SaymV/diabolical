@@ -14,6 +14,9 @@ public class CharacterResourceImpl extends AbstractResource implements Character
 
     private static final String INVALID_CHARACTER_ID = "Character ID invalid or missing.";
     private static final String CHARACTER_NOT_PROVIDED = "No character object payload provided.";
+    private static final String CHARACTER_NOT_FOUND = "Character not found.";
+    private static final String NO_CHARACTER_QUERY_PARAMS_PROVIDED = "Character query parameters not provided.";
+    private static final String NO_CHARACTERS_FOUND_WITH_GIVEN_PARAMS = "No characters were found that matched your parameters.";
 
     CharacterService characterService;
 
@@ -26,18 +29,26 @@ public class CharacterResourceImpl extends AbstractResource implements Character
     public Character getCharacterById(Integer id) {
         logServiceCall();
 
-        validate((id != null && id >= 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+        validate((id != null && id > 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+        Character c = characterService.getCharacterById(id);
+        validate(c != null, Response.Status.NOT_FOUND, CHARACTER_NOT_FOUND);
 
-        return characterService.getCharacterById(id);
+        return c;
     }
 
     // Tested
     @Override
-    public List<Character> getCharactersByQuery(String name, String className, Gender gender, Integer minLevel, Integer maxLevel) {
+    public List<Character> getCharactersByQuery(String name, String className, Gender gender, Integer minLevel,
+            Integer maxLevel) {
 
         logServiceCall();
 
-        return characterService.getCharacters(name, className, gender, minLevel, maxLevel);
+        validate((name != null || className != null || gender != null || minLevel != null || maxLevel != null),
+                Response.Status.BAD_REQUEST, NO_CHARACTER_QUERY_PARAMS_PROVIDED);
+        List<Character> characters = characterService.getCharacters(name, className, gender, minLevel, maxLevel);
+        validate(characters.size() > 0, Response.Status.NOT_FOUND, NO_CHARACTERS_FOUND_WITH_GIVEN_PARAMS);
+
+        return characters;
     }
 
     // Tested
@@ -53,9 +64,11 @@ public class CharacterResourceImpl extends AbstractResource implements Character
     public Response deleteCharacterById(Integer id) {
         logServiceCall();
 
-        validate((id != null && id >= 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+        validate((id != null && id > 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+        Character c = characterService.getCharacterById(id);
+        validate(c != null, Response.Status.NOT_FOUND, CHARACTER_NOT_FOUND);
 
-        characterService.deleteCharacter(characterService.getCharacterById(id));
+        characterService.deleteCharacter(c);
 
         return Response.status(Response.Status.NO_CONTENT).build();
     }
@@ -65,17 +78,23 @@ public class CharacterResourceImpl extends AbstractResource implements Character
     public Character updateCharacter(Character c) {
         logServiceCall();
 
-        validate(c != null, Response.Status.BAD_REQUEST, CHARACTER_NOT_PROVIDED);
+        validate((c != null && c.getId() != null && c.getId() > 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+        Character character = characterService.getCharacterById(c.getId());
+        validate(character != null, Response.Status.NOT_FOUND, CHARACTER_NOT_FOUND);
+        character = characterService.createOrUpdateCharacter(c);
 
-        return characterService.createOrUpdateCharacter(c);
+        return character;
     }
 
     // Tested
+    // I use PUT /characters/update because our IT library doesn't support PATCH
     @Override
     public Character updateCharacterByIdWithSpecifiedFields(Character c) {
         logServiceCall();
-        
-        validate((c != null && c.getId() != null && c.getId() >= 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+
+        validate((c != null && c.getId() != null && c.getId() > 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+        Character character = characterService.getCharacterById(c.getId());
+        validate(character != null, Response.Status.NOT_FOUND, CHARACTER_NOT_FOUND);
         
         return characterService.updateCharacterWithGivenFields(c);
     }
