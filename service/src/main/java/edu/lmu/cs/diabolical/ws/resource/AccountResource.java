@@ -31,9 +31,9 @@ public interface AccountResource {
 
     @GET
     public List<Account> getAccountsByQuery(@QueryParam("gender") Gender gender,
-            @QueryParam("username") String username, @QueryParam("name") String name,
-            @QueryParam("page") @DefaultValue("0") String page,
-            @QueryParam("pageSize") @DefaultValue("10") String pageSize);
+            @QueryParam("username") String username, @QueryParam("firstname") String first,
+            @QueryParam("lastname") String lastname, @QueryParam("page") @DefaultValue("0") Integer page,
+            @QueryParam("pageSize") @DefaultValue("10") Integer pageSize);
 
     @DELETE
     @Path("{id}")

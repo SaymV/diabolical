@@ -30,9 +30,16 @@ public class AccountResourceImpl extends AbstractResource implements AccountReso
     }
 
     @Override
-    public List<Account> getAccountsByQuery(Gender gender, String username, String name, String page, String pageSize) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Account> getAccountsByQuery(Gender gender, String username, String first, String last, Integer page,
+            Integer pageSize) {
+
+        validate(gender != null || username != null || first != null || last != null, Response.Status.BAD_REQUEST,
+                QUERY_REQUIRED);
+
+        validatePagination(page, pageSize, 0, 50);
+        
+        
+        return accountService.getAccountsByQuery(gender, username, first, last, page, pageSize);
     }
 
     @Override

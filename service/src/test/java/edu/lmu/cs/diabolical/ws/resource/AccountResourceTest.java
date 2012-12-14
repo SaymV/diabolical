@@ -1,9 +1,12 @@
 package edu.lmu.cs.diabolical.ws.resource;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.GenericType;
 
 import edu.lmu.cs.diabolical.ws.domain.Account;
 import edu.lmu.cs.diabolical.ws.domain.Gender;
@@ -84,7 +87,7 @@ public class AccountResourceTest extends ResourceTest {
         ClientResponse response = wr.path("accounts/100001").put(ClientResponse.class, account);
         Assert.assertEquals(204, response.getStatus());
     }
-    
+
     @Test
     public void updatesToAccountCanBeRead() {
         Account account = wr.path("accounts/100001").get(ClientResponse.class).getEntity(Account.class);
@@ -97,11 +100,176 @@ public class AccountResourceTest extends ResourceTest {
         Assert.assertEquals(account.getGender(), accountAfterUpdate.getGender());
         Assert.assertEquals(account.getId(), accountAfterUpdate.getId());
     }
-    
+
     @Test
     public void updateAccountWithMismatchedIdResponsd400() {
         Account account = new Account(Long.valueOf(50l), "first", "last", "login", "pw", null, Gender.MALE);
         ClientResponse response = wr.path("accounts/100001").put(ClientResponse.class, account);
         Assert.assertEquals(400, response.getStatus());
     }
+
+    @Test
+    public void endpointGetAccountsWithNoQueryResponds400() {
+        ClientResponse response = wr.path("accounts").get(ClientResponse.class);
+        Assert.assertEquals(400, response.getStatus());
+    }
+
+    @Test
+    public void getAccountsWithBadPageSizeResponds400() {
+        ClientResponse response = wr.path("accounts").queryParam("username", "ups").get(ClientResponse.class);
+        Assert.assertEquals(200, response.getStatus());
+
+        response = wr.path("accounts")
+                .queryParam("username", "test")
+                .queryParam("pageSize", "51")
+                .get(ClientResponse.class);
+        Assert.assertEquals(400, response.getStatus());
+    }
+
+    @Test
+    public void getAccountswithBadPageNumberResponds400() {
+        ClientResponse response = wr.path("accounts").queryParam("username", "ups").get(ClientResponse.class);
+        Assert.assertEquals(200, response.getStatus());
+
+        response = wr.path("accounts")
+                .queryParam("username", "test")
+                .queryParam("page", "-5")
+                .get(ClientResponse.class);
+        Assert.assertEquals(400, response.getStatus());
+    }
+
+    @Test
+    public void getAccountsByGender() {
+        List<Account> accounts = wr.path("accounts").queryParam("gender", "MALE").get(new GenericType<List<Account>>() {
+        });
+        Assert.assertEquals(2, accounts.size());
+        Assert.assertEquals(Long.valueOf(100001L), accounts.get(0).getId());
+        Assert.assertEquals("Jose", accounts.get(0).getFirstName());
+        Assert.assertEquals("Jose", accounts.get(0).getLastName());
+        Assert.assertEquals("upswimsdn", accounts.get(0).getLogin());
+        Assert.assertEquals("aaaaaa", accounts.get(0).getPassword());
+        Assert.assertEquals(Long.valueOf(100002L), accounts.get(1).getId());
+        Assert.assertEquals("Ignatius", accounts.get(1).getFirstName());
+        Assert.assertEquals("Lion", accounts.get(1).getLastName());
+        Assert.assertEquals("lmulion", accounts.get(1).getLogin());
+        Assert.assertEquals("iggy", accounts.get(1).getPassword());
+    }
+
+    @Test
+    public void getAccountsByUsername() {
+        List<Account> accounts = wr.path("accounts")
+                .queryParam("username", "upsw")
+                .get(new GenericType<List<Account>>() {
+                });
+        Assert.assertEquals(1, accounts.size());
+        Assert.assertEquals("upswimsdn", accounts.get(0).getLogin());
+        Assert.assertEquals(Long.valueOf(100001), accounts.get(0).getId());
+        Assert.assertEquals("Jose", accounts.get(0).getFirstName());
+        Assert.assertEquals("Jose", accounts.get(0).getLastName());
+    }
+
+    @Test
+    public void getAcountsByUserNameAndGender() {
+        List<Account> accounts = wr.path("accounts")
+                .queryParam("username", "upsw")
+                .queryParam("gender", "FEMALE")
+                .get(new GenericType<List<Account>>() {
+                });
+        Assert.assertEquals(0, accounts.size());
+
+        accounts = wr.path("accounts")
+                .queryParam("username", "upsw")
+                .queryParam("gender", "MALE")
+                .get(new GenericType<List<Account>>() {
+                });
+        Assert.assertEquals(1, accounts.size());
+        Assert.assertEquals("upswimsdn", accounts.get(0).getLogin());
+        Assert.assertEquals(Long.valueOf(100001), accounts.get(0).getId());
+        Assert.assertEquals("Jose", accounts.get(0).getFirstName());
+        Assert.assertEquals("Jose", accounts.get(0).getLastName());
+    }
+
+    @Test
+    public void getAccountsByFirstName() {
+        List<Account> accounts = wr.path("accounts").queryParam("firstname", "J").get(new GenericType<List<Account>>() {
+        });
+        Assert.assertEquals(1, accounts.size());
+        Assert.assertEquals("upswimsdn", accounts.get(0).getLogin());
+        Assert.assertEquals(Long.valueOf(100001), accounts.get(0).getId());
+        Assert.assertEquals("Jose", accounts.get(0).getFirstName());
+        Assert.assertEquals("Jose", accounts.get(0).getLastName());
+    }
+
+    @Test
+    public void getAccountsbyLastName() {
+        List<Account> accounts = wr.path("accounts").queryParam("lastname", "lI").get(new GenericType<List<Account>>() {
+        });
+        Assert.assertEquals(1, accounts.size());
+        Assert.assertEquals("lmulion", accounts.get(0).getLogin());
+        Assert.assertEquals(Long.valueOf(100002), accounts.get(0).getId());
+        Assert.assertEquals("Ignatius", accounts.get(0).getFirstName());
+        Assert.assertEquals("Lion", accounts.get(0).getLastName());
+    }
+
+    @Test
+    public void getAccountsByFirstAndLastName() {
+        List<Account> accounts = wr.path("accounts")
+                .queryParam("firstname", "i")
+                .queryParam("lastname", "j")
+                .get(new GenericType<List<Account>>() {
+                });
+        Assert.assertEquals(1, accounts.size());
+        Assert.assertEquals("iz", accounts.get(0).getLogin());
+        Assert.assertEquals(Long.valueOf(100004), accounts.get(0).getId());
+        Assert.assertEquals("Isabelle", accounts.get(0).getFirstName());
+        Assert.assertEquals("Johnson", accounts.get(0).getLastName());
+    }
+
+    @Test
+    public void getAccountsByFullNameAndGender() {
+        List<Account> accounts = wr.path("accounts")
+                .queryParam("firstname", "i")
+                .queryParam("lastname", "j")
+                .queryParam("gender", "MALE")
+                .get(new GenericType<List<Account>>() {
+                });
+        Assert.assertEquals(0, accounts.size());
+
+        accounts = wr.path("accounts")
+                .queryParam("firstname", "i")
+                .queryParam("lastname", "j")
+                .queryParam("gender", "FEMALE")
+                .get(new GenericType<List<Account>>() {
+                });
+        Assert.assertEquals(1, accounts.size());
+        Assert.assertEquals("iz", accounts.get(0).getLogin());
+        Assert.assertEquals(Long.valueOf(100004), accounts.get(0).getId());
+        Assert.assertEquals("Isabelle", accounts.get(0).getFirstName());
+        Assert.assertEquals("Johnson", accounts.get(0).getLastName());
+    }
+
+    @Test
+    public void getAccountsByFullNameGenderAndLogin() {
+        List<Account> accounts = wr.path("accounts")
+                .queryParam("firstname", "i")
+                .queryParam("lastname", "j")
+                .queryParam("gender", "FEMALE")
+                .queryParam("username", "blue")
+                .get(new GenericType<List<Account>>() {
+                });
+        Assert.assertEquals(0, accounts.size());
+
+        accounts = wr.path("accounts")
+                .queryParam("firstname", "i")
+                .queryParam("lastname", "j")
+                .queryParam("username", "i")
+                .queryParam("gender", "FEMALE")
+                .get(new GenericType<List<Account>>() {
+                });
+        Assert.assertEquals(1, accounts.size());
+        Assert.assertEquals("iz", accounts.get(0).getLogin());
+        Assert.assertEquals(Long.valueOf(100004), accounts.get(0).getId());
+        Assert.assertEquals("Isabelle", accounts.get(0).getFirstName());
+        Assert.assertEquals("Johnson", accounts.get(0).getLastName());
+    } 
 }
