@@ -9,6 +9,8 @@ import javax.ws.rs.core.Response;
 import edu.lmu.cs.diabolical.ws.domain.Account;
 import edu.lmu.cs.diabolical.ws.domain.Gender;
 import edu.lmu.cs.diabolical.ws.service.AccountService;
+import edu.lmu.cs.diabolical.ws.util.ServiceException;
+import exception.NoQueryProvidedException;
 
 @Path("/accounts")
 public class AccountResourceImpl extends AbstractResource implements AccountResource {
@@ -32,14 +34,15 @@ public class AccountResourceImpl extends AbstractResource implements AccountReso
     @Override
     public List<Account> getAccountsByQuery(Gender gender, String username, String first, String last, Integer page,
             Integer pageSize) {
-
-        validate(gender != null || username != null || first != null || last != null, Response.Status.BAD_REQUEST,
-                QUERY_REQUIRED);
+        logServiceCall();
 
         validatePagination(page, pageSize, 0, 50);
-        
-        
-        return accountService.getAccountsByQuery(gender, username, first, last, page, pageSize);
+
+        try {
+            return accountService.getAccountsByQuery(gender, username, first, last, page, pageSize);
+        } catch (NoQueryProvidedException e) {
+            throw new ServiceException(Response.Status.BAD_REQUEST, QUERY_REQUIRED);
+        }
     }
 
     @Override

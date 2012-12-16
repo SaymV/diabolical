@@ -5,6 +5,7 @@ import java.util.List;
 import edu.lmu.cs.diabolical.ws.dao.AccountDao;
 import edu.lmu.cs.diabolical.ws.domain.Account;
 import edu.lmu.cs.diabolical.ws.domain.Gender;
+import exception.NoQueryProvidedException;
 
 public class AccountServiceImpl extends AbstractService implements AccountService {
 
@@ -21,6 +22,7 @@ public class AccountServiceImpl extends AbstractService implements AccountServic
 
     @Override
     public List<Account> getAccountsByQuery(Gender gender, String login, String first, String last, int skip, int max) {
+        verify(gender != null || login != null || first != null || last != null, new NoQueryProvidedException());
         return accountDao.getAccountsByQuery(gender, login, first, last, skip, max);
     }
 

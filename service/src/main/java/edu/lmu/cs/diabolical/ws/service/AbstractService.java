@@ -16,4 +16,10 @@ public class AbstractService {
         return logger;
     }
     
+    protected void verify(boolean condition, RuntimeException e) {
+        if (!condition) {
+            throw e;
+        }
+    }
+    
 }
