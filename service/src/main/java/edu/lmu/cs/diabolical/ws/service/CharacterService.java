@@ -7,17 +7,17 @@ import edu.lmu.cs.diabolical.ws.domain.Gender;
 
 public interface CharacterService {
 
-    public List<Character> getCharacters(String name, String className, Gender gender, Integer minLevel, Integer maxLevel);
+    List<Character> getCharacters(String name, String className, Gender gender, Integer minLevel, Integer maxLevel);
     
-    public Character getCharacterById(Integer id);
+    Character getCharacterById(Integer id);
 
-    public Character createCharacter(Character character);
+    Character createCharacter(Character character);
 
-    public Character spawnRandomCharacter();
+    Character spawnRandomCharacter();
 
-    public Character createOrUpdateCharacter(Character character);
+    Character createOrUpdateCharacter(Character character);
 
-    public Character updateCharacterWithGivenFields(Character character);
+    Character updateCharacterWithGivenFields(Character character);
 
-    public void deleteCharacter(Character character);
+    void deleteCharacter(Character character);
 }

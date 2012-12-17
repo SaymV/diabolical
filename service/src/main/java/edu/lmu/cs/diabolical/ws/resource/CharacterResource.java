@@ -20,34 +20,41 @@ import edu.lmu.cs.diabolical.ws.domain.Gender;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface CharacterResource {
+
+    String INVALID_CHARACTER_ID = "Character ID invalid or missing.";
+    String CHARACTER_NOT_PROVIDED = "No character object payload provided.";
+    String CHARACTER_NOT_FOUND = "Character not found.";
+    String NO_CHARACTER_QUERY_PARAMS_PROVIDED = "Character query parameters not provided.";
+    String NO_CHARACTERS_FOUND_WITH_GIVEN_PARAMS = "No characters were found that matched your parameters.";
+
     @GET
     @Path("/{id}")
-    public Character getCharacterById(@PathParam("id") Integer id);
+    Character getCharacterById(@PathParam("id") Integer id);
 
     @GET
     @Path("/")
-    public List<Character> getCharactersByQuery(@QueryParam("name") String name,
+    List<Character> getCharactersByQuery(@QueryParam("name") String name,
             @QueryParam("className") String className, @QueryParam("gender") Gender gender,
             @QueryParam("minLevel") Integer minLevel, @QueryParam("maxLevel") Integer maxLevel);
 
     @GET
     @Path("/spawn")
-    public Character spawnRandomCharacter();
+    Character spawnRandomCharacter();
 
     @DELETE
     @Path("/{id}")
-    public Response deleteCharacterById(@PathParam("id") Integer id);
+    Response deleteCharacterById(@PathParam("id") Integer id);
 
     @PUT
     @Path("/")
-    public Character updateCharacter(Character c);
+    Character updateCharacter(Character c);
 
     @PUT
     @Path("/update")
-    public Character updateCharacterByIdWithSpecifiedFields(Character c);
+    Character updateCharacterByIdWithSpecifiedFields(Character c);
 
     @POST
     @Path("/")
-    public Response createCharacter(Character c);
+    Response createCharacter(Character c);
 
 }

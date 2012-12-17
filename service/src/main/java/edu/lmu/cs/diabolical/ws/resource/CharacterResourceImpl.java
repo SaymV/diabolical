@@ -12,12 +12,6 @@ import edu.lmu.cs.diabolical.ws.service.CharacterService;
 @Path("/characters")
 public class CharacterResourceImpl extends AbstractResource implements CharacterResource {
 
-    private static final String INVALID_CHARACTER_ID = "Character ID invalid or missing.";
-    private static final String CHARACTER_NOT_PROVIDED = "No character object payload provided.";
-    private static final String CHARACTER_NOT_FOUND = "Character not found.";
-    private static final String NO_CHARACTER_QUERY_PARAMS_PROVIDED = "Character query parameters not provided.";
-    private static final String NO_CHARACTERS_FOUND_WITH_GIVEN_PARAMS = "No characters were found that matched your parameters.";
-
     CharacterService characterService;
 
     public CharacterResourceImpl(CharacterService characterService) {

@@ -59,16 +59,16 @@ public class CharacterDaoTest extends ApplicationContextTest {
     public void getCharacters() {
         charDao.createCharacter(new Character("HarHar", Gender.MALE, "Project Manager", 99, 1000000000L, new ArrayList<Item>(),
                 new ArrayList<Skill>(), new ArrayList<Quest>()));
-        assertEquals(charDao.getCharacters("HarHar", null, null, null, null).size(), 1);
+        assertEquals(1, charDao.getCharacters("HarHar", null, null, null, null).size());
 
         charDao.createCharacter(new Character("Azzi", Gender.FEMALE, "Project Manager", 53, 1000000000L, new ArrayList<Item>(),
                 new ArrayList<Skill>(), new ArrayList<Quest>()));
-        assertEquals(charDao.getCharacters(null, "Project Manager", null, null, null).size(), 2);
+        assertEquals(2, charDao.getCharacters(null, "Project Manager", null, null, null).size());
 
-        assertEquals(charDao.getCharacters(null, null, Gender.FEMALE, null, null).size(), 1);
-        assertEquals(charDao.getCharacters(null, null, Gender.FEMALE, null, null).get(0).getName(), "Azzi");
+        assertEquals(2, charDao.getCharacters(null, null, Gender.FEMALE, null, null).size());
+        assertEquals("Azzi", charDao.getCharacters(null, null, Gender.FEMALE, null, null).get(0).getName());
         
-        assertEquals(charDao.getCharacters(null, null, null, 50, 60).size(), 1);
-        assertEquals(charDao.getCharacters(null, null, null, 50, 60).get(0).getName(), "Azzi");
+        assertEquals(3, charDao.getCharacters(null, null, null, 50, 60).size());
+        assertEquals("Azzi", charDao.getCharacters(null, null, null, 50, 60).get(0).getName());
     }
 }

@@ -10,8 +10,8 @@ insert into account(id, firstName, lastName, login, password, gender) values(100
 insert into account(id, firstName, lastName, login, password, gender) values(100003, 'Bart', 'Simpson', 'bs', 'hello', 1);
 insert into account(id, firstName, lastName, login, password, gender) values(100004, 'Isabelle', 'Johnson', 'iz', 'hello', 1);
 
-insert into character(id, classtype, gender, level, money, name) values(1, "Wizard", "male", 99, 1000, "HarryPotter");
-insert into character(id, classtype, gender, level, money, name) values(2, "Wizard", "female", 99, 1000, "HermioneGranger");
-insert into character(id, classtype, gender, level, money, name) values(3, "Warrior", "male", 99, 1000, "Ogre");
-insert into character(id, classtype, gender, level, money, name) values(4, "Rogue", "male", 57, 1000, "RayToal");
-insert into character(id, classtype, gender, level, money, name) values(4, "Healer", "male", 55, 1000, "Dondi");
+insert into character(id, classtype, gender, level, money, name) values(100001, 'Wizard', 0, 99, 1000, 'HarryPotter');
+insert into character(id, classtype, gender, level, money, name) values(100002, 'Wizard', 1, 99, 1000, 'HermioneGranger');
+insert into character(id, classtype, gender, level, money, name) values(100003, 'Warrior', 0, 99, 1000, 'Ogre');
+insert into character(id, classtype, gender, level, money, name) values(100004, 'Rogue', 0, 57, 1000, 'RayToal');
+insert into character(id, classtype, gender, level, money, name) values(100005, 'Healer', 0, 55, 1000, 'Dondi');
