@@ -1,10 +1,10 @@
-package edu.lmu.cs.diabolical.ws.service;
+package edu.lmu.cs.diabolical.ws.dao;
 
 import edu.lmu.cs.diabolical.ws.domain.Skill;
 
-public interface SkillService {
+public interface SkillDao {
 	
-    /**
+	/**
 	 *  Returns the skill with the given id, or null if there's no skill with such id.
 	 */	    
     Skill getSkillById(Long id);

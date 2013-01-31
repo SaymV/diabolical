@@ -1,10 +1,10 @@
-package edu.lmu.cs.diabolical.ws.service;
+package edu.lmu.cs.diabolical.ws.dao;
 
 import edu.lmu.cs.diabolical.ws.domain.Quest;
 
-public interface QuestService {
-	    
-    /**
+public interface QuestDao {
+	
+	/**
 	 *  Returns the quest with the given id, or null if there's no quest with such id.
 	 */	    
     Quest getQuestById(Long id);
