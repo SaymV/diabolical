@@ -1,12 +1,19 @@
 package edu.lmu.cs.diabolical.ws.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import java.util.List;
+
 
 /**
  * A quest is a specific predetermined mission for a character to accomplish.
@@ -20,13 +27,13 @@ public class Quest {
  private String description;
  private String clues;
  private String reward;
- //TODO private List<NPCs> npcs; 
+ private List<Character> character; 
 
  public Quest() {
 
  }
 
- public Quest(Long id, String name, String description, String clues, String reward) {
+ public Quest(Long id, String name, String description, String clues, String reward, List<Character> character) {
   this.id = id;
   this.name = name;
   this.description = description;
@@ -45,7 +52,6 @@ public class Quest {
   this.id = id;
  }
 
- @Lob
  public String getName() {
   return name;
  }
@@ -72,27 +78,22 @@ public class Quest {
   this.clues = clues;
  }
 
- @Lob
- public String getReward() {
+public String getReward() {
   return reward;
  }
 
  public void setReward(String reward) {
   this.reward = reward;
  }
-
- /* TODO Getters and setters from List<NPCs>
- public List<NPC> getNpcs() {
-  return npcs;
+ 
+ @LazyCollection(LazyCollectionOption.FALSE)
+ @ManyToMany(cascade = CascadeType.ALL)
+ public List<Character> getCharacter() {
+  return character;
  }
 
- public void setNpcs(List<Npcs> npcs) {
-  this.npcs = npcs;
+ public void setCharacter(List<Character> character) {
+  this.character = character;
  }
-
- public void addNpcs(Npcs npcs){
-  this.npcs.add(npcs);
- }
- */
-
+ 
 }

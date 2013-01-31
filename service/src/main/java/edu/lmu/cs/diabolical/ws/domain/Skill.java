@@ -23,8 +23,9 @@ public class Skill {
  
  }
 
- public Skill(Long id, String description) {
+ public Skill(Long id, String name, String description) {
   this.id = id;
+  this.name = name;
   this.description = description;
  }
 
@@ -39,7 +40,6 @@ public class Skill {
   this.id = id;
  }
 
- @Lob
  public String getName() {
   return name;
  }
