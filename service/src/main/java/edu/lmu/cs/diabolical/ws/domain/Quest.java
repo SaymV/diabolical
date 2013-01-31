@@ -22,78 +22,78 @@ import java.util.List;
 @XmlRootElement
 public class Quest {
 
- private Long id;
- private String name;
- private String description;
- private String clues;
- private String reward;
- private List<Character> character; 
+    private Long id;
+    private String name;
+    private String description;
+    private String clues;
+    private String reward;
+    private List<Character> character; 
 
- public Quest() {
+    public Quest() {
 
- }
+    }
 
- public Quest(Long id, String name, String description, String clues, String reward, List<Character> character) {
-  this.id = id;
-  this.name = name;
-  this.description = description;
-  this.clues = clues;
-  this.reward = reward;
- }
+    public Quest(Long id, String name, String description, String clues, String reward, List<Character> character) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.clues = clues;
+        this.reward = reward;
+    }
 
- @Id
- @GeneratedValue(strategy = GenerationType.AUTO)
- @XmlAttribute
- public Long getId() {
-  return id;
- }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @XmlAttribute
+    public Long getId() {
+        return id;
+    }
 
- public void setId(Long id) {
-  this.id = id;
- }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
- public String getName() {
-  return name;
- }
+    public String getName() {
+        return name;
+    }
 
- public void setName(String name) {
-  this.name = name;
- }
+    public void setName(String name) {
+        this.name = name;
+    }
 
- @Lob
- public String getDescription() {
-  return description;
- }
+    @Lob
+    public String getDescription() {
+        return description;
+    }
 
- public void setDescription(String description) {
-  this.description = description;
- }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
- @Lob
- public String getClues() {
-  return clues;
- }
+    @Lob
+    public String getClues() {
+        return clues;
+    }
 
- public void setClues(String clues) {
-  this.clues = clues;
- }
+    public void setClues(String clues) {
+        this.clues = clues;
+    }
 
-public String getReward() {
-  return reward;
- }
+    public String getReward() {
+        return reward;
+    }
 
- public void setReward(String reward) {
-  this.reward = reward;
- }
+    public void setReward(String reward) {
+        this.reward = reward;
+    }
  
- @LazyCollection(LazyCollectionOption.FALSE)
- @ManyToMany(cascade = CascadeType.ALL)
- public List<Character> getCharacter() {
-  return character;
- }
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(cascade = CascadeType.ALL)
+    public List<Character> getCharacter() {
+        return character;
+    }
 
- public void setCharacter(List<Character> character) {
-  this.character = character;
- }
+    public void setCharacter(List<Character> character) {
+        this.character = character;
+    }
  
 }
