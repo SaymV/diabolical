@@ -1,7 +1,5 @@
 package edu.lmu.cs.diabolical.ws.service;
 
-import java.util.List;
-
 import edu.lmu.cs.diabolical.ws.domain.Quest;
 
 public interface QuestService {
