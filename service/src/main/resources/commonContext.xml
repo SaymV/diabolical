@@ -88,6 +88,16 @@
         class="edu.lmu.cs.diabolical.ws.dao.AccountDaoHibernateImpl"
         autowire="byName"
     />
+    
+    <bean id="questDaoImpl"
+        class="edu.lmu.cs.diabolical.ws.dao.QuestDaoHibernateImpl"
+        autowire="byName"
+    />
+    
+    <bean id="skillDaoImpl"
+        class="edu.lmu.cs.diabolical.ws.dao.SkillDaoHibernateImpl"
+        autowire="byName"
+    />
 
     <bean id="accountDao" class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="proxyInterfaces">
@@ -137,6 +147,32 @@
             <list>
                 <value>hibernateInterceptor</value>
                 <value>characterDaoHibernateImpl</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="questDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>edu.lmu.cs.diabolical.ws.dao.QuestDao</value>
+        </property>
+
+        <property name="interceptorNames">
+            <list>
+                <value>hibernateInterceptor</value>
+                <value>questDaoHibernateImpl</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="skillDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>edu.lmu.cs.diabolical.ws.dao.SkillDao</value>
+        </property>
+
+        <property name="interceptorNames">
+            <list>
+                <value>hibernateInterceptor</value>
+                <value>skillDaoHibernateImpl</value>
             </list>
         </property>
     </bean>
