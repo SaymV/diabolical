@@ -43,6 +43,16 @@
         <constructor-arg ref="itemDao"/>
         <constructor-arg ref="itemTemplateDao"/>
     </bean>
+    
+    <bean id="questService"
+        class="edu.lmu.cs.diabolical.ws.service.QuestServiceImpl">
+        <constructor-arg ref="questDao"/>
+    </bean>
+    
+    <bean id="skillService"
+        class="edu.lmu.cs.diabolical.ws.service.SkillServiceImpl">
+        <constructor-arg ref="skillDao"/>
+    </bean>
 
     <bean id="characterDaoHibernateImpl"
         class="edu.lmu.cs.diabolical.ws.dao.CharacterDaoHibernateImpl"
