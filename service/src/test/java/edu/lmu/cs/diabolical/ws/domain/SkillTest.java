@@ -9,8 +9,9 @@ import edu.lmu.cs.diabolical.ws.domain.Skill;
 public class SkillTest {
     @Test
     public void testSkillConstructor() {
-        Skill skill = new Skill(1L, "First skill to be added");
+        Skill skill = new Skill(1L,"Skill 1", "First skill to be added");
         assertThat(skill.getId(), is(1L));
+        assertThat(skill.getName(), is("Skill 1"));
         assertThat(skill.getDescription(), is("First skill to be added"));
     }
 

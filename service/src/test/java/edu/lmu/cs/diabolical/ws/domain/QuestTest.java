@@ -1,15 +1,19 @@
 package edu.lmu.cs.diabolical.ws.domain;
 
 import static org.hamcrest.CoreMatchers.is;
+
 import static org.junit.Assert.assertThat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
-import edu.lmu.cs.diabolical.ws.domain.Quest;
+
 
 public class QuestTest {
     @Test
     public void testQuestConstructor() {
-        Quest quest = new Quest(1L, "One", "First quest added", "No clues, buddy!", "Best tester");
+        Quest quest = new Quest(1L, "One", "First quest added", "No clues, buddy!", "Best tester", new ArrayList<Character>());
         assertThat(quest.getId(), is(1L));
         assertThat(quest.getName(), is("One"));
         assertThat(quest.getDescription(), is("First quest added"));
