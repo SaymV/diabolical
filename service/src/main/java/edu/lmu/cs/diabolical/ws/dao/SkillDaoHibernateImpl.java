@@ -8,30 +8,22 @@ public class SkillDaoHibernateImpl extends HibernateDaoSupport implements SkillD
 	
 	@Override
     public Skill getSkillById(Long id){
-    	
         return getHibernateTemplate().get(Skill.class, id);
-    	 
     }
 	
 	@Override
     public Skill createSkill(Skill skill){
-    	
-    	getHibernateTemplate().save(skill);
+      	getHibernateTemplate().save(skill);
     	return skill;
-    	
     }
 		   	 
 	@Override
     public void createOrUpdateSkill(Skill skill){
-    	
-    	getHibernateTemplate().saveOrUpdate(skill);
-    	
+        getHibernateTemplate().saveOrUpdate(skill);
     }
 		   
 	@Override
     public void deleteSkill(Skill skill){
-    	
-    	getHibernateTemplate().delete(skill);
-    	
+        getHibernateTemplate().delete(skill);
     }
 }

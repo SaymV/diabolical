@@ -9,30 +9,22 @@ public class QuestDaoHibernateImpl extends HibernateDaoSupport implements QuestD
 
 	@Override
     public Quest getQuestById(Long id){
-    
         return getHibernateTemplate().get(Quest.class, id);
-    
     }
 	
 	@Override
     public Quest createQuest(Quest quest){
-    	
         getHibernateTemplate().save(quest);
         return quest;    	
-        
     }
     	   	 
 	@Override
 	public void createOrUpdateQuest(Quest quest){
-		
-		getHibernateTemplate().saveOrUpdate(quest);
-		
+	    getHibernateTemplate().saveOrUpdate(quest);
 	}
 	   
 	@Override
 	public void deleteQuest(Quest quest){
-		
-		getHibernateTemplate().delete(quest);
-
+	    getHibernateTemplate().delete(quest);
 	}
 }
