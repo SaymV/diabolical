@@ -15,3 +15,15 @@ insert into character(id, classtype, gender, level, money, name) values(100002, 
 insert into character(id, classtype, gender, level, money, name) values(100003, 'Warrior', 0, 99, 1000, 'Ogre');
 insert into character(id, classtype, gender, level, money, name) values(100004, 'Rogue', 0, 57, 1000, 'RayToal');
 insert into character(id, classtype, gender, level, money, name) values(100005, 'Healer', 0, 55, 1000, 'Dondi');
+
+insert into quest(id, name, description, clue, reward, characters) values(100001, 'Quest 1', 'First quest', 'Clue 1', 'Reward 1', 0);
+insert into quest(id, name, description, clue, reward, characters) values(100002, 'Quest 2', 'Second quest', 'Clue 2', 'Reward 2', 1);
+insert into quest(id, name, description, clue, reward, characters) values(100003, 'Quest 3', 'Third quest', 'Clue 3', 'Reward 3', 2);
+insert into quest(id, name, description, clue, reward, characters) values(100004, 'Quest 4', 'Fourth quest', 'Clue 4', 'Reward 4', 3);
+insert into quest(id, name, description, clue, reward, characters) values(100005, 'Quest 5', 'Fifth quest', 'Clue 5', 'Reward 5', 4);
+
+insert into skill(id, name, description) values(10001, 'Skill 1', 'First Skill');
+insert into skill(id, name, description) values(10002, 'Skill 2', 'Second Skill');
+insert into skill(id, name, description) values(10003, 'Skill 3', 'Third Skill');
+insert into skill(id, name, description) values(10004, 'Skill 4', 'Fourth Skill');
+insert into skill(id, name, description) values(10005, 'Skill 5', 'Fifth Skill');

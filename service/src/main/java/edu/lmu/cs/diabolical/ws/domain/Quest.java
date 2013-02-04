@@ -25,20 +25,21 @@ public class Quest {
     private Long id;
     private String name;
     private String description;
-    private String clues;
+    private String clue;
     private String reward;
-    private List<Character> character; 
+    private List<Character> characters; 
 
     public Quest() {
 
     }
 
-    public Quest(Long id, String name, String description, String clues, String reward, List<Character> character) {
+    public Quest(Long id, String name, String description, String clue, String reward, List<Character> characters) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.clues = clues;
+        this.clue = clue;
         this.reward = reward;
+        this.characters = characters;
     }
 
     @Id
@@ -70,12 +71,12 @@ public class Quest {
     }
 
     @Lob
-    public String getClues() {
-        return clues;
+    public String getClue() {
+        return clue;
     }
 
-    public void setClues(String clues) {
-        this.clues = clues;
+    public void setClue(String clue) {
+        this.clue = clue;
     }
 
     public String getReward() {
@@ -86,14 +87,13 @@ public class Quest {
         this.reward = reward;
     }
  
-    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL)
-    public List<Character> getCharacter() {
-        return character;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    public List<Character> getCharacters() {
+        return characters;
     }
 
-    public void setCharacter(List<Character> character) {
-        this.character = character;
-    }
- 
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
+    } 
 }

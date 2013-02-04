@@ -179,7 +179,7 @@
         <property name="interceptorNames">
             <list>
                 <value>hibernateInterceptor</value>
-                <value>questDaoHibernateImpl</value>
+                <value>questDaoImpl</value>
             </list>
         </property>
     </bean>
@@ -192,7 +192,7 @@
         <property name="interceptorNames">
             <list>
                 <value>hibernateInterceptor</value>
-                <value>skillDaoHibernateImpl</value>
+                <value>skillDaoImpl</value>
             </list>
         </property>
     </bean>
