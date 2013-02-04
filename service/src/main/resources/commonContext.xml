@@ -52,7 +52,7 @@
     <bean id="skillService"
         class="edu.lmu.cs.diabolical.ws.service.SkillServiceImpl">
         <constructor-arg ref="skillDao"/>
-    </bean>
+     </bean>
 
     <bean id="characterDaoHibernateImpl"
         class="edu.lmu.cs.diabolical.ws.dao.CharacterDaoHibernateImpl"
@@ -73,7 +73,17 @@
         class="edu.lmu.cs.diabolical.ws.resource.ItemResourceImpl">
         <constructor-arg ref="itemService"/>
     </bean>
-
+    
+    <bean id="questResource"
+        class="edu.lmu.cs.diabolical.ws.resource.QuestResourceImpl">
+        <constructor-arg ref="questService"/>
+    </bean>
+    
+    <bean id="skillResource"
+        class="edu.lmu.cs.diabolical.ws.resource.SkillResourceImpl">
+        <constructor-arg ref="skillService"/>
+    </bean>
+    
     <bean id="accountService"
         class="edu.lmu.cs.diabolical.ws.service.AccountServiceImpl">
         <constructor-arg ref="accountDao"/>
