@@ -4,9 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class QuestTest{
