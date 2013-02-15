@@ -11,3 +11,4 @@ The database consists of:
 - Quests: name, NPCs, reward, description, clues
 - NPCs: health, name, gender, damage rating, hostility, group aggro
 
+[For reference documentation please see our wiki!](https://github.com/SaymV/diabolical/wiki)
