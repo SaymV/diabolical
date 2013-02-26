@@ -1,7 +1,8 @@
 Diabolical
 ==========
 
-This is a database back-end with a web service for a role playing game.
+This is a database back-end with a web service for a role playing game. Diabolical was implemented as a project for Loyola Marymount University's CMSI 486 class. Note: there is a master branch and a secondary branch that shows the class's effort to convert the stack to use Google App Engine.(gae)
+The live application may be found at [http://lmu-diabolical.appspot.com/](http://lmu-diabolical.appspot.com/)
 
 The database consists of:
 
