@@ -10,6 +10,15 @@
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 
+    <bean id="characterService"
+        class="edu.lmu.cs.diabolical.ws.service.CharacterServiceImpl">
+    </bean>
+
+    <bean id="characterResource"
+        class="edu.lmu.cs.diabolical.ws.resource.CharacterResourceImpl">
+        <constructor-arg ref="characterService"/>
+    </bean>
+
     <bean id="itemService"
         class="edu.lmu.cs.diabolical.ws.service.ItemServiceImpl">
     </bean>

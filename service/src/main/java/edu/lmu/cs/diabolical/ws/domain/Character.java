@@ -33,9 +33,8 @@ public class Character {
         // Empty arg constructor for annotations?
     }
 
-    public Character(Integer id, String name, Gender gender, String classType, Integer level, Long money,
+    public Character(String name, Gender gender, String classType, Integer level, Long money,
             List<Item> items, List<Skill> skills, List<Quest> accomplishedQuests) {
-        this.id = id;
         this.name = name;
         this.gender = gender;
         this.classType = classType;
