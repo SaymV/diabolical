@@ -12,7 +12,7 @@ public class CharacterTest {
     public void testCharacterConstructor() {
         Character c = new Character("Uncle Bob", Gender.MALE, "Coder", 99, 1000000000L, new ArrayList<Item>(),
                 new ArrayList<Skill>(), new ArrayList<Quest>());
-        assertThat(c.getId(), is(1));
+        assertThat(c.getId(), is((Integer)null));
         assertThat(c.getName(), is("Uncle Bob"));
         assertThat(c.getGender(), is(Gender.MALE));
         assertThat(c.getClassType(), is("Coder"));
@@ -27,7 +27,7 @@ public class CharacterTest {
     public void testCharacterSetters() {
         Character c = new Character("Uncle Bob", Gender.MALE, "Coder", 99, 1000000000L, new ArrayList<Item>(),
                 new ArrayList<Skill>(), new ArrayList<Quest>());
-        assertThat(c.getId(), is(1));
+        assertThat(c.getId(), is((Integer)null));
         c.setId(2);
         assertThat(c.getId(), is(2));
 

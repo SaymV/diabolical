@@ -18,7 +18,6 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         this.characterService = characterService;
     }
 
-    // Tested
     @Override
     public Character getCharacterById(Integer id) {
         logServiceCall();
@@ -30,22 +29,18 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         return c;
     }
 
-    // Tested
     @Override
     public List<Character> getCharactersByQuery(String name, String className, Gender gender, Integer minLevel,
             Integer maxLevel) {
 
         logServiceCall();
 
-        validate((name != null || className != null || gender != null || minLevel != null || maxLevel != null),
-                Response.Status.BAD_REQUEST, NO_CHARACTER_QUERY_PARAMS_PROVIDED);
         List<Character> characters = characterService.getCharacters(name, className, gender, minLevel, maxLevel);
         validate(characters.size() > 0, Response.Status.NOT_FOUND, NO_CHARACTERS_FOUND_WITH_GIVEN_PARAMS);
 
         return characters;
     }
 
-    // Tested
     @Override
     public Character spawnRandomCharacter() {
         logServiceCall();
@@ -53,7 +48,6 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         return characterService.spawnRandomCharacter();
     }
 
-    // Tested
     @Override
     public Response deleteCharacterById(Integer id) {
         logServiceCall();
@@ -67,7 +61,6 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
-    // Tested
     @Override
     public Character updateCharacter(Character c) {
         logServiceCall();
@@ -80,8 +73,6 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         return character;
     }
 
-    // Tested
-    // I use PUT /characters/update because our IT library doesn't support PATCH
     @Override
     public Character updateCharacterByIdWithSpecifiedFields(Character c) {
         logServiceCall();
@@ -93,7 +84,6 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         return characterService.updateCharacterWithGivenFields(c);
     }
 
-    // Tested
     @Override
     public Response createCharacter(Character c) {
         logServiceCall();
@@ -102,6 +92,7 @@ public class CharacterResourceImpl extends AbstractResource implements Character
         c.setId(null);
         Character character = characterService.createCharacter(c);
 
-        return Response.created(uriInfo.getAbsolutePathBuilder().path(character.getId() + "").build()).build();
+        return Response.created(uriInfo.getAbsolutePathBuilder().path(character.getId().toString()).build()).build();
     }
+
 }
