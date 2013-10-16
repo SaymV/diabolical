@@ -29,7 +29,7 @@ public class CharacterServiceImpl extends AbstractService implements CharacterSe
 
     // Tested
     @Override
-    public Character getCharacterById(Integer id) {
+    public Character getCharacterById(Long id) {
         return characterDao.getCharacterById(id);
     }
 
@@ -41,7 +41,7 @@ public class CharacterServiceImpl extends AbstractService implements CharacterSe
                 randomString(gen.nextInt(15) + 1),
                 (gen.nextInt() % 2 == 1 ? Gender.MALE : Gender.FEMALE),
                 randomString(gen.nextInt(15) + 1),
-                (Integer) (gen.nextInt(99) + 1),
+                new Long(gen.nextInt(99) + 1),
                 new Long(gen.nextInt(100000000)),
                 new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>())/*)*/;
     }

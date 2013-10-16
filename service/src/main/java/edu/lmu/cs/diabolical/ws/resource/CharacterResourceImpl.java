@@ -19,7 +19,7 @@ public class CharacterResourceImpl extends AbstractResource implements Character
     }
 
     @Override
-    public Character getCharacterById(Integer id) {
+    public Character getCharacterById(Long id) {
         logServiceCall();
 
         validate((id != null && id > 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
@@ -49,7 +49,7 @@ public class CharacterResourceImpl extends AbstractResource implements Character
     }
 
     @Override
-    public Response deleteCharacterById(Integer id) {
+    public Response deleteCharacterById(Long id) {
         logServiceCall();
 
         validate((id != null && id > 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);

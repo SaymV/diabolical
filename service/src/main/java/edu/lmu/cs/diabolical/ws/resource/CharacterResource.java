@@ -29,7 +29,7 @@ public interface CharacterResource {
 
     @GET
     @Path("/{id}")
-    Character getCharacterById(@PathParam("id") Integer id);
+    Character getCharacterById(@PathParam("id") Long id);
 
     @GET
     @Path("/")
@@ -43,7 +43,7 @@ public interface CharacterResource {
 
     @DELETE
     @Path("/{id}")
-    Response deleteCharacterById(@PathParam("id") Integer id);
+    Response deleteCharacterById(@PathParam("id") Long id);
 
     @PUT
     @Path("/")

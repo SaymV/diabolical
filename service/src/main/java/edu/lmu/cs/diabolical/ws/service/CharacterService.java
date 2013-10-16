@@ -9,7 +9,7 @@ public interface CharacterService {
 
     List<Character> getCharacters(String name, String className, Gender gender, Integer minLevel, Integer maxLevel);
     
-    Character getCharacterById(Integer id);
+    Character getCharacterById(Long id);
 
     Character createCharacter(Character character);
 

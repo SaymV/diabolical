@@ -12,18 +12,14 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-//import org.hibernate.annotations.LazyCollection;
-//import org.hibernate.annotations.LazyCollectionOption;
-
-//@Entity
 @XmlRootElement
 public class Character {
 
-    private Integer id;
+    private Long id;
     private String name;
     private Gender gender;
     private String classType;
-    private Integer level;
+    private Long level;
     private Long money;
     private List<Item> items;
     private List<Skill> skills;
@@ -33,7 +29,7 @@ public class Character {
         // Empty arg constructor for annotations?
     }
 
-    public Character(String name, Gender gender, String classType, Integer level, Long money,
+    public Character(String name, Gender gender, String classType, Long level, Long money,
             List<Item> items, List<Skill> skills, List<Quest> accomplishedQuests) {
         this.name = name;
         this.gender = gender;
@@ -57,14 +53,12 @@ public class Character {
         this.skills.add(s);
     }
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlAttribute
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -92,11 +86,11 @@ public class Character {
         this.classType = classType;
     }
 
-    public Integer getLevel() {
+    public Long getLevel() {
         return level;
     }
 
-    public void setLevel(Integer level) {
+    public void setLevel(Long level) {
         this.level = level;
     }
 
@@ -108,8 +102,6 @@ public class Character {
         this.money = money;
     }
 
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Item> getItems() {
         return items;
     }
@@ -118,8 +110,6 @@ public class Character {
         this.items = items;
     }
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Skill> getSkills() {
         return skills;
     }
@@ -128,8 +118,6 @@ public class Character {
         this.skills = skills;
     }
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Quest> getAccomplishedQuests() {
         return accomplishedQuests;
     }

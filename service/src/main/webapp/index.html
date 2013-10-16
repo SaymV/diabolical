@@ -8,17 +8,24 @@
   <body>
     <h1>Welcome to Diabolical!</h1>
 
-    <p>Things are still quite preliminary.  Just to show that there is something here:</p>
-
     <ul>
-        <li>Despite the error message, <a href="items">/items</a> demonstrates the
-        JAX-RS resource layer that is running underneath.</li>
+        <li>Try <a href="characters">/characters</a> to see who’s in the system.</li>
+        
+        <li>/characters/<code>id</code> will get you a particular character.  And of course you will get a 404 if no character with the given <code>id</code> could be found.</li>
 
-        <li>Our <a href="https://github.com/SaymV/diabolical">GitHub repository</a>
-        shows what has been done so far.  The <code>master</code> branch shows the original
-        stack; the <code>gae</code> branch shows what has been ported to GAE (this app!).</li>
+        <li><a href="characters/spawn">/characters/spawn</a> gets you a random (non-saved) character.</li>
+        
+        <li>You should <strong>POST</strong> such objects to /characters to get them in the database.</li>
+
+        <li>Save changes to an existing character by <strong>PUT</strong>ting the modified object to /characters/<code>id</code>.</li>
+        
+        <li>Finally, you can <strong>DELETE</strong> characters using that same identifying /characters/<code>id</code> URL.</li> 
     </ul>
 
-    <p>The class may have ended but the work goes on...</p>
+    <p>Our <a href="https://github.com/SaymV/diabolical">GitHub repository</a>
+    shows what has been done so far.  The <code>master</code> branch shows the original
+    stack; the <code>gae</code> branch shows what has been ported to GAE (this app!).</p>
+
+    <script src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
   </body>
 </html>

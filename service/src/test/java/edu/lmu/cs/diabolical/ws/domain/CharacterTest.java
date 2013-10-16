@@ -10,13 +10,13 @@ import org.junit.Test;
 public class CharacterTest {
     @Test
     public void testCharacterConstructor() {
-        Character c = new Character("Uncle Bob", Gender.MALE, "Coder", 99, 1000000000L, new ArrayList<Item>(),
+        Character c = new Character("Uncle Bob", Gender.MALE, "Coder", 99L, 1000000000L, new ArrayList<Item>(),
                 new ArrayList<Skill>(), new ArrayList<Quest>());
-        assertThat(c.getId(), is((Integer)null));
+        assertThat(c.getId(), is((Long)null));
         assertThat(c.getName(), is("Uncle Bob"));
         assertThat(c.getGender(), is(Gender.MALE));
         assertThat(c.getClassType(), is("Coder"));
-        assertThat(c.getLevel(), is(99));
+        assertThat(c.getLevel(), is(99L));
         assertThat(c.getMoney(), is(1000000000L));
         assertThat(c.getAccomplishedQuests().size(), is(0));
         assertThat(c.getItems().size(), is(0));
@@ -25,11 +25,11 @@ public class CharacterTest {
 
     @Test
     public void testCharacterSetters() {
-        Character c = new Character("Uncle Bob", Gender.MALE, "Coder", 99, 1000000000L, new ArrayList<Item>(),
+        Character c = new Character("Uncle Bob", Gender.MALE, "Coder", 99L, 1000000000L, new ArrayList<Item>(),
                 new ArrayList<Skill>(), new ArrayList<Quest>());
-        assertThat(c.getId(), is((Integer)null));
-        c.setId(2);
-        assertThat(c.getId(), is(2));
+        assertThat(c.getId(), is((Long)null));
+        c.setId(2L);
+        assertThat(c.getId(), is(2L));
 
         assertThat(c.getName(), is("Uncle Bob"));
         c.setName("Homie D. Clown");
@@ -43,9 +43,9 @@ public class CharacterTest {
         c.setClassType("Clown");
         assertThat(c.getClassType(), is("Clown"));
 
-        assertThat(c.getLevel(), is(99));
-        c.setLevel(37);
-        assertThat(c.getLevel(), is(37));
+        assertThat(c.getLevel(), is(99L));
+        c.setLevel(37L);
+        assertThat(c.getLevel(), is(37L));
 
         assertThat(c.getMoney(), is(1000000000L));
         c.setMoney(1217L);
@@ -66,7 +66,7 @@ public class CharacterTest {
 
     @Test
     public void testQuestItemSkillSetter() {
-        Character c = new Character("Uncle Bob", Gender.MALE, "Coder", 99, 1000000000L, new ArrayList<Item>(),
+        Character c = new Character("Uncle Bob", Gender.MALE, "Coder", 99L, 1000000000L, new ArrayList<Item>(),
                 new ArrayList<Skill>(), new ArrayList<Quest>());
 
         assertThat(c.getAccomplishedQuests().size(), is(0));
