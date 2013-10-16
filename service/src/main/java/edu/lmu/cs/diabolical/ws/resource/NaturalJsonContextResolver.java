@@ -10,6 +10,7 @@ import javax.xml.bind.JAXBContext;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
 
+import edu.lmu.cs.diabolical.ws.domain.Character;
 import edu.lmu.cs.diabolical.ws.domain.Item;
 import edu.lmu.cs.diabolical.ws.domain.Quest;
 import edu.lmu.cs.diabolical.ws.domain.Skill;

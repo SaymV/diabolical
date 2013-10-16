@@ -20,39 +20,32 @@ public class CharacterServiceImpl extends AbstractService implements CharacterSe
         this.characterDao = characterDao;
     }
 
-    // Tested
     @Override
-    public List<Character> getCharacters(String name, String className, Gender gender, Integer minLevel,
-            Integer maxLevel) {
+    public List<Character> getCharacters(String name, String className, Gender gender, Integer minLevel, Integer maxLevel) {
         return characterDao.getCharacters(name, className, gender, minLevel, maxLevel);
     }
 
-    // Tested
     @Override
     public Character getCharacterById(Long id) {
         return characterDao.getCharacterById(id);
     }
 
-    // TODO: Test this
     @Override
     public Character spawnRandomCharacter() {
         Random gen = new Random();
-        return /*characterDao.createCharacter(*/new Character(
-                randomString(gen.nextInt(15) + 1),
+        return new Character(randomString(gen.nextInt(15) + 1),
                 (gen.nextInt() % 2 == 1 ? Gender.MALE : Gender.FEMALE),
                 randomString(gen.nextInt(15) + 1),
                 new Long(gen.nextInt(99) + 1),
                 new Long(gen.nextInt(100000000)),
-                new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>())/*)*/;
+                new ArrayList<Item>(), new ArrayList<Skill>(), new ArrayList<Quest>());
     }
 
-    // Tested
     @Override
     public Character createOrUpdateCharacter(Character character) {
         return characterDao.createOrUpdateCharacter(character);
     }
 
-    // Tested
     @Override
     public Character updateCharacterWithGivenFields(Character character) {
         Character current = characterDao.getCharacterById(character.getId());
@@ -92,13 +85,11 @@ public class CharacterServiceImpl extends AbstractService implements CharacterSe
         return characterDao.createOrUpdateCharacter(current);
     }
 
-    // Tested
     @Override
     public Character createCharacter(Character character) {
         return characterDao.createCharacter(character);
     }
 
-    // Tested
     @Override
     public void deleteCharacter(Character character) {
         characterDao.deleteCharacter(character);
