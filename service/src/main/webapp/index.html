@@ -62,22 +62,6 @@ $.getJSON(
           </tr>
           <tr>
             <td>
-              <p>Create a random character (and we do mean random!).</p>
-            </td>
-            <td>
-              <p>GET <code>http://lmu-diabolical.appspot.com/characters/spawn</code></p>
-              <pre class="prettyprint linenums">
-$.getJSON(
-    "http://lmu-diabolical.appspot.com/characters/spawn",
-    function (character) {
-        // Do something with the character.
-        console.log(character);
-    }
-);</pre>
-            </td>
-          </tr>
-          <tr>
-            <td>
               <p>Save a new character to the system.</p>
               <p>Status 201 CREATED is returned upon successful creation.
                 The URL for the new character is returned in the <code>Location</code> header.</p>
@@ -151,6 +135,45 @@ $.ajax({
     }
 });</pre>
             </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Create a random item.</p>
+            </td>
+            <td>
+              <p>GET <code>http://lmu-diabolical.appspot.com/items/spawn</code> with two parameters:
+              <code>level</code> (an integer for the item’s base “level”) and <code>slot</code>
+              (a string indicating what part of the character may use the item, e.g., “body” or “head”)</p>
+              <pre class="prettyprint linenums">
+$.getJSON(
+    "http://lmu-diabolical.appspot.com/items/spawn",
+    {
+        level: 50,
+        slot: "body"
+    },
+    function (item) {
+        // Mmmmm, new item.
+        console.log(item);
+    }
+);</pre>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Create a random character (and we do mean random!).</p>
+            </td>
+            <td>
+              <p>GET <code>http://lmu-diabolical.appspot.com/characters/spawn</code></p>
+              <pre class="prettyprint linenums">
+$.getJSON(
+    "http://lmu-diabolical.appspot.com/characters/spawn",
+    function (character) {
+        // Do something with the character.
+        console.log(character);
+    }
+);</pre>
+            </td>
+          </tr>
         </tbody>
       </table> 
           

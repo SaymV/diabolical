@@ -104,7 +104,7 @@ public interface ItemResource {
      * @return a spawned, or random, item based upon an item template and according to given parameters
      */
     @GET
-    @Path("/spawner")
+    @Path("/spawn")
     Item getSpawnedItem(@QueryParam("level") Integer level, @QueryParam("slot") String slot);
 
     /**

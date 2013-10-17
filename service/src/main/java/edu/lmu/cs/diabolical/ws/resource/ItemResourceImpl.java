@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import edu.lmu.cs.diabolical.ws.domain.Item;
@@ -63,7 +62,7 @@ public class ItemResourceImpl extends AbstractResource implements ItemResource {
     }
 
     @Override
-    public Item getSpawnedItem(@QueryParam("level") Integer level, @QueryParam("slot") String slot) {
+    public Item getSpawnedItem(Integer level, String slot) {
         logServiceCall();
 
         validate((level != null || slot != null), Response.Status.BAD_REQUEST,

@@ -2,7 +2,6 @@ package edu.lmu.cs.diabolical.ws.service;
 
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.Random;
 
 //import edu.lmu.cs.diabolical.ws.dao.ItemDao;
 //import edu.lmu.cs.diabolical.ws.dao.ItemTemplateDao;
@@ -61,7 +60,10 @@ public class ItemServiceImpl extends AbstractService implements ItemService {
 //                slot));
 //        return ItemGenerator.generateRandomItem(itemTemplates.get(new Random().nextInt(itemTemplates.size())));
         // TODO Stub
-        return ItemGenerator.generateRandomItem(new ItemTemplate(-1l, "dummy random template", "dummy", -9.0, -99.0, -999.0, -9999.0, -1.0, -99.0, -100, -1000, -1, -100, -9.0, -99.0, -100.0, -1000.0, -1.0, -11.0));
+        return ItemGenerator.generateRandomItem(new ItemTemplate(-1l, "spawned item", slot, 1.0, 3.0, 10.0, 100.0, 1.0, 99.0, 1, 10,
+                level - 4,
+                level + 4,
+                1.0, 50.0, 1.0, 90.0, 1.0, 75.0));
     }
 
     @Override
