@@ -50,7 +50,14 @@ $.getJSON(
             </td>
             <td>
               <p>GET <code>http://lmu-diabolical.appspot.com/characters/<strong><em>id</em></strong></code></p>
-              <pre class="prettyprint linenums"></pre>
+              <pre class="prettyprint linenums">
+$.getJSON(
+    "http://lmu-diabolical.appspot.com/characters/5629499534213120",
+    function (character) {
+        // Do something with the character.
+        console.log(character);
+    }
+);</pre>
             </td>
           </tr>
           <tr>
@@ -59,39 +66,90 @@ $.getJSON(
             </td>
             <td>
               <p>GET <code>http://lmu-diabolical.appspot.com/characters/spawn</code></p>
-              <pre class="prettyprint linenums"></pre>
+              <pre class="prettyprint linenums">
+$.getJSON(
+    "http://lmu-diabolical.appspot.com/characters/spawn",
+    function (character) {
+        // Do something with the character.
+        console.log(character);
+    }
+);</pre>
             </td>
           </tr>
           <tr>
             <td>
               <p>Save a new character to the system.</p>
-              <p>Status 201 is returned upon successful creation.
+              <p>Status 201 CREATED is returned upon successful creation.
                 The URL for the new character is returned in the <code>Location</code> header.</p>
             </td>
             <td>
               <p>POST <code>http://lmu-diabolical.appspot.com/chracters</code></p>
-              <pre class="prettyprint linenums"></pre>
+              <pre class="prettyprint linenums">
+$.ajax({
+    type: 'POST',
+    url: "http://lmu-diabolical.appspot.com/characters",
+    data: JSON.stringify({
+        name: "Sam",
+        classType: "rogue",
+        gender: "MALE",
+        level: 89,
+        money: 4732349
+    }),
+    contentType: "application/json",
+    dataType: "json",
+    accept: "application/json",
+    complete: function (jqXHR, textStatus) {
+        // The new character can be accessed from the Location header.
+        console.log("You may access the new character at:" +
+            jqXHR.getResponseHeader("Location"));
+    }
+});</pre>
             </td>
           </tr>
           <tr>
             <td>
               <p>Update an existing character.</p>
               <p>Error 400 if the ID in the URL and the payload character’s ID do not match.
-                Response has no content if successful.</p>
+                Response is status 204 NO CONTENT if successful.</p>
             </td>
             <td>
               <p>PUT <code>http://lmu-diabolical.appspot.com/characters/<strong><em>id</em></strong></code></p>
-              <pre class="prettyprint linenums"></pre>
+              <pre class="prettyprint linenums">
+$.ajax({
+    type: 'PUT',
+    url: "http://lmu-diabolical.appspot.com/characters/5891733057437696",
+    data: JSON.stringify({
+        id: 5891733057437696,
+        name: "Sam",
+        classType: "rogue",
+        gender: "MALE",
+        level: 1,
+        money: 0
+    }),
+    contentType: "application/json",
+    dataType: "json",
+    accept: "application/json",
+    success: function (data, textStatus, jqXHR) {
+        console.log("Done: no news is good news.");
+    }
+});</pre>
             </td>
           </tr>
           <tr>
             <td>
               <p>Delete an existing character.</p>
-              <p>Response has no content if successful.</p> 
+              <p>Response is status 204 NO CONTENT if successful.</p> 
             </td>
             <td>
               <p>DELETE <code>http://lmu-diabolical.appspot.com/characters/<strong><em>id</em></strong></code></p>
-              <pre class="prettyprint linenums"></pre>
+              <pre class="prettyprint linenums">
+$.ajax({
+    type: 'DELETE',
+    url: "http://lmu-diabolical.appspot.com/characters/5891733057437696",
+    success: function (data, textStatus, jqXHR) {
+        console.log("Gone baby gone.");
+    }
+});</pre>
             </td>
         </tbody>
       </table> 
@@ -100,6 +158,13 @@ $.getJSON(
         <a href="https://github.com/SaymV/diabolical">GitHub repository</a>.
         The <code>master</code> branch shows the original stack; the <code>gae</code>
         branch shows what has been ported to GAE (this app!).</p>
+        
+      <h3>References</h3>
+      
+      <ul>
+        <li><a href="http://api.jquery.com/jQuery.getJSON/">http://api.jquery.com/jQuery.getJSON/</a></li>
+        <li><a href="http://api.jquery.com/jQuery.ajax/">http://api.jquery.com/jQuery.ajax/</a></li>
+      </ul>
     </div>
 
     <script src="//codeorigin.jquery.com/jquery.min.js"></script>
