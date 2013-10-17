@@ -35,6 +35,10 @@
             <param-value>com.sun.jersey.api.container.filter.RolesAllowedResourceFilterFactory</param-value>  
         </init-param>  
         <init-param>
+            <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
+            <param-value>edu.lmu.cs.diabolical.ws.util.CORSFilter</param-value>
+        </init-param>
+        <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>edu.lmu.cs.diabolical.ws.resource</param-value>
         </init-param>
