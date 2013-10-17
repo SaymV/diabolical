@@ -3,29 +3,110 @@
   <head>
     <meta charset="UTF-8"/>
     <title>Welcome to Diabolical!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="prettify.css"/>
   </head>
 
   <body>
-    <h1>Welcome to Diabolical!</h1>
+    <div class="container">
+      <h1>Welcome to Diabolical!</h1>
+      
+      <p>Diabolical is a very simple web service backed by Google App Engine that
+        simulates a hypothetical role-playing game.  Services and sample code for
+        using those services using jQuery are shown below.</p>
 
-    <ul>
-        <li>Try <a href="characters">/characters</a> to see who’s in the system.</li>
-        
-        <li>/characters/<code>id</code> will get you a particular character.  And of course you will get a 404 if no character with the given <code>id</code> could be found.</li>
+      <table class="table table-condensed table-striped">
+        <thead>
+          <tr>
+            <th style="width: 25%">Operation</th>
+            <th>Method, URI, Sample Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p>Get the current list of characters.</p>
+              <p>Error 404 if no characters are found.</p>
+            </td>
+            <td>
+              <p>GET <code>http://lmu-diabolical.appspot.com/characters</code></p>
+              <pre class="prettyprint linenums">
+$.getJSON(
+    "http://lmu-diabolical.appspot.com/characters",
+    function (characters) {
+        // Do something with the character list.
+        characters.forEach(function (character) {
+            console.log(character);
+        });
+    }
+);</pre>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Get the character with a particular ID.</p>
+              <p>Error 404 if there is no character with the given ID.</p>
+            </td>
+            <td>
+              <p>GET <code>http://lmu-diabolical.appspot.com/characters/<strong><em>id</em></strong></code></p>
+              <pre class="prettyprint linenums"></pre>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Create a random character (and we do mean random!).</p>
+            </td>
+            <td>
+              <p>GET <code>http://lmu-diabolical.appspot.com/characters/spawn</code></p>
+              <pre class="prettyprint linenums"></pre>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Save a new character to the system.</p>
+              <p>Status 201 is returned upon successful creation.
+                The URL for the new character is returned in the <code>Location</code> header.</p>
+            </td>
+            <td>
+              <p>POST <code>http://lmu-diabolical.appspot.com/chracters</code></p>
+              <pre class="prettyprint linenums"></pre>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Update an existing character.</p>
+              <p>Error 400 if the ID in the URL and the payload character’s ID do not match.
+                Response has no content if successful.</p>
+            </td>
+            <td>
+              <p>PUT <code>http://lmu-diabolical.appspot.com/characters/<strong><em>id</em></strong></code></p>
+              <pre class="prettyprint linenums"></pre>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Delete an existing character.</p>
+              <p>Response has no content if successful.</p> 
+            </td>
+            <td>
+              <p>DELETE <code>http://lmu-diabolical.appspot.com/characters/<strong><em>id</em></strong></code></p>
+              <pre class="prettyprint linenums"></pre>
+            </td>
+        </tbody>
+      </table> 
+          
+      <p>The code for this service can be found in our
+        <a href="https://github.com/SaymV/diabolical">GitHub repository</a>.
+        The <code>master</code> branch shows the original stack; the <code>gae</code>
+        branch shows what has been ported to GAE (this app!).</p>
+    </div>
 
-        <li><a href="characters/spawn">/characters/spawn</a> gets you a random (non-saved) character.</li>
-        
-        <li>You should <strong>POST</strong> such objects to /characters to get them in the database.</li>
-
-        <li>Save changes to an existing character by <strong>PUT</strong>ting the modified object to /characters/<code>id</code>.</li>
-        
-        <li>Finally, you can <strong>DELETE</strong> characters using that same identifying /characters/<code>id</code> URL.</li> 
-    </ul>
-
-    <p>Our <a href="https://github.com/SaymV/diabolical">GitHub repository</a>
-    shows what has been done so far.  The <code>master</code> branch shows the original
-    stack; the <code>gae</code> branch shows what has been ported to GAE (this app!).</p>
-
-    <script src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//codeorigin.jquery.com/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="prettify.js"></script>
+    <script>
+        $(prettyPrint);
+    </script>
   </body>
 </html>

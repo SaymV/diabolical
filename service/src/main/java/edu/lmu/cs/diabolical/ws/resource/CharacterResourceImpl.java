@@ -62,26 +62,15 @@ public class CharacterResourceImpl extends AbstractResource implements Character
     }
 
     @Override
-    public Character updateCharacter(Character c) {
+    public Response updateCharacter(Long id, Character c) {
         logServiceCall();
 
-        validate((c != null && c.getId() != null && c.getId() > 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
+        validate((c != null && c.getId() != null && c.getId().equals(id)), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
         Character character = characterService.getCharacterById(c.getId());
         validate(character != null, Response.Status.NOT_FOUND, CHARACTER_NOT_FOUND);
-        character = characterService.createOrUpdateCharacter(c);
+        characterService.updateCharacter(c);
 
-        return character;
-    }
-
-    @Override
-    public Character updateCharacterByIdWithSpecifiedFields(Character c) {
-        logServiceCall();
-
-        validate((c != null && c.getId() != null && c.getId() > 0), Response.Status.BAD_REQUEST, INVALID_CHARACTER_ID);
-        Character character = characterService.getCharacterById(c.getId());
-        validate(character != null, Response.Status.NOT_FOUND, CHARACTER_NOT_FOUND);
-
-        return characterService.updateCharacterWithGivenFields(c);
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 
     @Override

@@ -51,15 +51,16 @@ public class CharacterDaoDatastoreImpl implements CharacterDao {
     }
 
     @Override
-    public Character createOrUpdateCharacter(Character c) {
-        // TODO Auto-generated method stub
-        return c;
+    public void updateCharacter(Character c) {
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        Entity entity = characterToEntity(c, new Entity("Character", c.getId()));
+        datastore.put(entity);
     }
 
     @Override
     public Character createCharacter(Character c) {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        Entity entity = characterToEntity(c);
+        Entity entity = characterToEntity(c, new Entity("Character"));
         datastore.put(entity);
         c.setId(entity.getKey().getId());
         return c;
@@ -82,8 +83,7 @@ public class CharacterDaoDatastoreImpl implements CharacterDao {
     /**
      * Helper for vice versa.
      */
-    private Entity characterToEntity(Character character) {
-        Entity result = new Entity("Character");
+    private Entity characterToEntity(Character character, Entity result) {
         result.setProperty("name", character.getName());
         result.setProperty("gender", character.getGender().name());
         result.setProperty("classType", character.getClassType());

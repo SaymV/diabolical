@@ -12,7 +12,7 @@ public interface CharacterDao {
 
     void deleteCharacter(Character c);
 
-    Character createOrUpdateCharacter(Character c);
+    void updateCharacter(Character c);
 
     Character createCharacter(Character c);
 }

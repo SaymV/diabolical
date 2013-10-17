@@ -42,47 +42,8 @@ public class CharacterServiceImpl extends AbstractService implements CharacterSe
     }
 
     @Override
-    public Character createOrUpdateCharacter(Character character) {
-        return characterDao.createOrUpdateCharacter(character);
-    }
-
-    @Override
-    public Character updateCharacterWithGivenFields(Character character) {
-        Character current = characterDao.getCharacterById(character.getId());
-
-        if (character.getAccomplishedQuests() != null) {
-            current.setAccomplishedQuests(character.getAccomplishedQuests());
-        }
-
-        if (character.getClassType() != null) {
-            current.setClassType(character.getClassType());
-        }
-
-        if (character.getGender() != null) {
-            current.setGender(character.getGender());
-        }
-
-        if (character.getItems() != null) {
-            current.setItems(character.getItems());
-        }
-
-        if (character.getLevel() != null) {
-            current.setLevel(character.getLevel());
-        }
-
-        if (character.getMoney() != null) {
-            current.setMoney(character.getMoney());
-        }
-
-        if (character.getName() != null) {
-            current.setName(character.getName());
-        }
-
-        if (character.getSkills() != null) {
-            current.setSkills(character.getSkills());
-        }
-
-        return characterDao.createOrUpdateCharacter(current);
+    public void updateCharacter(Character character) {
+        characterDao.updateCharacter(character);
     }
 
     @Override

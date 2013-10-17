@@ -46,12 +46,8 @@ public interface CharacterResource {
     Response deleteCharacterById(@PathParam("id") Long id);
 
     @PUT
-    @Path("/")
-    Character updateCharacter(Character c);
-
-    @PUT
-    @Path("/update")
-    Character updateCharacterByIdWithSpecifiedFields(Character c);
+    @Path("/{id}")
+    Response updateCharacter(@PathParam("id") Long id, Character c);
 
     @POST
     @Path("/")

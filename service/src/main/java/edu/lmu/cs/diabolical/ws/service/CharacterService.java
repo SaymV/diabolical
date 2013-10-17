@@ -15,9 +15,8 @@ public interface CharacterService {
 
     Character spawnRandomCharacter();
 
-    Character createOrUpdateCharacter(Character character);
-
-    Character updateCharacterWithGivenFields(Character character);
+    void updateCharacter(Character character);
 
     void deleteCharacter(Character character);
+
 }
